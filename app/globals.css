@@ -1,0 +1,38 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { font-size: 16px; }
+
+body {
+  background: #080a0d;
+  color: #b8c4d4;
+  font-family: 'Barlow Condensed', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+button { cursor: pointer; font-family: 'Barlow Condensed', sans-serif; }
+input, textarea, select { font-family: 'Barlow Condensed', sans-serif; }
+
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: #0a0c10; }
+::-webkit-scrollbar-thumb { background: #1e2530; }
+
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.2; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes counterFlicker {
+  0%, 93%, 100% { opacity: 1; }
+  94%           { opacity: 0.88; }
+  96%           { opacity: 0.96; }
+}
+
+.fadeUp    { animation: fadeUp 0.3s ease forwards; }
+.blink     { animation: blink 1.4s infinite; }
+.flicker   { animation: counterFlicker 9s infinite; }
