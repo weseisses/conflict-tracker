@@ -51,31 +51,17 @@ export default function DetailPanel({ conflict: c, cost }: Props) {
           Cost Estimates
         </div>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(140px, 1fr))", gap: 12 }}>
-          {isOver ? [
-            { label: "Total Est. Cost",     value: fmt(cost) },
-            { label: "Rate (at peak)",      value: fmt(c.ratePerDay, 0) + "/day" },
-            { label: "Per Day (avg)",       value: fmt(cost / Math.max(totalDays, 1)) },
-            { label: "Duration",            value: `${totalDays.toLocaleString()} days` },
+          {(isOver ? [
+            { label: "Total Est. Cost",  value: fmt(cost) },
+            { label: "Rate (at peak)",   value: fmt(c.ratePerDay, 0) + "/day" },
+            { label: "Per Day (avg)",    value: fmt(cost / Math.max(totalDays, 1)) },
+            { label: "Duration",         value: `${totalDays.toLocaleString()} days` },
           ] : [
             { label: "Total Est. Cost",  value: fmt(cost) },
             { label: "Last 30 days",     value: fmt(c.ratePerDay * 30) },
             { label: "Last 7 days",      value: fmt(c.ratePerDay * 7) },
             { label: "Last 24 hours",    value: fmt(c.ratePerDay) },
-          ].map((r) => (
-            <div key={r.label}>
-              <div style={{ fontSize: 10, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 4 }}>{r.label}</div>
-              <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 17, color: "#f0f4f8" }}>{r.value}</div>
-            </div>
-          ))}
-          {isOver && [{
-            label: "Total Est. Cost", value: fmt(cost)
-          }, {
-            label: "Rate (at peak)", value: fmt(c.ratePerDay, 0) + "/day"
-          }, {
-            label: "Per Day (avg)", value: fmt(cost / Math.max(totalDays, 1))
-          }, {
-            label: "Duration", value: `${totalDays.toLocaleString()} days`
-          }].map((r) => (
+          ]).map((r) => (
             <div key={r.label}>
               <div style={{ fontSize: 10, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 4 }}>{r.label}</div>
               <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 17, color: "#f0f4f8" }}>{r.value}</div>
