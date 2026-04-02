@@ -20,12 +20,12 @@
     "flag": "🇺🇦",
     "color": "#3498db",
     "startDate": "2022-02-24",
-    "ratePerDay": 877000000,
+    "ratePerDay": 825000000,
     "anchor": 0,
     "status": "ACTIVE",
     "parties": "Russia vs. Ukraine + Western support",
-    "sources": "SIPRI Military Expenditure Database 2024; Al Jazeera Feb 2026; CFR Ukraine Aid Tracker (Dec 2025); Kiel Institute",
-    "summary": "Combined: Russia ~$149B/yr (SIPRI 2024) + Ukraine ~$71B/yr (2025 budget) + Western aid pipeline ~$100B/yr = ~$320B/yr or ~$877M/day. Total Western aid committed: $188B+ (CFR, Dec 2025). US withdrew 99% of direct support in 2025; Europe increased contribution by ~two-thirds."
+    "sources": "SIPRI Military Expenditure Database 2024–2026; Al Jazeera Feb 2026; CFR Ukraine Aid Tracker (Dec 2025); Kiel Institute; UkraineWorld (Russia 2026 budget analysis)",
+    "summary": "Combined: Russia ~$165B/yr (SIPRI/UkraineWorld 2026 budget: 14.9T roubles) + Ukraine ~$71B/yr (2025 defense budget) + European aid ~$65B/yr = ~$301B/yr or ~$825M/day. Total Western aid committed: $188B+ (CFR, Dec 2025). US withdrew 99% of direct support in 2025; Europe increased contribution but has not fully compensated. Russia's military spending as % of GDP rose to 7.5% in 2025."
   },
   {
     "id": "gaza",
@@ -34,12 +34,12 @@
     "flag": "🇵🇸",
     "color": "#e67e22",
     "startDate": "2023-10-07",
-    "ratePerDay": 350000000,
-    "anchor": 0,
-    "status": "ACTIVE",
+    "ratePerDay": 100000000,
+    "anchor": 16000000000,
+    "status": "CEASEFIRE",
     "parties": "Israel + U.S. vs. Hamas / Hezbollah / Houthis",
-    "sources": "Bank of Israel; Al Jazeera Feb 2026; Brown University Costs of War 2025; Ctech Mar 2026; Bloomberg Sep 2025",
-    "summary": "Israel's former military economic adviser (Gil Pinchas) estimated ~$96M/day to Israel in early 2025. Bank of Israel total ~$68B through end-2025. Escalated to NIS 1.5-1.7B/day (~$400-460M) with Iran ops in 2026. U.S. provided $21.7B in military aid since Oct 7 (Brown Univ)."
+    "sources": "Bank of Israel (direct defense costs ~$77B through 2025); AA.com — war expenses $76.3B in 2 years (Oct 2025); Brown University Costs of War 2025 — U.S. military aid $21.7B; Breaking Defense Mar 2026 — Israel $45B defense budget; Haaretz Jan 2026",
+    "summary": "Gaza ceasefire reached mid-October 2025 after 2 years of conflict. Israel direct defense costs: ~$77B through end-2025 (Bank of Israel); U.S. military aid: $21.7B (Brown Univ). Total theater cost ~$106B to date. Post-ceasefire rate of $100M/day reflects ongoing Houthi exchanges, residual IDF brigades in Gaza, and Lebanon border operations. Iran escalation costs (Op. Epic Fury, Feb 2026+) are tracked separately. Israel approved $45B 2026 defense budget (Breaking Defense, Mar 2026)."
   },
   {
     "id": "sudan",
@@ -62,12 +62,12 @@
     "flag": "🇲🇲",
     "color": "#9b59b6",
     "startDate": "2021-02-01",
-    "ratePerDay": 6800000,
+    "ratePerDay": 13700000,
     "anchor": 0,
     "status": "ACTIVE",
     "parties": "Military Junta (SAC) vs. People's Defence Force + ethnic armed groups",
-    "sources": "SIPRI Military Expenditure Database 2024; IISS Military Balance 2026; CNN/SIPRI Apr 2025",
-    "summary": "Junta seized power Feb 2021. SIPRI 2024: Myanmar spends 6.8% of GDP on military — highest ratio in Asia-Pacific — ~$2.5B/yr or ~$6.8M/day. Military spending +66% in 2024 (SIPRI). Resistance controls significant territory. Figures reflect junta spending only."
+    "sources": "SIPRI Military Expenditure Database 2024 (April 2025 release); IISS Military Balance 2026; SIPRI press release Apr 2025",
+    "summary": "Junta seized power Feb 2021. SIPRI 2024 (released Apr 2025): Myanmar military spending surged 66% to $5.0B/yr — highest rate of increase in Asia-Pacific and 6.8% of GDP — equating to ~$13.7M/day. Previous $2.5B/yr figure predated the 66% surge. Military now consumes 29% of government expenditure. Resistance controls significant territory. Figures reflect junta spending only."
   },
   {
     "id": "sahel",
