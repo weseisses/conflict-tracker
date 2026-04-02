@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
+import Link from "next/link";
 import type { Conflict } from "../lib/types";
 import { calcCost, daysSince, fmt, fmtLive } from "../lib/cost";
 import ConflictBar from "./ConflictBar";
@@ -9,14 +10,25 @@ import StatCard from "./StatCard";
 
 interface Props { conflicts: Conflict[]; }
 
+const SITE = "https://conflictcost.org";
+
 export default function TrackerClient({ conflicts }: Props) {
-  const [now, setNow]         = useState(() => new Date());
+  const [now, setNow]           = useState(() => new Date());
   const [selected, setSelected] = useState<string | null>(null);
-  const [filter, setFilter]   = useState<"active" | "all">("active");
+  const [filter, setFilter]     = useState<"active" | "all">("active");
+  const [embedOpen, setEmbedOpen] = useState(false);
+  const [copied, setCopied]     = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 300);
     return () => clearInterval(id);
+  }, []);
+
+  const handleCopy = useCallback((text: string) => {
+    navigator.clipboard.writeText(text).then(() => {
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    });
   }, []);
 
   const conflictCosts = conflicts.map((c) => ({
@@ -60,6 +72,9 @@ export default function TrackerClient({ conflicts }: Props) {
               </button>
             ))}
           </div>
+          <Link href="/methodology" style={{ background: "transparent", border: "1px solid #1a2030", color: "#3d4a5a", fontSize: 10, fontWeight: 700, letterSpacing: 2, padding: "5px 12px", textTransform: "uppercase", textDecoration: "none" }}>
+            Methodology
+          </Link>
           <div style={{ display: "flex", alignItems: "center", gap: 7, fontSize: 11, letterSpacing: 2, color: "#e74c3c", fontFamily: "'Share Tech Mono', monospace" }}>
             <div className="blink" style={{ width: 6, height: 6, borderRadius: "50%", background: "#e74c3c" }} />LIVE
           </div>
@@ -109,7 +124,87 @@ export default function TrackerClient({ conflicts }: Props) {
             COUNTER FROZEN AT END DATE — FINAL ESTIMATE
           </div>
         )}
+
+        {/* EMBED BUTTON — only shown when a specific conflict is selected */}
+        {active && (
+          <div style={{ marginTop: 18 }}>
+            <button
+              onClick={() => setEmbedOpen(true)}
+              style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 10, fontWeight: 700, letterSpacing: 2, padding: "6px 14px", textTransform: "uppercase", cursor: "pointer" }}>
+              &lt;/&gt; Embed This Counter
+            </button>
+          </div>
+        )}
       </section>
+
+      {/* EMBED MODAL */}
+      {embedOpen && active && (() => {
+        const iframeUrl = `${SITE}/embed/${active.id}`;
+        const snippet = `<iframe\n  src="${iframeUrl}"\n  width="480"\n  height="140"\n  frameborder="0"\n  style="border:none;overflow:hidden"\n  allowtransparency="true"\n  title="${active.name} cost tracker"\n></iframe>`;
+        return (
+          <div
+            onClick={() => setEmbedOpen(false)}
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20 }}>
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{ background: "#0e1218", border: "1px solid #1e2a38", maxWidth: 560, width: "100%", padding: "28px 28px 24px" }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
+                <div>
+                  <div style={{ fontSize: 10, letterSpacing: 3, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 4 }}>Embed Widget</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: 1, color: "#e8edf5" }}>{active.flag} {active.name}</div>
+                </div>
+                <button onClick={() => setEmbedOpen(false)} style={{ background: "transparent", border: "none", color: "#3d4a5a", fontSize: 20, cursor: "pointer", lineHeight: 1, padding: "0 4px" }}>✕</button>
+              </div>
+
+              {/* Preview */}
+              <div style={{ fontSize: 11, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>Preview</div>
+              <div style={{ background: "#070a0d", border: "1px solid #1a2030", marginBottom: 20, overflow: "hidden", height: 140 }}>
+                <iframe
+                  src={`/embed/${active.id}`}
+                  width="100%"
+                  height="140"
+                  style={{ border: "none", display: "block" }}
+                  title={`${active.name} embed preview`}
+                />
+              </div>
+
+              {/* Code snippet */}
+              <div style={{ fontSize: 11, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>HTML Snippet</div>
+              <pre style={{
+                background: "#070a0d",
+                border: "1px solid #1a2030",
+                padding: "14px 16px",
+                fontFamily: "'Share Tech Mono', monospace",
+                fontSize: 12,
+                color: "#7a9ab0",
+                overflowX: "auto",
+                whiteSpace: "pre",
+                marginBottom: 14,
+                lineHeight: 1.7,
+              }}>{snippet}</pre>
+
+              <div style={{ display: "flex", gap: 10 }}>
+                <button
+                  onClick={() => handleCopy(snippet)}
+                  style={{ flex: 1, background: copied ? "#1a3a2a" : "#1e2a38", border: `1px solid ${copied ? "#2a5a3a" : "#2a3a50"}`, color: copied ? "#4aaa6a" : "#c8d4e0", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "9px 16px", textTransform: "uppercase", cursor: "pointer" }}>
+                  {copied ? "✓ Copied!" : "Copy Code"}
+                </button>
+                <a
+                  href={`/embed/${active.id}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "9px 16px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center" }}>
+                  Preview ↗
+                </a>
+              </div>
+
+              <div style={{ marginTop: 14, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
+                Recommended size: 480 × 140 px. The widget is responsive — it scales to fill its container. No API key required.
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* MAIN CONTENT */}
       <main style={{ maxWidth: 980, margin: "0 auto", padding: "24px 20px 60px" }}>
