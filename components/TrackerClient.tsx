@@ -7,6 +7,7 @@ import { calcCost, daysSince, fmt, fmtLive } from "../lib/cost";
 import ConflictBar from "./ConflictBar";
 import DetailPanel from "./DetailPanel";
 import StatCard from "./StatCard";
+import EmailCapture from "./EmailCapture";
 
 interface Props { conflicts: Conflict[]; }
 
@@ -225,6 +226,8 @@ export default function TrackerClient({ conflicts }: Props) {
               <StatCard label="Combined Daily Burn" value={fmt(globalRate, 1)}             color="#e74c3c" />
               <StatCard label="Per Second (active)" value={fmt(globalRate / 86_400, 0)}   color="#e74c3c" />
             </div>
+
+            <EmailCapture />
           </div>
         )}
 
