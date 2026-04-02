@@ -11,7 +11,21 @@
     "status": "ACTIVE",
     "parties": "U.S. + Israel vs. Iran",
     "sources": "CSIS (Cancian & Park, Mar 2026) — $3.7B first 100 hrs, $16.5B by Day 12; Pentagon Congressional briefing (Military Times, Mar 2026) — $11.3B at Day 6; Penn Wharton Budget Model (Mar 2026) — ~$500M/day sustained; Middle East Monitor (Mar 2026) — ~$27.5B through Day 32",
-    "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B. Anchor of $11.5B calibrated to Day 32 total; $500M/day reflects current sustained operational rate including munitions, personnel, naval/air ops, and logistics."
+    "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B. Anchor of $11.5B calibrated to Day 32 total; $500M/day reflects current U.S. operational costs. Note: concurrent 2026 Israel–Hezbollah/Lebanon operations are tracked separately."
+  },
+  {
+    "id": "lebanon2026",
+    "name": "2026 Lebanon War",
+    "region": "Middle East",
+    "flag": "🇱🇧",
+    "color": "#8e44ad",
+    "startDate": "2026-03-02",
+    "ratePerDay": 150000000,
+    "anchor": 2000000000,
+    "status": "ACTIVE",
+    "parties": "Israel vs. Hezbollah",
+    "sources": "Times of Israel (Mar 2026) — NIS 143B defense budget + NIS 39B supplemental; Bloomberg Mar 2026 — war costs $1.6B/week for all Israeli ops; CFR Israel-announces-plan-to-occupy-southern-Lebanon (Mar 2026); ACLED Middle East Special Issue Mar 2026",
+    "summary": "Hezbollah resumed rocket fire against northern Israel on March 2, 2026 — breaking the Nov 2024 ceasefire — in response to Op. Epic Fury against Iran. Israel launched an expanded air campaign over Lebanon, followed by ground operations in southern Lebanon beginning March 16. By late March 2026 Israel's combined war costs (Iran + Lebanon) were running at ~$1.6B/week. $150M/day reflects Israel-specific Lebanon operational costs; anchor of $2B captures the initial bombardment phase. Concurrent U.S. and Israeli costs for the Iran campaign are tracked under Op. Epic Fury."
   },
   {
     "id": "ukraine",
@@ -96,6 +110,21 @@
     "parties": "DRC Armed Forces (FARDC) + SADC vs. M23 / Rwanda",
     "sources": "SIPRI 2023 (DRC +105%); ACLED; UN Group of Experts reports",
     "summary": "M23 resurgence from late 2022, backed by Rwanda (UN Group of Experts confirmed). DRC military spending surged 105% in 2023 — largest increase of any country globally (SIPRI). DRC defense budget ~$1.5-2B/yr by 2023. ~$5.5M/day blended estimate including SADC forces."
+  },
+  {
+    "id": "twelvedaywar",
+    "name": "The Twelve-Day War (Israel–Iran)",
+    "region": "Middle East",
+    "flag": "🇮🇱",
+    "color": "#1abc9c",
+    "startDate": "2025-06-13",
+    "endDate": "2025-06-25",
+    "ratePerDay": 1500000000,
+    "anchor": 0,
+    "status": "ENDED",
+    "parties": "Israel + U.S. vs. Iran",
+    "sources": "New Arab — Israel faces $12B losses after 12-day war; TRT World — total U.S. + Israel + Iran costs; Al Jazeera Centre for Studies — Twelve Days of Inferno analysis; Britannica — 12-Day War entry; House of Commons Library CBP-10292 (Impacts of June 2025 strikes)",
+    "summary": "On June 13, 2025, Israel launched a massive air campaign against Iranian nuclear facilities, military bases, and IRGC infrastructure — the IDF's largest single operation, deploying 200+ fighter jets across 5 strike waves targeting 100+ sites. Iran retaliated with 550 ballistic missiles and 1,000 drones. Trump announced a ceasefire on June 23, 2025, naming it the 'Twelve-Day War.' Israel's direct losses estimated at $12B; total combined costs (Israel + U.S. support + Iranian response) estimated at $18B over 12 days (~$1.5B/day). This operation served as the tactical blueprint for Op. Epic Fury (Feb 2026)."
   },
   {
     "id": "yemen",
