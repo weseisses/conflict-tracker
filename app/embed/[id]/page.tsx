@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, use } from "react";
+import { useState, useEffect } from "react";
 import type { Conflict } from "../../../lib/types";
 import { calcCost, fmtLive, fmt } from "../../../lib/cost";
 import conflictsData from "../../../conflicts.config.json";
@@ -14,8 +14,8 @@ const STATUS_COLOR: Record<string, string> = {
   ENDED:     "#4a5568",
 };
 
-export default function EmbedPage({ params }: { params: Promise<{ id: string }> }) {
-  const { id } = use(params);
+export default function EmbedPage({ params }: { params: { id: string } }) {
+  const { id } = params;
   const conflict = conflicts.find((c) => c.id === id) ?? null;
 
   const [now, setNow] = useState(() => new Date());
