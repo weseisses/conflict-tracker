@@ -6,12 +6,12 @@
     "flag": "🇮🇷",
     "color": "#e74c3c",
     "startDate": "2026-02-28",
-    "ratePerDay": 155000000,
-    "anchor": 13800000000,
+    "ratePerDay": 500000000,
+    "anchor": 11500000000,
     "status": "ACTIVE",
     "parties": "U.S. + Israel vs. Iran",
-    "sources": "CSIS (Cancian & Park, Mar 2026); Pentagon Congressional briefing via NBC News; Brown University Costs of War (Oct 2025)",
-    "summary": "Operation Epic Fury launched Feb 28, 2026. Pentagon confirmed $11.3B in first 6 days. CSIS estimated $16.5B by Day 12. Three-phase model: $380M/day (initial strikes, days 0-3), $220M/day (sustained ops, days 3-10), $155M/day (air dominance, day 10+). Anchor of $13.8B = cumulative cost through Day 10."
+    "sources": "CSIS (Cancian & Park, Mar 2026) — $3.7B first 100 hrs, $16.5B by Day 12; Pentagon Congressional briefing (Military Times, Mar 2026) — $11.3B at Day 6; Penn Wharton Budget Model (Mar 2026) — ~$500M/day sustained; Middle East Monitor (Mar 2026) — ~$27.5B through Day 32",
+    "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B. Anchor of $11.5B calibrated to Day 32 total; $500M/day reflects current sustained operational rate including munitions, personnel, naval/air ops, and logistics."
   },
   {
     "id": "ukraine",
