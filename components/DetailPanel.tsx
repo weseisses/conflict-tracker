@@ -4,6 +4,8 @@ import type { Conflict } from "../lib/types";
 import { daysSince, fmt } from "../lib/cost";
 import StatCard from "./StatCard";
 
+const SKULL = "✕"; // neutral marker — avoids emoji rendering inconsistency
+
 interface Props {
   conflict: Conflict;
   cost: number;
@@ -71,7 +73,7 @@ export default function DetailPanel({ conflict: c, cost }: Props) {
       </div>
 
       {c.comparables && c.comparables.length > 0 && (
-        <div style={{ background: "#0c0f14", border: "1px solid #1a2030", borderLeft: `3px solid ${c.color}`, padding: "14px 18px" }}>
+        <div style={{ background: "#0c0f14", border: "1px solid #1a2030", borderLeft: `3px solid ${c.color}`, padding: "14px 18px", marginBottom: c.casualties ? 10 : 0 }}>
           <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: c.color, marginBottom: 12 }}>
             Compared To
           </div>
@@ -82,6 +84,37 @@ export default function DetailPanel({ conflict: c, cost }: Props) {
                 <div style={{ fontSize: 13, color: "#8a9ab0", lineHeight: 1.75 }}>{line}</div>
               </div>
             ))}
+          </div>
+        </div>
+      )}
+
+      {c.casualties && (
+        <div style={{ background: "#0c0f14", border: "1px solid #1a2030", borderLeft: `3px solid #4a5568`, padding: "14px 18px" }}>
+          <div style={{ display: "flex", alignItems: "baseline", justifyContent: "space-between", marginBottom: 12, flexWrap: "wrap", gap: 6 }}>
+            <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: "#6a7a8a" }}>
+              Human Cost — Casualties
+            </div>
+            <div style={{ fontSize: 10, letterSpacing: 1, color: "#2d3a4a" }}>
+              est. as of {c.casualties.asOf}
+            </div>
+          </div>
+
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: 8, marginBottom: 12 }}>
+            {c.casualties.entries.map((entry, i) => (
+              <div key={i} style={{ background: "#080b10", border: "1px solid #1a2030", padding: "10px 14px" }}>
+                <div style={{ fontSize: 10, letterSpacing: 1, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 5, lineHeight: 1.4 }}>{entry.label}</div>
+                <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 15, color: "#8a9ab0" }}>{entry.count}</div>
+              </div>
+            ))}
+          </div>
+
+          {c.casualties.note && (
+            <div style={{ fontSize: 11, color: "#2d3a4a", lineHeight: 1.7, marginBottom: 8 }}>
+              ⚠ {c.casualties.note}
+            </div>
+          )}
+          <div style={{ fontSize: 10, color: "#1e2a38", lineHeight: 1.6 }}>
+            Sources: {c.casualties.source}
           </div>
         </div>
       )}

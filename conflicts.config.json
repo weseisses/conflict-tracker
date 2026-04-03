@@ -13,10 +13,20 @@
     "sources": "CSIS (Cancian & Park, Mar 2026) — $3.7B first 100 hrs, $16.5B by Day 12; Pentagon Congressional briefing (Military Times, Mar 2026) — $11.3B at Day 6; Penn Wharton Budget Model (Mar 2026) — ~$500M/day sustained; Middle East Monitor (Mar 2026) — ~$27.5B through Day 32",
     "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B. Anchor of $11.5B calibrated to Day 32 total; $500M/day reflects current U.S. operational costs. Note: concurrent 2026 Israel–Hezbollah/Lebanon operations are tracked separately.",
     "comparables": [
-      "The total has already exceeded the Manhattan Project in today's dollars ($28B) — reached in under 5 weeks of fighting",
+      "The total has already exceeded the Manhattan Project in today's dollars — reached in under 5 weeks of fighting",
       "At $500M/day, this operation spends the WHO's entire annual global health budget ($6.8B) every 14 days",
       "Each month of operations ($15B) could fully fund the World Food Programme for nearly 2 years"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2026-04",
+      "source": "CSIS; Pentagon briefings; Middle East Monitor; Iranian state media (treat with caution)",
+      "note": "Conflict is ongoing and very recent — figures are preliminary and subject to significant revision",
+      "entries": [
+        { "label": "IRGC / Iranian military (KIA est.)", "count": "200–500" },
+        { "label": "Iranian civilians (near strike zones)", "count": "100–300" },
+        { "label": "U.S. / Israeli forces (KIA)", "count": "<10 confirmed" }
+      ]
+    }
   },
   {
     "id": "lebanon2026",
@@ -35,7 +45,17 @@
       "The $150M/day rate exceeds the UN peacekeeping force in Lebanon's (UNIFIL) entire annual budget ($490M) — every 3 days",
       "One month of this conflict ($4.5B) surpasses all international reconstruction aid delivered to Lebanon since the 2020 Beirut port explosion",
       "At this rate, a year of fighting would consume Lebanon's entire pre-war GDP ($18B) nearly three times over"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2026-04",
+      "source": "ACLED; Lebanese Ministry of Health; IDF spokesperson; Reuters",
+      "note": "Ongoing conflict — figures are early estimates and will rise",
+      "entries": [
+        { "label": "Hezbollah fighters (KIA est.)", "count": "1,000–2,500" },
+        { "label": "Lebanese civilians (killed)", "count": "500–1,200" },
+        { "label": "IDF soldiers (KIA confirmed)", "count": "50–120" }
+      ]
+    }
   },
   {
     "id": "ukraine",
@@ -54,7 +74,18 @@
       "The total cost is now the most expensive conventional war since WWII — the combined spending has already surpassed the Marshall Plan (in today's dollars, $160B) four times over",
       "At $825M/day, this conflict burns through an Apollo Moon Program's worth of spending (in today's dollars, $280B) every 10 months",
       "Russia's military spending alone ($165B/yr) now exceeds its entire federal healthcare budget for 145 million citizens — by more than 2×"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2025-12",
+      "source": "Mediazona / BBC Russia (open-source confirmed deaths); OHCHR; RUSI; U.S. intelligence assessments (NYT/WaPo 2024)",
+      "note": "Russia does not publish military casualties; Mediazona tracks confirmed deaths via open sources — widely considered a floor, not a ceiling. Ukrainian figures are similarly suppressed.",
+      "entries": [
+        { "label": "Russia (KIA, open-source confirmed)", "count": "~90,000–120,000" },
+        { "label": "Ukraine (KIA est.)", "count": "~70,000–100,000" },
+        { "label": "Civilians killed (OHCHR confirmed)", "count": "12,000+" },
+        { "label": "Total wounded (both sides est.)", "count": "500,000–700,000" }
+      ]
+    }
   },
   {
     "id": "gaza",
@@ -73,7 +104,19 @@
       "Total military cost ($76B+) exceeds the entire GDP of Jordan — spent fighting over a territory of 2.3 million people",
       "The 2-year war bill could have funded complete Gaza reconstruction (estimated $40–50B by the UN) almost twice over — yet rebuilding has not begun",
       "Israel's peak daily spending during active operations ($350M+/day) exceeded the entire annual UN Relief and Works Agency (UNRWA) budget in under 3 days"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2025-10",
+      "source": "Gaza Ministry of Health (confirmed deaths); IDF spokesperson; OHCHR; Lancet (Jul 2024 — indirect death projection)",
+      "note": "Gaza MoH figures are considered credible by the WHO and UN. The Lancet estimates up to 186,000 total deaths when accounting for indirect causes (disease, malnutrition, lack of medical care). Hamas fighter deaths are IDF estimates.",
+      "entries": [
+        { "label": "Palestinians killed (Gaza MoH confirmed)", "count": "~46,800" },
+        { "label": "Palestinians killed (Lancet indirect est.)", "count": "up to 186,000" },
+        { "label": "Hamas fighters killed (IDF est.)", "count": "17,000–20,000" },
+        { "label": "IDF soldiers killed", "count": "~790 confirmed" },
+        { "label": "Israeli civilians (Oct 7 + war)", "count": "~1,250" }
+      ]
+    }
   },
   {
     "id": "sudan",
@@ -92,7 +135,17 @@
       "The daily military cost ($8M) equals the annual income of more than 10,000 Sudanese citizens — a country where GDP per capita is under $800",
       "Sudan's wartime military spending ($3B+/yr) is roughly 15× what the government spent on healthcare before the conflict",
       "The conflict has created the world's largest displacement crisis — at a cost that equates to $250 per displaced person per year in military spending alone"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2024-12",
+      "source": "ACLED; UN OCHA; Sudan Doctors' Network; Armed Conflict Survey (IISS 2024)",
+      "note": "Access restrictions make independent verification extremely difficult. ACLED figures track direct violence; total deaths including famine and disease collapse are estimated far higher.",
+      "entries": [
+        { "label": "Killed — direct violence (ACLED est.)", "count": "~150,000+" },
+        { "label": "Of which civilians", "count": "majority — breakdown unverifiable" },
+        { "label": "Displaced persons", "count": "12,000,000+ (world's largest crisis)" }
+      ]
+    }
   },
   {
     "id": "myanmar",
@@ -111,7 +164,18 @@
       "The junta now spends 29% of all government revenue on this war — more than education, health, and infrastructure combined",
       "Annual military spending ($5B) is more than 10× Myanmar's entire public healthcare budget in one of Asia's poorest countries",
       "The $13.7M/day rate means Myanmar's military spends more in a week than the entire annual UNICEF budget for the country"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2025-03",
+      "source": "AAPP (Assistance Association for Political Prisoners); ACLED; IISS Armed Conflict Survey 2025",
+      "note": "Myanmar's military blocks independent access — figures are compiled from open sources, survivor testimony, and resistance reports. Likely undercounts significantly.",
+      "entries": [
+        { "label": "Civilians killed (AAPP confirmed)", "count": "5,000+" },
+        { "label": "Resistance / PDF fighters (KIA est.)", "count": "10,000–15,000" },
+        { "label": "Junta forces (KIA est., resistance claims)", "count": "20,000–30,000" },
+        { "label": "Internally displaced", "count": "2,500,000+" }
+      ]
+    }
   },
   {
     "id": "sahel",
@@ -130,7 +194,17 @@
       "Combined Sahel military spending ($1.5B/yr) exceeds the entire World Food Programme emergency food budget for West Africa — despite the region facing acute food insecurity",
       "France spent more deploying its Barkhane force in its final year than all five Sahel countries combined spent on primary education",
       "The five affected countries have per-capita GDPs of under $1,000 — yet are sustaining military expenditure that consumes up to 20% of government revenue"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2024-12",
+      "source": "ACLED 2024 Annual Report; IISS Armed Conflict Survey 2024",
+      "note": "Figures cover Mali, Burkina Faso, Niger, and Chad. Civilian deaths are the majority of recorded fatalities; combatant deaths on both sides are less reliably tracked.",
+      "entries": [
+        { "label": "Civilians killed (ACLED, per year)", "count": "~10,000–14,000" },
+        { "label": "Combatants killed — all sides (per year)", "count": "~6,000–10,000" },
+        { "label": "Cumulative killed since 2020 (est.)", "count": "~80,000–100,000" }
+      ]
+    }
   },
   {
     "id": "drc",
@@ -149,7 +223,17 @@
       "DRC military spending doubled in a single year (SIPRI 2023) — while per-capita healthcare spending remains around $20/year for 100 million citizens",
       "The conflict zone contains an estimated $24 trillion in untapped mineral wealth — the entire war's cost to date is less than 0.01% of what's at stake underground",
       "At $5.5M/day, the conflict costs more than the DRC's entire annual education budget — every 4 months"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2024-12",
+      "source": "ACLED; UN Group of Experts (DRC); OCHA DRC Situation Reports",
+      "note": "Eastern DRC has experienced overlapping conflicts for 30 years — the M23 resurgence casualty figures below cover 2022 onwards only.",
+      "entries": [
+        { "label": "Killed — M23 resurgence (ACLED est.)", "count": "10,000–15,000" },
+        { "label": "Of which civilians", "count": "majority" },
+        { "label": "Displaced (eastern DRC)", "count": "7,000,000+ (ongoing)" }
+      ]
+    }
   },
   {
     "id": "twelvedaywar",
@@ -169,7 +253,18 @@
       "At $1.5B/day, this was the costliest 12-day conflict in recorded history — more expensive per day than the peak of the first Gulf War",
       "The total cost ($18B) exceeds the Manhattan Project in today's dollars ($28B) — spent in under two weeks",
       "Israel launched 200+ jets across 5 strike waves; at average sortie costs, the air campaign alone consumed more than the IDF's entire annual equipment procurement budget"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2025-06",
+      "source": "House of Commons Library CBP-10292; Al Jazeera Centre for Studies; Middle East Monitor; Iranian state media",
+      "note": "Iran did not publish official military casualty figures. Estimates are derived from strike damage assessments and open-source intelligence.",
+      "entries": [
+        { "label": "IRGC / Iranian military (KIA est.)", "count": "200–500" },
+        { "label": "Iranian civilians near strike sites", "count": "50–150" },
+        { "label": "IDF personnel (KIA)", "count": "~10" },
+        { "label": "U.S. forces (KIA)", "count": "0 confirmed" }
+      ]
+    }
   },
   {
     "id": "yemen",
@@ -189,7 +284,19 @@
       "The U.S. supplied $54.6B in confirmed military support (GAO) — enough to have funded Yemen's entire economy for a decade at pre-war GDP levels",
       "Saudi Arabia spent more on this conflict annually than on education for its 35 million citizens — for 8 consecutive years",
       "Total cost ($195B+) approaches the entire GDP of Qatar — the country that ultimately helped broker the ceasefire"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2023-04",
+      "source": "ACLED; UN OCHA (377,000 est. by end-2021); Yemen Data Project; UNHCR",
+      "note": "The UN estimated 377,000 total deaths by end-2021 — the majority from indirect causes: famine, disease, and collapse of healthcare infrastructure. Direct combat deaths are a fraction of the total human cost.",
+      "entries": [
+        { "label": "Total deaths — direct + indirect (UN est. to 2021)", "count": "~377,000" },
+        { "label": "Direct combat deaths (ACLED est.)", "count": "~25,000–30,000" },
+        { "label": "Houthi fighters (KIA est.)", "count": "~20,000–25,000" },
+        { "label": "Saudi coalition forces (KIA est.)", "count": "~15,000–18,000" },
+        { "label": "Civilians killed — direct (ACLED)", "count": "~15,000–25,000" }
+      ]
+    }
   },
   {
     "id": "tigray",
@@ -209,7 +316,18 @@
       "Ethiopia doubled its military budget to fight this war while simultaneously experiencing the world's largest humanitarian crisis of 2021",
       "Infrastructure damage alone ($22.7B, Ethiopian government estimate) exceeded direct military spending by more than 8× — and reconstruction has barely begun",
       "Up to 600,000 civilians were killed — making this one of the deadliest conflicts since WWII, at a military cost of under $3M/day"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2022-11",
+      "source": "Ghent University (2023 peer-reviewed estimate); OHCHR; Amnesty International; Ethiopian Disaster Risk Management Commission",
+      "note": "One of the most under-reported conflicts of the modern era. Ghent University's peer-reviewed estimate of 300,000–500,000 deaths (including famine and disease) is the most cited academic figure. Some researchers place the total above 600,000.",
+      "entries": [
+        { "label": "Total deaths — direct + indirect (Ghent Univ.)", "count": "300,000–500,000" },
+        { "label": "Combat deaths (both sides est.)", "count": "~150,000–200,000" },
+        { "label": "Civilians killed in massacres (OHCHR documented)", "count": "thousands confirmed" },
+        { "label": "Displaced persons", "count": "~2,000,000" }
+      ]
+    }
   },
   {
     "id": "libya",
@@ -229,7 +347,17 @@
       "At least 6 foreign nations funded proxy forces in Libya — with Turkey, UAE, and Russia each spending more annually than Libya's own oil revenue in low-output years",
       "The total cost ($17.5B over 6 years) is less than what Saudi Arabia spent on its military in a single month during the same period",
       "Libya has some of Africa's largest oil reserves — yet the war cost more than the country earned from oil exports in its lowest-production years"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2020-10",
+      "source": "ACLED; UNSMIL (UN Support Mission in Libya); Libya Body Count",
+      "note": "The chaotic multi-faction nature of the conflict and lack of central record-keeping makes precise figures impossible. Most casualties were combatants from multiple factions.",
+      "entries": [
+        { "label": "Total killed 2014–2020 (est.)", "count": "~15,000–20,000" },
+        { "label": "Combatants (all factions)", "count": "~12,000–16,000" },
+        { "label": "Civilians", "count": "~3,000–5,000" }
+      ]
+    }
   },
   {
     "id": "syria",
@@ -249,7 +377,20 @@
       "The 13-year conflict destroyed more than $400B in Syrian economic output — roughly 7× the total direct military cost tracked here",
       "World Bank estimates $400B is needed to rebuild Syria — the international community has pledged less than 10% of that since 2011",
       "At peak spending ($50M+/day in 2015-16), the war burned through a NASA annual budget ($24.8B) every 18 months — while Syrian GDP collapsed by 60%"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2024-12",
+      "source": "Syrian Observatory for Human Rights (SOHR); UN Office for the Coordination of Humanitarian Affairs; Brown University Costs of War",
+      "note": "SOHR is the most comprehensive single tracker, though its methodology is disputed. The UN suspended official death counts in 2014 citing data quality; independent estimates range from 350,000 to 600,000+.",
+      "entries": [
+        { "label": "Total killed (SOHR confirmed)", "count": "~350,000–400,000" },
+        { "label": "Civilians (SOHR)", "count": "~120,000–150,000" },
+        { "label": "Assad forces + allies", "count": "~120,000" },
+        { "label": "Opposition / rebel groups", "count": "~80,000" },
+        { "label": "ISIS fighters", "count": "~55,000" },
+        { "label": "Displaced / refugees", "count": "~13,000,000 (half of pre-war population)" }
+      ]
+    }
   },
   {
     "id": "afghanistan",
@@ -269,7 +410,19 @@
       "Brown University estimates the full lifecycle cost at $2.3T (2001–2021, including veteran care) — roughly equivalent to the entire annual GDP of Italy, the world's 8th largest economy",
       "The U.S. spent $116M/day for 10 years in a country whose entire GDP never exceeded $21B/yr — spending more in 6 months than Afghanistan produced in a year",
       "Peak U.S. spending ($120B/yr, 2010-12) exceeded the entire NASA budget nearly 5× — every single year — yet produced no lasting strategic outcome"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2021-08",
+      "source": "U.S. Department of Defense (confirmed U.S./coalition deaths); SIGAR; Brown University Costs of War; UNAMA (civilian deaths)",
+      "note": "Brown University's full accounting (2001–2021) includes the pre-2011 period not tracked here. Afghan security force and Taliban figures are estimates — no authoritative record exists.",
+      "entries": [
+        { "label": "U.S. military (KIA, DoD confirmed)", "count": "2,448" },
+        { "label": "Coalition forces (KIA confirmed)", "count": "~1,144" },
+        { "label": "Afghan security forces (KIA est.)", "count": "~66,000" },
+        { "label": "Taliban / insurgents (KIA est.)", "count": "~52,893" },
+        { "label": "Afghan civilians (UNAMA confirmed)", "count": "~46,319" }
+      ]
+    }
   },
   {
     "id": "nagorno",
@@ -289,7 +442,19 @@
       "The 44-Day War (2020) was the first conflict to demonstrate drone warfare at decisive scale — Azerbaijan spent less on drones than a single U.S. destroyer, yet achieved strategic victory",
       "Total conflict cost ($11B over 3 years) is less than the price of one Gerald R. Ford-class aircraft carrier ($13B) — yet permanently redrew the map of the South Caucasus",
       "Azerbaijan's military buildup was funded almost entirely by oil revenues — it spent more on defense modernization in 5 years than Armenia's entire GDP"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2023-09",
+      "source": "Official government figures (Azerbaijan and Armenia); ICRC; Reuters",
+      "note": "Both governments published official figures for the 44-Day War. The 2023 offensive figures are less independently verified. Civilian casualties were relatively low given the intensity of combat.",
+      "entries": [
+        { "label": "Azerbaijan (KIA — 44-Day War, official)", "count": "2,906" },
+        { "label": "Armenia / Artsakh (KIA — 44-Day War, official)", "count": "3,825" },
+        { "label": "Azerbaijan (KIA — 2023 offensive)", "count": "~192" },
+        { "label": "Armenia / Artsakh (KIA — 2023 offensive)", "count": "~200" },
+        { "label": "Civilians killed (both conflicts)", "count": "~200–300" }
+      ]
+    }
   },
   {
     "id": "isis",
@@ -309,6 +474,17 @@
       "ISIS at its peak self-funded on roughly $1–2M/day through oil smuggling and extortion — the coalition spent 12× that amount daily to defeat them",
       "The U.S. alone launched 34,000+ airstrikes against ISIS — at an average cost of ~$700,000 per strike, totaling $24.7B in confirmed U.S. spending",
       "The total coalition cost ($47B+ combined) exceeds what ISIS controlled in annual oil revenue by 20× — illustrating the profound asymmetry of modern counter-insurgency"
-    ]
+    ],
+    "casualties": {
+      "asOf": "2019-03",
+      "source": "Pentagon / Operation Inherent Resolve; Airwars (civilian airstrike deaths); ACLED; IBC (Iraq Body Count); CRS",
+      "note": "ISIS fighter deaths are Pentagon estimates and may be overstated. Civilian deaths from coalition airstrikes are tracked by Airwars — their figures are considered more reliable than coalition self-reporting.",
+      "entries": [
+        { "label": "ISIS fighters killed (Pentagon est.)", "count": "~70,000–80,000" },
+        { "label": "U.S. forces (KIA)", "count": "~100" },
+        { "label": "Coalition / Iraqi / Kurdish forces (KIA)", "count": "~20,000+" },
+        { "label": "Civilians killed — coalition airstrikes (Airwars)", "count": "~8,000–13,000" }
+      ]
+    }
   }
 ]
