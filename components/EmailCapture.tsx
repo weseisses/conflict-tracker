@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-// Replace with your Buttondown username after creating an account at buttondown.com
+// Your Buttondown username — update this once your account is created at buttondown.com
 const BUTTONDOWN_USERNAME = "conflictcost";
 
 type State = "idle" | "loading" | "success" | "error";
@@ -19,34 +19,22 @@ export default function EmailCapture() {
     setErrMsg("");
 
     try {
-      const res = await fetch(
-        `https://api.buttondown.com/v1/subscribers`,
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            // Buttondown public embed endpoint — no auth key needed for subscribe
-          },
-          body: JSON.stringify({ email_address: email.trim(), tags: ["conflictcost"] }),
-        }
-      );
-
-      // Buttondown's public embed form endpoint
       const formData = new FormData();
       formData.append("email_address", email.trim());
       formData.append("tag", "conflictcost");
 
-      const embedRes = await fetch(
+      // Buttondown's public embed endpoint — no API key required
+      // Uses no-cors so we can't read the response body; assume success on no throw
+      await fetch(
         `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`,
         { method: "POST", body: formData, mode: "no-cors" }
       );
 
-      // no-cors means we can't read the response — assume success
       setState("success");
       setEmail("");
     } catch {
       setState("error");
-      setErrMsg("Something went wrong — try again.");
+      setErrMsg("Something went wrong — please try again.");
     }
   }
 
