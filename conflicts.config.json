@@ -19,12 +19,15 @@
     ],
     "casualties": {
       "asOf": "2026-04",
-      "source": "CSIS; Pentagon briefings; Middle East Monitor; Iranian state media (treat with caution)",
-      "note": "Conflict is ongoing and very recent — figures are preliminary and subject to significant revision",
+      "source": "CENTCOM statements; Military Times; DefenseScoop; Al Jazeera death toll tracker; Iranian Red Crescent; The Intercept (Apr 2026 — Pentagon undercounting allegation); Wikipedia 2026 Iran war",
+      "note": "Figures are actively contested. Iran has not published a verified military vs. civilian breakdown. The Intercept (Apr 1, 2026) alleges CENTCOM is underreporting U.S. casualties. Iranian Red Crescent and independent estimates diverge significantly from official U.S. characterisations of strikes as 'precision military operations'.",
       "entries": [
-        { "label": "IRGC / Iranian military (KIA est.)", "count": "200–500" },
-        { "label": "Iranian civilians (near strike zones)", "count": "100–300" },
-        { "label": "U.S. / Israeli forces (KIA)", "count": "<10 confirmed" }
+        { "label": "Total killed in Iran (all causes)", "count": "~1,937–2,400+" },
+        { "label": "Iranian civilians (documented incidents)", "count": "significant — breakdown disputed" },
+        { "label": "IRGC / Iranian military (KIA)", "count": "not independently verified" },
+        { "label": "Senior Iranian officials killed", "count": "Defence Minister, IRGC C-in-C, Supreme Leader Khamenei" },
+        { "label": "U.S. troops killed (CENTCOM confirmed)", "count": "~15" },
+        { "label": "U.S. troops wounded", "count": "300–520+ (reporting contested)" }
       ]
     }
   },
