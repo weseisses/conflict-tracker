@@ -3,7 +3,7 @@
 import { useState } from "react";
 
 const BUTTONDOWN_USERNAME = "conflictcost";
-const BMC_USERNAME = "conflictcost";
+const KOFI_USERNAME = "conflictcost";
 
 type State = "idle" | "loading" | "success" | "error";
 
@@ -132,15 +132,15 @@ export default function EmailCapture() {
           This site has no ads. If you find it useful, a coffee keeps it running.
         </p>
         <a
-          href={`https://www.buymeacoffee.com/${BMC_USERNAME}`}
+          href={`https://ko-fi.com/${KOFI_USERNAME}`}
           target="_blank"
           rel="noopener noreferrer"
           style={{
             display: "inline-flex",
             alignItems: "center",
             gap: 8,
-            background: "#FFDD00",
-            color: "#000",
+            background: "#29ABE0",
+            color: "#fff",
             fontSize: 13,
             fontWeight: 700,
             fontFamily: "'Barlow Condensed', sans-serif",
@@ -154,7 +154,7 @@ export default function EmailCapture() {
           onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
           onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
         >
-          ☕ Buy Me a Coffee
+          ☕ Support on Ko-fi
         </a>
       </div>
 
