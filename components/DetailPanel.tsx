@@ -46,7 +46,7 @@ export default function DetailPanel({ conflict: c, cost }: Props) {
         </div>
       ))}
 
-      <div style={{ background: "#0c0f14", border: "1px solid #1a2030", borderLeft: `3px solid ${c.color}`, padding: "14px 18px" }}>
+      <div style={{ background: "#0c0f14", border: "1px solid #1a2030", borderLeft: `3px solid ${c.color}`, padding: "14px 18px", marginBottom: c.comparables?.length ? 10 : 0 }}>
         <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: c.color, marginBottom: 10 }}>
           Cost Estimates
         </div>
@@ -69,6 +69,22 @@ export default function DetailPanel({ conflict: c, cost }: Props) {
           ))}
         </div>
       </div>
+
+      {c.comparables && c.comparables.length > 0 && (
+        <div style={{ background: "#0c0f14", border: "1px solid #1a2030", borderLeft: `3px solid ${c.color}`, padding: "14px 18px" }}>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: c.color, marginBottom: 12 }}>
+            Compared To
+          </div>
+          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+            {c.comparables.map((line, i) => (
+              <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                <div style={{ color: c.color, fontSize: 16, lineHeight: 1.2, flexShrink: 0, marginTop: 1, opacity: 0.7 }}>≈</div>
+                <div style={{ fontSize: 13, color: "#8a9ab0", lineHeight: 1.75 }}>{line}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }

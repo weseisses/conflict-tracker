@@ -12,4 +12,5 @@ export interface Conflict {
   parties: string;
   sources: string;
   summary: string;
+  comparables?: string[];   // "compared to what?" equivalency lines
 }

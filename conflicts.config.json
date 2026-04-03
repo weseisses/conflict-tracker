@@ -11,7 +11,12 @@
     "status": "ACTIVE",
     "parties": "U.S. + Israel vs. Iran",
     "sources": "CSIS (Cancian & Park, Mar 2026) — $3.7B first 100 hrs, $16.5B by Day 12; Pentagon Congressional briefing (Military Times, Mar 2026) — $11.3B at Day 6; Penn Wharton Budget Model (Mar 2026) — ~$500M/day sustained; Middle East Monitor (Mar 2026) — ~$27.5B through Day 32",
-    "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B. Anchor of $11.5B calibrated to Day 32 total; $500M/day reflects current U.S. operational costs. Note: concurrent 2026 Israel–Hezbollah/Lebanon operations are tracked separately."
+    "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B. Anchor of $11.5B calibrated to Day 32 total; $500M/day reflects current U.S. operational costs. Note: concurrent 2026 Israel–Hezbollah/Lebanon operations are tracked separately.",
+    "comparables": [
+      "The total has already exceeded the Manhattan Project in today's dollars ($28B) — reached in under 5 weeks of fighting",
+      "At $500M/day, this operation spends the WHO's entire annual global health budget ($6.8B) every 14 days",
+      "Each month of operations ($15B) could fully fund the World Food Programme for nearly 2 years"
+    ]
   },
   {
     "id": "lebanon2026",
@@ -25,7 +30,12 @@
     "status": "ACTIVE",
     "parties": "Israel vs. Hezbollah",
     "sources": "Times of Israel (Mar 2026) — NIS 143B defense budget + NIS 39B supplemental; Bloomberg Mar 2026 — war costs $1.6B/week for all Israeli ops; CFR Israel-announces-plan-to-occupy-southern-Lebanon (Mar 2026); ACLED Middle East Special Issue Mar 2026",
-    "summary": "Hezbollah resumed rocket fire against northern Israel on March 2, 2026 — breaking the Nov 2024 ceasefire — in response to Op. Epic Fury against Iran. Israel launched an expanded air campaign over Lebanon, followed by ground operations in southern Lebanon beginning March 16. By late March 2026 Israel's combined war costs (Iran + Lebanon) were running at ~$1.6B/week. $150M/day reflects Israel-specific Lebanon operational costs; anchor of $2B captures the initial bombardment phase. Concurrent U.S. and Israeli costs for the Iran campaign are tracked under Op. Epic Fury."
+    "summary": "Hezbollah resumed rocket fire against northern Israel on March 2, 2026 — breaking the Nov 2024 ceasefire — in response to Op. Epic Fury against Iran. Israel launched an expanded air campaign over Lebanon, followed by ground operations in southern Lebanon beginning March 16. By late March 2026 Israel's combined war costs (Iran + Lebanon) were running at ~$1.6B/week. $150M/day reflects Israel-specific Lebanon operational costs; anchor of $2B captures the initial bombardment phase. Concurrent U.S. and Israeli costs for the Iran campaign are tracked under Op. Epic Fury.",
+    "comparables": [
+      "The $150M/day rate exceeds the UN peacekeeping force in Lebanon's (UNIFIL) entire annual budget ($490M) — every 3 days",
+      "One month of this conflict ($4.5B) surpasses all international reconstruction aid delivered to Lebanon since the 2020 Beirut port explosion",
+      "At this rate, a year of fighting would consume Lebanon's entire pre-war GDP ($18B) nearly three times over"
+    ]
   },
   {
     "id": "ukraine",
@@ -39,7 +49,12 @@
     "status": "ACTIVE",
     "parties": "Russia vs. Ukraine + Western support",
     "sources": "SIPRI Military Expenditure Database 2024–2026; Al Jazeera Feb 2026; CFR Ukraine Aid Tracker (Dec 2025); Kiel Institute; UkraineWorld (Russia 2026 budget analysis)",
-    "summary": "Combined: Russia ~$165B/yr (SIPRI/UkraineWorld 2026 budget: 14.9T roubles) + Ukraine ~$71B/yr (2025 defense budget) + European aid ~$65B/yr = ~$301B/yr or ~$825M/day. Total Western aid committed: $188B+ (CFR, Dec 2025). US withdrew 99% of direct support in 2025; Europe increased contribution but has not fully compensated. Russia's military spending as % of GDP rose to 7.5% in 2025."
+    "summary": "Combined: Russia ~$165B/yr (SIPRI/UkraineWorld 2026 budget: 14.9T roubles) + Ukraine ~$71B/yr (2025 defense budget) + European aid ~$65B/yr = ~$301B/yr or ~$825M/day. Total Western aid committed: $188B+ (CFR, Dec 2025). US withdrew 99% of direct support in 2025; Europe increased contribution but has not fully compensated. Russia's military spending as % of GDP rose to 7.5% in 2025.",
+    "comparables": [
+      "The total cost is now the most expensive conventional war since WWII — the combined spending has already surpassed the Marshall Plan (in today's dollars, $160B) four times over",
+      "At $825M/day, this conflict burns through an Apollo Moon Program's worth of spending (in today's dollars, $280B) every 10 months",
+      "Russia's military spending alone ($165B/yr) now exceeds its entire federal healthcare budget for 145 million citizens — by more than 2×"
+    ]
   },
   {
     "id": "gaza",
@@ -53,7 +68,12 @@
     "status": "CEASEFIRE",
     "parties": "Israel + U.S. vs. Hamas / Hezbollah / Houthis",
     "sources": "Bank of Israel (direct defense costs ~$77B through 2025); AA.com — war expenses $76.3B in 2 years (Oct 2025); Brown University Costs of War 2025 — U.S. military aid $21.7B; Breaking Defense Mar 2026 — Israel $45B defense budget; Haaretz Jan 2026",
-    "summary": "Gaza ceasefire reached mid-October 2025 after 2 years of conflict. Israel direct defense costs: ~$77B through end-2025 (Bank of Israel); U.S. military aid: $21.7B (Brown Univ). Total theater cost ~$106B to date. Post-ceasefire rate of $100M/day reflects ongoing Houthi exchanges, residual IDF brigades in Gaza, and Lebanon border operations. Iran escalation costs (Op. Epic Fury, Feb 2026+) are tracked separately. Israel approved $45B 2026 defense budget (Breaking Defense, Mar 2026)."
+    "summary": "Gaza ceasefire reached mid-October 2025 after 2 years of conflict. Israel direct defense costs: ~$77B through end-2025 (Bank of Israel); U.S. military aid: $21.7B (Brown Univ). Total theater cost ~$106B to date. Post-ceasefire rate of $100M/day reflects ongoing Houthi exchanges, residual IDF brigades in Gaza, and Lebanon border operations. Iran escalation costs (Op. Epic Fury, Feb 2026+) are tracked separately. Israel approved $45B 2026 defense budget (Breaking Defense, Mar 2026).",
+    "comparables": [
+      "Total military cost ($76B+) exceeds the entire GDP of Jordan — spent fighting over a territory of 2.3 million people",
+      "The 2-year war bill could have funded complete Gaza reconstruction (estimated $40–50B by the UN) almost twice over — yet rebuilding has not begun",
+      "Israel's peak daily spending during active operations ($350M+/day) exceeded the entire annual UN Relief and Works Agency (UNRWA) budget in under 3 days"
+    ]
   },
   {
     "id": "sudan",
@@ -67,7 +87,12 @@
     "status": "ACTIVE",
     "parties": "Sudanese Armed Forces (SAF) vs. Rapid Support Forces (RSF)",
     "sources": "Nuba Reports; Taylor & Francis conflict cost study (Nov 2025); SIPRI; ACLED",
-    "summary": "War erupted April 2023 between SAF and RSF. Nuba Reports: $3-8M/day in direct military spending; $8M/day used as upper-bound estimate. SAF recaptured Khartoum March 2025. 12M+ displaced. Pre-war military budget ~$1B/yr; wartime spending roughly tripled."
+    "summary": "War erupted April 2023 between SAF and RSF. Nuba Reports: $3-8M/day in direct military spending; $8M/day used as upper-bound estimate. SAF recaptured Khartoum March 2025. 12M+ displaced. Pre-war military budget ~$1B/yr; wartime spending roughly tripled.",
+    "comparables": [
+      "The daily military cost ($8M) equals the annual income of more than 10,000 Sudanese citizens — a country where GDP per capita is under $800",
+      "Sudan's wartime military spending ($3B+/yr) is roughly 15× what the government spent on healthcare before the conflict",
+      "The conflict has created the world's largest displacement crisis — at a cost that equates to $250 per displaced person per year in military spending alone"
+    ]
   },
   {
     "id": "myanmar",
@@ -81,7 +106,12 @@
     "status": "ACTIVE",
     "parties": "Military Junta (SAC) vs. People's Defence Force + ethnic armed groups",
     "sources": "SIPRI Military Expenditure Database 2024 (April 2025 release); IISS Military Balance 2026; SIPRI press release Apr 2025",
-    "summary": "Junta seized power Feb 2021. SIPRI 2024 (released Apr 2025): Myanmar military spending surged 66% to $5.0B/yr — highest rate of increase in Asia-Pacific and 6.8% of GDP — equating to ~$13.7M/day. Previous $2.5B/yr figure predated the 66% surge. Military now consumes 29% of government expenditure. Resistance controls significant territory. Figures reflect junta spending only."
+    "summary": "Junta seized power Feb 2021. SIPRI 2024 (released Apr 2025): Myanmar military spending surged 66% to $5.0B/yr — highest rate of increase in Asia-Pacific and 6.8% of GDP — equating to ~$13.7M/day. Previous $2.5B/yr figure predated the 66% surge. Military now consumes 29% of government expenditure. Resistance controls significant territory. Figures reflect junta spending only.",
+    "comparables": [
+      "The junta now spends 29% of all government revenue on this war — more than education, health, and infrastructure combined",
+      "Annual military spending ($5B) is more than 10× Myanmar's entire public healthcare budget in one of Asia's poorest countries",
+      "The $13.7M/day rate means Myanmar's military spends more in a week than the entire annual UNICEF budget for the country"
+    ]
   },
   {
     "id": "sahel",
@@ -95,7 +125,12 @@
     "status": "ACTIVE",
     "parties": "Multiple governments vs. JNIM / ISGS (Islamic State Greater Sahara)",
     "sources": "SIPRI 2024; ACLED conflict data; IISS Africa report 2025",
-    "summary": "Jihadist insurgency across Mali, Burkina Faso, Niger, Chad. French withdrew 2023; Russian Africa Corps present. Combined government military budgets ~$1.5B/yr. ~$4M/day blended estimate. 10,000+ civilian deaths annually (ACLED)."
+    "summary": "Jihadist insurgency across Mali, Burkina Faso, Niger, Chad. French withdrew 2023; Russian Africa Corps present. Combined government military budgets ~$1.5B/yr. ~$4M/day blended estimate. 10,000+ civilian deaths annually (ACLED).",
+    "comparables": [
+      "Combined Sahel military spending ($1.5B/yr) exceeds the entire World Food Programme emergency food budget for West Africa — despite the region facing acute food insecurity",
+      "France spent more deploying its Barkhane force in its final year than all five Sahel countries combined spent on primary education",
+      "The five affected countries have per-capita GDPs of under $1,000 — yet are sustaining military expenditure that consumes up to 20% of government revenue"
+    ]
   },
   {
     "id": "drc",
@@ -109,7 +144,12 @@
     "status": "ACTIVE",
     "parties": "DRC Armed Forces (FARDC) + SADC vs. M23 / Rwanda",
     "sources": "SIPRI 2023 (DRC +105%); ACLED; UN Group of Experts reports",
-    "summary": "M23 resurgence from late 2022, backed by Rwanda (UN Group of Experts confirmed). DRC military spending surged 105% in 2023 — largest increase of any country globally (SIPRI). DRC defense budget ~$1.5-2B/yr by 2023. ~$5.5M/day blended estimate including SADC forces."
+    "summary": "M23 resurgence from late 2022, backed by Rwanda (UN Group of Experts confirmed). DRC military spending surged 105% in 2023 — largest increase of any country globally (SIPRI). DRC defense budget ~$1.5-2B/yr by 2023. ~$5.5M/day blended estimate including SADC forces.",
+    "comparables": [
+      "DRC military spending doubled in a single year (SIPRI 2023) — while per-capita healthcare spending remains around $20/year for 100 million citizens",
+      "The conflict zone contains an estimated $24 trillion in untapped mineral wealth — the entire war's cost to date is less than 0.01% of what's at stake underground",
+      "At $5.5M/day, the conflict costs more than the DRC's entire annual education budget — every 4 months"
+    ]
   },
   {
     "id": "twelvedaywar",
@@ -124,7 +164,12 @@
     "status": "ENDED",
     "parties": "Israel + U.S. vs. Iran",
     "sources": "New Arab — Israel faces $12B losses after 12-day war; TRT World — total U.S. + Israel + Iran costs; Al Jazeera Centre for Studies — Twelve Days of Inferno analysis; Britannica — 12-Day War entry; House of Commons Library CBP-10292 (Impacts of June 2025 strikes)",
-    "summary": "On June 13, 2025, Israel launched a massive air campaign against Iranian nuclear facilities, military bases, and IRGC infrastructure — the IDF's largest single operation, deploying 200+ fighter jets across 5 strike waves targeting 100+ sites. Iran retaliated with 550 ballistic missiles and 1,000 drones. Trump announced a ceasefire on June 23, 2025, naming it the 'Twelve-Day War.' Israel's direct losses estimated at $12B; total combined costs (Israel + U.S. support + Iranian response) estimated at $18B over 12 days (~$1.5B/day). This operation served as the tactical blueprint for Op. Epic Fury (Feb 2026)."
+    "summary": "On June 13, 2025, Israel launched a massive air campaign against Iranian nuclear facilities, military bases, and IRGC infrastructure — the IDF's largest single operation, deploying 200+ fighter jets across 5 strike waves targeting 100+ sites. Iran retaliated with 550 ballistic missiles and 1,000 drones. Trump announced a ceasefire on June 23, 2025, naming it the 'Twelve-Day War.' Israel's direct losses estimated at $12B; total combined costs (Israel + U.S. support + Iranian response) estimated at $18B over 12 days (~$1.5B/day). This operation served as the tactical blueprint for Op. Epic Fury (Feb 2026).",
+    "comparables": [
+      "At $1.5B/day, this was the costliest 12-day conflict in recorded history — more expensive per day than the peak of the first Gulf War",
+      "The total cost ($18B) exceeds the Manhattan Project in today's dollars ($28B) — spent in under two weeks",
+      "Israel launched 200+ jets across 5 strike waves; at average sortie costs, the air campaign alone consumed more than the IDF's entire annual equipment procurement budget"
+    ]
   },
   {
     "id": "yemen",
@@ -139,7 +184,12 @@
     "status": "CEASEFIRE",
     "parties": "Saudi-led coalition vs. Houthi forces (Ansar Allah)",
     "sources": "Wilson Center Dec 2015 ($200M/day peak); GAO 2022 ($54.6B US support 2015-2021); SIPRI",
-    "summary": "Saudi-led coalition intervened March 2015. Wilson Center estimated $200M/day at peak (Dec 2015). GAO confirmed $54.6B in U.S. military support to Saudi Arabia and UAE, 2015-2021. ~$67M/day is a blended 8-year average accounting for high early intensity and reduced tempo post-2022 UN truce. UN-brokered truce April 2023."
+    "summary": "Saudi-led coalition intervened March 2015. Wilson Center estimated $200M/day at peak (Dec 2015). GAO confirmed $54.6B in U.S. military support to Saudi Arabia and UAE, 2015-2021. ~$67M/day is a blended 8-year average accounting for high early intensity and reduced tempo post-2022 UN truce. UN-brokered truce April 2023.",
+    "comparables": [
+      "The U.S. supplied $54.6B in confirmed military support (GAO) — enough to have funded Yemen's entire economy for a decade at pre-war GDP levels",
+      "Saudi Arabia spent more on this conflict annually than on education for its 35 million citizens — for 8 consecutive years",
+      "Total cost ($195B+) approaches the entire GDP of Qatar — the country that ultimately helped broker the ceasefire"
+    ]
   },
   {
     "id": "tigray",
@@ -154,7 +204,12 @@
     "status": "ENDED",
     "parties": "Ethiopian federal forces + Eritrea vs. TPLF / Tigray Defence Forces",
     "sources": "SIPRI (Ethiopia budget $1.03B in 2022, +111%); East African / SIPRI Feb 2022; Oxford Initiative on Peace and Recovery in Ethiopia",
-    "summary": "War began Nov 2020. Ethiopia's military budget doubled to $1.03B/yr at peak (SIPRI 2022). Infrastructure damage assessed at $22.7B (Ethiopian government). ~$2.8M/day reflects wartime expenditure increase above pre-war baseline, averaged over 2-year conflict. Pretoria ceasefire Nov 2, 2022. Up to 600,000 civilians killed (researchers)."
+    "summary": "War began Nov 2020. Ethiopia's military budget doubled to $1.03B/yr at peak (SIPRI 2022). Infrastructure damage assessed at $22.7B (Ethiopian government). ~$2.8M/day reflects wartime expenditure increase above pre-war baseline, averaged over 2-year conflict. Pretoria ceasefire Nov 2, 2022. Up to 600,000 civilians killed (researchers).",
+    "comparables": [
+      "Ethiopia doubled its military budget to fight this war while simultaneously experiencing the world's largest humanitarian crisis of 2021",
+      "Infrastructure damage alone ($22.7B, Ethiopian government estimate) exceeded direct military spending by more than 8× — and reconstruction has barely begun",
+      "Up to 600,000 civilians were killed — making this one of the deadliest conflicts since WWII, at a military cost of under $3M/day"
+    ]
   },
   {
     "id": "libya",
@@ -169,7 +224,12 @@
     "status": "FROZEN",
     "parties": "GNA / GNU vs. LNA (Haftar) + foreign backers (Turkey, UAE, Russia, Egypt)",
     "sources": "SIPRI; IISS; Stockholm Forum on Peace and Development",
-    "summary": "Second Libyan Civil War began 2014. Multiple foreign powers: Turkey backed GNA (~$2B arms/forces), UAE/Russia/Egypt backed LNA (Haftar). ~$8M/day blended estimate covering all parties including foreign military presence. UN-brokered ceasefire Oct 2020; situation remains frozen with divided government."
+    "summary": "Second Libyan Civil War began 2014. Multiple foreign powers: Turkey backed GNA (~$2B arms/forces), UAE/Russia/Egypt backed LNA (Haftar). ~$8M/day blended estimate covering all parties including foreign military presence. UN-brokered ceasefire Oct 2020; situation remains frozen with divided government.",
+    "comparables": [
+      "At least 6 foreign nations funded proxy forces in Libya — with Turkey, UAE, and Russia each spending more annually than Libya's own oil revenue in low-output years",
+      "The total cost ($17.5B over 6 years) is less than what Saudi Arabia spent on its military in a single month during the same period",
+      "Libya has some of Africa's largest oil reserves — yet the war cost more than the country earned from oil exports in its lowest-production years"
+    ]
   },
   {
     "id": "syria",
@@ -184,7 +244,12 @@
     "status": "ENDED",
     "parties": "Assad government + Russia + Iran vs. opposition + ISIS + U.S. coalition",
     "sources": "SIPRI; Brown University Costs of War; Syrian Observatory for Human Rights; Watson Institute",
-    "summary": "13-year civil war. At peak (2013-2016): Assad forces + Russia (~$4M/day) + Iran + U.S. coalition (~$14M/day for ISIS campaign) exceeded $50M/day combined. ~$35M/day is a conflict-lifetime blended average accounting for reduced tempo post-2019. Assad regime fell December 8, 2024."
+    "summary": "13-year civil war. At peak (2013-2016): Assad forces + Russia (~$4M/day) + Iran + U.S. coalition (~$14M/day for ISIS campaign) exceeded $50M/day combined. ~$35M/day is a conflict-lifetime blended average accounting for reduced tempo post-2019. Assad regime fell December 8, 2024.",
+    "comparables": [
+      "The 13-year conflict destroyed more than $400B in Syrian economic output — roughly 7× the total direct military cost tracked here",
+      "World Bank estimates $400B is needed to rebuild Syria — the international community has pledged less than 10% of that since 2011",
+      "At peak spending ($50M+/day in 2015-16), the war burned through a NASA annual budget ($24.8B) every 18 months — while Syrian GDP collapsed by 60%"
+    ]
   },
   {
     "id": "afghanistan",
@@ -199,7 +264,12 @@
     "status": "ENDED",
     "parties": "U.S. / NATO / Afghan forces vs. Taliban / al-Qaeda",
     "sources": "Brown University Costs of War Project; SIGAR; Congressional Research Service; SIPRI",
-    "summary": "Tracking from 2011 to U.S. withdrawal Aug 2021. Brown University Costs of War: total U.S. cost ~$2.3T over full conflict (2001-2021). ~$116M/day reflects 2011-2021 average of ~$42B/yr in direct DoD war appropriations plus coalition. Peak spending ~$120B/yr (2010-2012). Taliban retook Kabul Aug 15, 2021."
+    "summary": "Tracking from 2011 to U.S. withdrawal Aug 2021. Brown University Costs of War: total U.S. cost ~$2.3T over full conflict (2001-2021). ~$116M/day reflects 2011-2021 average of ~$42B/yr in direct DoD war appropriations plus coalition. Peak spending ~$120B/yr (2010-2012). Taliban retook Kabul Aug 15, 2021.",
+    "comparables": [
+      "Brown University estimates the full lifecycle cost at $2.3T (2001–2021, including veteran care) — roughly equivalent to the entire annual GDP of Italy, the world's 8th largest economy",
+      "The U.S. spent $116M/day for 10 years in a country whose entire GDP never exceeded $21B/yr — spending more in 6 months than Afghanistan produced in a year",
+      "Peak U.S. spending ($120B/yr, 2010-12) exceeded the entire NASA budget nearly 5× — every single year — yet produced no lasting strategic outcome"
+    ]
   },
   {
     "id": "nagorno",
@@ -214,7 +284,12 @@
     "status": "ENDED",
     "parties": "Azerbaijan (+ Turkey) vs. Armenia / Artsakh forces",
     "sources": "SIPRI; IISS; Armenian and Azerbaijani defense ministry budget data; Reuters",
-    "summary": "44-Day War (Sep-Nov 2020) followed by Azerbaijan's final offensive in Sept 2023. Azerbaijan military spending ~$2.65B/yr (SIPRI 2020); Armenia ~$630M/yr. Combined ~$3.3B/yr or ~$9M/day at peak. Blended ~$12M/day including Turkish drone operations and advisor costs. Azerbaijan seized full control Sept 19, 2023; ethnic Armenian population fled."
+    "summary": "44-Day War (Sep-Nov 2020) followed by Azerbaijan's final offensive in Sept 2023. Azerbaijan military spending ~$2.65B/yr (SIPRI 2020); Armenia ~$630M/yr. Combined ~$3.3B/yr or ~$9M/day at peak. Blended ~$12M/day including Turkish drone operations and advisor costs. Azerbaijan seized full control Sept 19, 2023; ethnic Armenian population fled.",
+    "comparables": [
+      "The 44-Day War (2020) was the first conflict to demonstrate drone warfare at decisive scale — Azerbaijan spent less on drones than a single U.S. destroyer, yet achieved strategic victory",
+      "Total conflict cost ($11B over 3 years) is less than the price of one Gerald R. Ford-class aircraft carrier ($13B) — yet permanently redrew the map of the South Caucasus",
+      "Azerbaijan's military buildup was funded almost entirely by oil revenues — it spent more on defense modernization in 5 years than Armenia's entire GDP"
+    ]
   },
   {
     "id": "isis",
@@ -229,6 +304,11 @@
     "status": "ENDED",
     "parties": "U.S.-led coalition + Iraq + Kurdish forces vs. Islamic State (ISIS/ISIL)",
     "sources": "Pentagon Cost of War reports; Congressional Research Service; Watson Institute; Defense One",
-    "summary": "ISIS declared caliphate June 2014; Operation Inherent Resolve began Aug 2014. Pentagon reported ~$14M/day in U.S. costs alone at peak (2016). Full coalition including Iraq, Kurdish, French, UK operations ~$25M/day. Total U.S. cost ~$24.7B (CRS). ISIS territorial defeat at Baghouz, Syria, March 23, 2019."
+    "summary": "ISIS declared caliphate June 2014; Operation Inherent Resolve began Aug 2014. Pentagon reported ~$14M/day in U.S. costs alone at peak (2016). Full coalition including Iraq, Kurdish, French, UK operations ~$25M/day. Total U.S. cost ~$24.7B (CRS). ISIS territorial defeat at Baghouz, Syria, March 23, 2019.",
+    "comparables": [
+      "ISIS at its peak self-funded on roughly $1–2M/day through oil smuggling and extortion — the coalition spent 12× that amount daily to defeat them",
+      "The U.S. alone launched 34,000+ airstrikes against ISIS — at an average cost of ~$700,000 per strike, totaling $24.7B in confirmed U.S. spending",
+      "The total coalition cost ($47B+ combined) exceeds what ISIS controlled in annual oil revenue by 20× — illustrating the profound asymmetry of modern counter-insurgency"
+    ]
   }
 ]
