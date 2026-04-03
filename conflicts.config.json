@@ -51,12 +51,12 @@
     ],
     "casualties": {
       "asOf": "2026-04",
-      "source": "ACLED; Lebanese Ministry of Health; IDF spokesperson; Reuters",
-      "note": "Ongoing conflict — figures are early estimates and will rise",
+      "source": "Lebanese Ministry of Health; IDF spokesperson (Times of Israel, Apr 2026); Al Jazeera; ACLED Middle East Special Issue Mar 2026",
+      "note": "Ongoing conflict — figures are preliminary. Lebanese MoH total includes both civilian and combatant deaths and will rise. IDF soldier figures are confirmed deaths only; wounded not published.",
       "entries": [
-        { "label": "Hezbollah fighters (KIA est.)", "count": "1,000–2,500" },
-        { "label": "Lebanese civilians (killed)", "count": "500–1,200" },
-        { "label": "IDF soldiers (KIA confirmed)", "count": "50–120" }
+        { "label": "Total killed in Lebanon (MoH confirmed)", "count": "1,200+" },
+        { "label": "Hezbollah fighters (KIA, IDF est.)", "count": "~1,000+" },
+        { "label": "IDF soldiers (KIA confirmed)", "count": "~10" }
       ]
     }
   },
@@ -79,14 +79,16 @@
       "Russia's military spending alone ($165B/yr) now exceeds its entire federal healthcare budget for 145 million citizens — by more than 2×"
     ],
     "casualties": {
-      "asOf": "2025-12",
-      "source": "Mediazona / BBC Russia (open-source confirmed deaths); OHCHR; RUSI; U.S. intelligence assessments (NYT/WaPo 2024)",
-      "note": "Russia does not publish military casualties; Mediazona tracks confirmed deaths via open sources — widely considered a floor, not a ceiling. Ukrainian figures are similarly suppressed.",
+      "asOf": "2026-02",
+      "source": "Mediazona / BBC Russia (open-source confirmed deaths, Nov 2025); The Economist (Feb 2026 model); OHCHR (civilian deaths, 2025 annual); Al Jazeera 4-year review (Feb 2026); Zelenskyy public statement (Feb 2026)",
+      "note": "Russia does not publish military casualties. Mediazona's confirmed figure (~150,000+) is an open-source floor — actual deaths are higher. The Economist's model (230,000–430,000 killed) uses actuarial and satellite methods and is the most cited independent estimate. Ukrainian figures are state-suppressed; Zelenskyy cited 55,000 KIA in Feb 2026, widely considered an undercount.",
       "entries": [
-        { "label": "Russia (KIA, open-source confirmed)", "count": "~90,000–120,000" },
-        { "label": "Ukraine (KIA est.)", "count": "~70,000–100,000" },
-        { "label": "Civilians killed (OHCHR confirmed)", "count": "12,000+" },
-        { "label": "Total wounded (both sides est.)", "count": "500,000–700,000" }
+        { "label": "Russia (KIA, Mediazona open-source confirmed)", "count": "150,000+" },
+        { "label": "Russia (KIA, Economist model est.)", "count": "230,000–430,000" },
+        { "label": "Ukraine (KIA, Zelenskyy Feb 2026)", "count": "~55,000 (likely undercount)" },
+        { "label": "Ukraine (KIA, Western intel est.)", "count": "100,000–140,000" },
+        { "label": "Civilians killed (OHCHR confirmed)", "count": "13,883" },
+        { "label": "Total wounded (both sides est.)", "count": "600,000–1,000,000+" }
       ]
     }
   },
@@ -140,12 +142,13 @@
       "The conflict has created the world's largest displacement crisis — at a cost that equates to $250 per displaced person per year in military spending alone"
     ],
     "casualties": {
-      "asOf": "2024-12",
-      "source": "ACLED; UN OCHA; Sudan Doctors' Network; Armed Conflict Survey (IISS 2024)",
-      "note": "Access restrictions make independent verification extremely difficult. ACLED figures track direct violence; total deaths including famine and disease collapse are estimated far higher.",
+      "asOf": "2025-09",
+      "source": "ACLED (documented fatalities to Nov 2024: 28,700+); OHCHR (Jan–Jun 2025: 3,384 civilians); UN OCHA; Sudan Doctors' Network; factually.co verified tally (Nov 2025)",
+      "note": "Documented ACLED figures (28,700+) and widely cited aggregate estimates (~150,000) diverge sharply — the gap reflects unrecorded violence, famine, and disease deaths that cannot be independently verified given near-total access restrictions. The true toll is almost certainly far higher than either figure.",
       "entries": [
-        { "label": "Killed — direct violence (ACLED est.)", "count": "~150,000+" },
-        { "label": "Of which civilians", "count": "majority — breakdown unverifiable" },
+        { "label": "Killed — direct violence (ACLED documented)", "count": "28,700+" },
+        { "label": "Total killed inc. famine/disease (est.)", "count": "~150,000+" },
+        { "label": "Civilians killed (OHCHR, Jan–Jun 2025 alone)", "count": "3,384+" },
         { "label": "Displaced persons", "count": "12,000,000+ (world's largest crisis)" }
       ]
     }
@@ -169,11 +172,13 @@
       "The $13.7M/day rate means Myanmar's military spends more in a week than the entire annual UNICEF budget for the country"
     ],
     "casualties": {
-      "asOf": "2025-03",
-      "source": "AAPP (Assistance Association for Political Prisoners); ACLED; IISS Armed Conflict Survey 2025",
-      "note": "Myanmar's military blocks independent access — figures are compiled from open sources, survivor testimony, and resistance reports. Likely undercounts significantly.",
+      "asOf": "2025-04",
+      "source": "AAPP (Assistance Association for Political Prisoners, Apr 2025); OHCHR (Jan 2025 four-year report); PRIO report (20-month study); IISS Armed Conflict Survey 2025",
+      "note": "Myanmar's military blocks independent access. AAPP tracks confirmed civilian deaths via open-source documentation — widely considered a floor. Combatant figures rely on resistance reporting and are less reliable.",
       "entries": [
-        { "label": "Civilians killed (AAPP confirmed)", "count": "5,000+" },
+        { "label": "Civilians killed (AAPP confirmed, to Apr 2025)", "count": "6,486" },
+        { "label": "Of which women", "count": "1,494" },
+        { "label": "Of which children", "count": "751" },
         { "label": "Resistance / PDF fighters (KIA est.)", "count": "10,000–15,000" },
         { "label": "Junta forces (KIA est., resistance claims)", "count": "20,000–30,000" },
         { "label": "Internally displaced", "count": "2,500,000+" }
@@ -228,13 +233,13 @@
       "At $5.5M/day, the conflict costs more than the DRC's entire annual education budget — every 4 months"
     ],
     "casualties": {
-      "asOf": "2024-12",
-      "source": "ACLED; UN Group of Experts (DRC); OCHA DRC Situation Reports",
-      "note": "Eastern DRC has experienced overlapping conflicts for 30 years — the M23 resurgence casualty figures below cover 2022 onwards only.",
+      "asOf": "2025-12",
+      "source": "ACLED; UN Security Council (Aug 2025); Human Rights Watch (Jun, Aug 2025); Al Jazeera DRC mapping project (Mar 2025); OHCHR (Aug 2025)",
+      "note": "The M23 resurgence has proven far deadlier than early estimates. Documented mass atrocities include: 773 killed in Goma in one week (Feb 2025); 319+ civilians in Rutshuru in July 2025; 400+ in South Kivu (Dec 2025). These individual incidents alone exceed original total estimates — figures below should be treated as minimums.",
       "entries": [
-        { "label": "Killed — M23 resurgence (ACLED est.)", "count": "10,000–15,000" },
-        { "label": "Of which civilians", "count": "majority" },
-        { "label": "Displaced (eastern DRC)", "count": "7,000,000+ (ongoing)" }
+        { "label": "Killed — M23 resurgence (est., 2022–2025)", "count": "30,000–50,000+" },
+        { "label": "Civilians (documented mass atrocities alone)", "count": "thousands confirmed" },
+        { "label": "Displaced (eastern DRC)", "count": "7,000,000+" }
       ]
     }
   },
