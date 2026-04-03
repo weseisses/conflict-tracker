@@ -494,5 +494,131 @@
         { "label": "Civilians killed — coalition airstrikes (Airwars)", "count": "~8,000–13,000" }
       ]
     }
+  },
+  {
+    "id": "nigeria",
+    "name": "Nigeria / Boko Haram + ISWAP",
+    "region": "Africa",
+    "flag": "🇳🇬",
+    "color": "#e65100",
+    "startDate": "2009-07-26",
+    "ratePerDay": 2500000,
+    "anchor": 500000000,
+    "status": "ACTIVE",
+    "parties": "Nigeria + MNJTF vs. Boko Haram / ISWAP",
+    "sources": "SIPRI Military Expenditure Database 2020–2024 (Nigeria defense spending: $2.57B 2020, $4.47B 2021, $3.11B 2022, $3.2B 2023); ISS Africa — conflict financing analysis; Ecofin Agency (SIPRI Nigeria +56% YoY 2021); ACLED Nigeria country data; CFR Boko Haram's Deadly Impact",
+    "summary": "Boko Haram's violent insurgency erupted July 2009 in Maiduguri, northeastern Nigeria. The group fractured in 2016 — Boko Haram (JAS) weakened, ISWAP (Islamic State West Africa Province) expanded. Nigeria's defense budget grew from ~$1.5B/yr in 2009 to $4.47B in 2021 (SIPRI), driven substantially by the northeast campaign. Nigeria also leads the Multinational Joint Task Force (MNJTF) with Cameroon, Chad, and Niger. Approximately 40–50% of Nigeria's defense spending — plus MNJTF contributions — is attributed to the northeast theater, averaging ~$2.5M/day over the conflict's lifetime. ISWAP now controls larger territory than Boko Haram ever did. 50,000+ killed; 2M+ IDPs in Borno, Yobe, and Adamawa states.",
+    "comparables": [
+      "Nigeria's annual northeast security cost exceeds the entire national budget for universal basic education — for a country where 10 million children are out of school",
+      "The total estimated cost ($15B+) is more than twice Nigeria's peak annual oil revenue during the 2016 oil-price crash — spent fighting an insurgency that has lasted longer than WWII",
+      "The Lake Chad Basin humanitarian crisis (10.7M+ affected) costs the international community more to respond to each year than Nigeria spends fighting the insurgency itself"
+    ],
+    "casualties": {
+      "asOf": "2024-06",
+      "source": "ACLED Nigeria (34,261 documented conflict deaths Jun 2011–Jun 2018); CFR Boko Haram's Deadly Impact (50,000+ total cited); Global Centre for R2P; ISS Africa; UNHCR",
+      "note": "ACLED documented 34,261 killed in the 7-year period 2011–2018 alone — roughly 50% were classified as Boko Haram/ISWAP fighters. The total since 2009 (including pre-ACLED period and ISWAP expansion 2018–2024) is widely cited as 50,000–60,000+. Civilian deaths are heavily undercounted given severe access restrictions in Borno State.",
+      "entries": [
+        { "label": "Total killed (est., 2009–2024)", "count": "50,000–60,000+" },
+        { "label": "Documented conflict deaths (ACLED, 2011–2018)", "count": "34,261" },
+        { "label": "Boko Haram / ISWAP fighters (ACLED, 2011–2018)", "count": "~18,950" },
+        { "label": "Civilians killed (est., 2009–2024)", "count": "25,000–35,000+" },
+        { "label": "Internally displaced (northeastern Nigeria)", "count": "2,000,000+" },
+        { "label": "Lake Chad Basin — total humanitarian crisis (affected)", "count": "10,700,000+" }
+      ]
+    }
+  },
+  {
+    "id": "somalia",
+    "name": "Somalia / Al-Shabaab War",
+    "region": "Africa",
+    "flag": "🇸🇴",
+    "color": "#1b5e20",
+    "startDate": "2007-03-06",
+    "ratePerDay": 2000000,
+    "anchor": 2054000000,
+    "status": "ACTIVE",
+    "parties": "Somalia + AU Mission (AMISOM/ATMIS/AUSSOM) + U.S. vs. Al-Shabaab",
+    "sources": "ISS Africa (ATMIS annual cost $1.5B in 2023); IPI — Lessons from AMISOM (2019, initial budget $622M); EU Commission (€4.3B committed since 2007); IPI Global Observatory — AUSSOM $196M 2025 budget; CFR Global Conflict Tracker; ACLED Somalia; VOA — Al-Shabaab 4,000+ civilian deaths",
+    "summary": "AMISOM deployed March 2007 to support Somalia's Transitional Federal Government. Mission peaked at 22,000 troops, grew from $350M/yr to ~$1B/yr (AMISOM), then $1.5B/yr (ATMIS, 2022–2023). The EU has invested €4.3B ($4.7B) in Somalia security since 2007; U.S. spent ~$2B in counter-terrorism assistance 2007–2020 with ongoing airstrikes. Al-Shabaab controls significant rural territory despite 18 years of operations. Current mission (AUSSOM, 2025) budgeted at just $196M — a severe reduction that threatens the mission's viability. Al-Shabaab remains the most prolific Al-Qaeda affiliate by attack volume. $2M/day reflects a mission-lifetime average across escalating and de-escalating phases.",
+    "comparables": [
+      "The EU alone has invested €4.3 billion in Somalia's security since 2007 — enough to reconstruct the entire country's road network three times over",
+      "Al-Shabaab remains the world's most active Al-Qaeda affiliate despite 18 years of AU peacekeeping and $16B+ in external security spending — illustrating the limits of military solutions to insurgency",
+      "AMISOM at peak deployed 22,000 troops — more soldiers than the entire standing armies of 70 UN member states — yet could not permanently dislodge Al-Shabaab from rural Somalia"
+    ],
+    "casualties": {
+      "asOf": "2024-12",
+      "source": "ACLED Somalia (4,000+ civilian deaths from Al-Shabaab attacks, 2010–2021, per VOA); ACLED 2024 Al-Shabaab activity mapping; Mogadishu Medina Hospital data (54,000+ injuries since 2007); CFR Al-Shabaab conflict tracker; UNHCR",
+      "note": "ACLED's civilian-targeting figures (4,000+ since 2010) are a floor — Medina Hospital data and broader estimates suggest 10,000–30,000+ direct civilian deaths. Combatant figures from both AMISOM/AU and Al-Shabaab are not systematically published. Indirect deaths from displacement and famine across the conflict period are substantially higher. 2022 was the deadliest year since 2018, with 6,500+ reported fatalities (ACLED).",
+      "entries": [
+        { "label": "Civilian deaths — Al-Shabaab attacks (ACLED, 2010–2021)", "count": "4,000+" },
+        { "label": "Civilian deaths — direct all causes (est.)", "count": "10,000–30,000+" },
+        { "label": "AMISOM / AU mission forces (KIA est.)", "count": "~3,000 (not officially published)" },
+        { "label": "Al-Shabaab fighters (KIA est.)", "count": "15,000–25,000" },
+        { "label": "Internally displaced (Somalia)", "count": "3,800,000+" }
+      ]
+    }
+  },
+  {
+    "id": "southsudan",
+    "name": "South Sudan Civil War",
+    "region": "Africa",
+    "flag": "🇸🇸",
+    "color": "#4a235a",
+    "startDate": "2013-12-15",
+    "endDate": "2020-02-22",
+    "ratePerDay": 3500000,
+    "anchor": 90000000,
+    "status": "ENDED",
+    "parties": "SPLA / government forces (Kiir) + Uganda vs. SPLM-IO (Machar) + UNMISS (UN peacekeeping)",
+    "sources": "SIPRI (South Sudan military 2012: $612M / 8.4% GDP); CFR Global Conflict Tracker — South Sudan; CRS / FAS IN10975 (nearly 400,000 estimated dead); Watson Institute Costs of War; UNMISS budget data (~$1B/yr UN peacekeeping); UNHCR; OCHA",
+    "summary": "Civil war erupted December 15, 2013 after a political rupture between President Salva Kiir and Vice President Riek Machar. Uganda deployed forces in support of Kiir 2013–2015 (estimated $600–800M/yr). UNMISS expanded to 17,000 troops with UN budget of ~$1B/yr throughout the conflict. South Sudan's own military spending ranged from $400M–$800M/yr. Combined direct military cost estimated at $3.5M/day average. Transitional Government of National Unity formed February 22, 2020, ending the primary conflict phase. Approximately 400,000 excess deaths; 4M+ IDPs; 2.5M+ refugees.",
+    "comparables": [
+      "The war killed approximately 400,000 people — equivalent to the entire population of New Orleans — in a country of just 11 million, making this one of the deadliest post-Cold War conflicts",
+      "UNMISS alone cost the UN ~$1B/year — more than all infrastructure investment in South Sudan since its independence in 2011",
+      "In 2016, the UN estimated 65% of South Sudan's population needed emergency food aid — while both warring factions spent millions per day on arms and soldiers"
+    ],
+    "casualties": {
+      "asOf": "2020-02",
+      "source": "Harvard School of Public Health / London School of Hygiene & Tropical Medicine (2018 peer-reviewed excess death estimate: 383,000); CRS IN10975 (citing ~400,000); UNHCR; OCHA; Amnesty International",
+      "note": "The ~383,000 figure (Harvard/LSHTM, 2018 peer-reviewed) is an excess death estimate through mid-2018 covering all causes — combat, disease, and starvation. Total deaths through the 2020 peace deal are almost certainly higher. Direct combat deaths are estimated at roughly half the total; the remainder from famine and disease caused by the conflict. Access restrictions severely limited independent verification throughout.",
+      "entries": [
+        { "label": "Excess deaths — all causes (Harvard/LSHTM est. to 2018)", "count": "~383,000" },
+        { "label": "Violence-related deaths (direct, est.)", "count": "~190,000" },
+        { "label": "Deaths from famine and disease (indirect, est.)", "count": "~190,000–210,000" },
+        { "label": "Internally displaced", "count": "~4,000,000" },
+        { "label": "Refugees in neighboring countries", "count": "~2,500,000" }
+      ]
+    }
+  },
+  {
+    "id": "mozambique",
+    "name": "Mozambique / Cabo Delgado",
+    "region": "Africa",
+    "flag": "🇲🇿",
+    "color": "#006064",
+    "startDate": "2017-10-05",
+    "ratePerDay": 600000,
+    "anchor": 200000000,
+    "status": "ACTIVE",
+    "parties": "Mozambique + Rwanda vs. Ansar al-Sunna (ISIS-Mozambique / al-Shabaab)",
+    "sources": "ACLED / Club of Mozambique (6,515 deaths Mar 2026); ISS Africa — SAMIM withdrawal analysis (May 2024); EU Council European Peace Facility (€20M for RDF, Nov 2024 — top-up); Bloomberg — EU ending Rwanda funding May 2026 (Mar 2026); VOA — Rwanda 2,500 troop reinforcement (May 2024); ISS Africa — Rwanda costs ~6× EU total contribution",
+    "summary": "ISIS-linked insurgency (Ansar al-Sunna, locally called al-Shabaab) erupted October 5, 2017 in Mocímboa da Praia, Cabo Delgado. Insurgents seized Mocímboa da Praia town August 2020. SADC deployed SAMIM in June 2021 (~$10M/month); Rwanda deployed from July 2021, peaking at 4,000–6,500 troops. SAMIM withdrew July 2024 due to funding constraints. Rwanda and Tanzania are now primary external security providers. EU European Peace Facility committed ~€46M total 2021–2025 — roughly 17% of Rwanda's reported deployment costs. Rwanda's government stated its Cabo Delgado costs are at least 10× the EU's €20M 2024 disbursement (~$200M+ annually). EU announced end of Rwanda funding in May 2026; Rwanda threatened withdrawal. Insurgent strength estimated at 300–1,000 fighters. $600K/day reflects conflict-lifetime average; current rate is higher with Rwanda's active deployment.",
+    "comparables": [
+      "Cabo Delgado sits above one of the world's largest natural gas reserves — TotalEnergies' $20B LNG project remains suspended, costing far more in lost investment than the entire war",
+      "Rwanda has committed hundreds of millions and thousands of troops to stabilize a neighbor's insurgency — while relying on EU support that has now been terminated with no replacement funding",
+      "The 6,500+ documented deaths make this one of Africa's least-covered active conflicts — despite the same region hosting a Western LNG investment larger than the entire Mozambican GDP"
+    ],
+    "casualties": {
+      "asOf": "2026-03",
+      "source": "ACLED / Club of Mozambique (6,257 deaths — 8-year total to Oct 2025); ACLED Mozambique Conflict Monitor (6,515 total — Mar 2026); UNHCR; OCHA",
+      "note": "Of the 6,515 ACLED-documented deaths, at least 2,631 were civilians. Insurgent membership declined from a peak of several thousand to an estimated 300–1,000 due to Rwandan-Mozambican operations, though attacks resumed in strength in 2025–2026 following SAMIM's withdrawal.",
+      "entries": [
+        { "label": "Total killed (ACLED documented, Oct 2017–Mar 2026)", "count": "6,515" },
+        { "label": "Civilians killed (ACLED documented)", "count": "2,631+" },
+        { "label": "Insurgents killed (ISIS-Mozambique est.)", "count": "~2,000–3,000" },
+        { "label": "Mozambican + Rwandan forces (KIA est.)", "count": "several hundred" },
+        { "label": "Displaced persons (Cabo Delgado)", "count": "1,000,000+" }
+      ]
+    }
   }
 ]
