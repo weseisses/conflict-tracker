@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 
-// Your Buttondown username — update this once your account is created at buttondown.com
 const BUTTONDOWN_USERNAME = "conflictcost";
+const BMC_USERNAME = "conflictcost";
 
 type State = "idle" | "loading" | "success" | "error";
 
@@ -23,8 +23,6 @@ export default function EmailCapture() {
       formData.append("email_address", email.trim());
       formData.append("tag", "conflictcost");
 
-      // Buttondown's public embed endpoint — no API key required
-      // Uses no-cors so we can't read the response body; assume success on no throw
       await fetch(
         `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`,
         { method: "POST", body: formData, mode: "no-cors" }
@@ -44,8 +42,13 @@ export default function EmailCapture() {
       borderBottom: "1px solid #1a2030",
       padding: "28px 0 24px",
       margin: "28px 0",
+      display: "flex",
+      gap: 0,
+      flexWrap: "wrap",
     }}>
-      <div style={{ maxWidth: 480 }}>
+
+      {/* ── Email capture ── */}
+      <div style={{ flex: "1 1 280px", paddingRight: 32, minWidth: 0 }}>
         <div style={{ fontSize: 10, letterSpacing: 4, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8, fontWeight: 700 }}>
           Stay Informed
         </div>
@@ -72,7 +75,7 @@ export default function EmailCapture() {
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={state === "loading"}
                 style={{
-                  flex: "1 1 220px",
+                  flex: "1 1 180px",
                   background: "#080b10",
                   border: "1px solid #1e2a38",
                   color: "#c8d4e0",
@@ -110,6 +113,51 @@ export default function EmailCapture() {
           </>
         )}
       </div>
+
+      {/* ── Vertical divider ── */}
+      <div style={{
+        width: 1,
+        background: "#1a2030",
+        margin: "0 32px",
+        alignSelf: "stretch",
+        flexShrink: 0,
+      }} />
+
+      {/* ── Buy Me a Coffee ── */}
+      <div style={{ flex: "0 1 auto", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 180 }}>
+        <div style={{ fontSize: 10, letterSpacing: 4, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8, fontWeight: 700 }}>
+          Support This Project
+        </div>
+        <p style={{ fontSize: 13, color: "#4a5568", lineHeight: 1.7, marginBottom: 16 }}>
+          This site has no ads. If you find it useful, a coffee keeps it running.
+        </p>
+        <a
+          href={`https://www.buymeacoffee.com/${BMC_USERNAME}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          style={{
+            display: "inline-flex",
+            alignItems: "center",
+            gap: 8,
+            background: "#FFDD00",
+            color: "#000",
+            fontSize: 13,
+            fontWeight: 700,
+            fontFamily: "'Barlow Condensed', sans-serif",
+            letterSpacing: 1,
+            padding: "9px 20px",
+            textDecoration: "none",
+            whiteSpace: "nowrap",
+            alignSelf: "flex-start",
+            transition: "opacity 0.15s",
+          }}
+          onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+          onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+        >
+          ☕ Buy Me a Coffee
+        </a>
+      </div>
+
     </div>
   );
 }
