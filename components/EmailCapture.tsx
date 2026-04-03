@@ -7,6 +7,15 @@ const KOFI_USERNAME = "conflictcost";
 
 type State = "idle" | "loading" | "success" | "error";
 
+const TAG_STYLE: React.CSSProperties = {
+  fontSize: 10,
+  letterSpacing: 3,
+  color: "#3d4a5a",
+  textTransform: "uppercase",
+  fontWeight: 700,
+  fontFamily: "'Barlow Condensed', sans-serif",
+};
+
 export default function EmailCapture() {
   const [email, setEmail]   = useState("");
   const [state, setState]   = useState<State>("idle");
@@ -45,16 +54,15 @@ export default function EmailCapture() {
       display: "flex",
       gap: 0,
       flexWrap: "wrap",
+      alignItems: "stretch",
     }}>
 
       {/* ── Email capture ── */}
-      <div style={{ flex: "1 1 280px", paddingRight: 32, minWidth: 0 }}>
-        <div style={{ fontSize: 10, letterSpacing: 4, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8, fontWeight: 700 }}>
-          Stay Informed
-        </div>
+      <div style={{ flex: "1 1 280px", paddingRight: 32, minWidth: 0, display: "flex", flexDirection: "column" }}>
+        <div style={{ ...TAG_STYLE, marginBottom: 12 }}>Stay Informed</div>
 
         {state === "success" ? (
-          <div style={{ display: "flex", alignItems: "center", gap: 10 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 10, flex: 1 }}>
             <div style={{ width: 8, height: 8, borderRadius: "50%", background: "#27ae60", flexShrink: 0 }} />
             <div style={{ fontSize: 13, color: "#7a9a7a", lineHeight: 1.6 }}>
               You're in. We'll notify you when conflict data is updated or new conflicts are added.
@@ -62,7 +70,7 @@ export default function EmailCapture() {
           </div>
         ) : (
           <>
-            <p style={{ fontSize: 13, color: "#4a5568", lineHeight: 1.7, marginBottom: 16 }}>
+            <p style={{ fontSize: 13, color: "#4a5568", lineHeight: 1.7, marginBottom: 16, flex: 1 }}>
               Get notified when conflict cost figures are updated or new conflicts are added.
               No spam — updates are rare and substantive.
             </p>
@@ -119,43 +127,44 @@ export default function EmailCapture() {
         width: 1,
         background: "#1a2030",
         margin: "0 32px",
-        alignSelf: "stretch",
         flexShrink: 0,
       }} />
 
-      {/* ── Buy Me a Coffee ── */}
-      <div style={{ flex: "0 1 auto", display: "flex", flexDirection: "column", justifyContent: "center", minWidth: 180 }}>
-        <div style={{ fontSize: 10, letterSpacing: 4, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8, fontWeight: 700 }}>
-          Support This Project
-        </div>
-        <p style={{ fontSize: 13, color: "#4a5568", lineHeight: 1.7, marginBottom: 16 }}>
-          This site has no ads. If you find it useful, a coffee keeps it running.
+      {/* ── Ko-fi ── */}
+      <div style={{ flex: "1 1 280px", minWidth: 0, display: "flex", flexDirection: "column" }}>
+        <div style={{ ...TAG_STYLE, marginBottom: 12 }}>Support This Project</div>
+
+        <p style={{ fontSize: 13, color: "#4a5568", lineHeight: 1.7, marginBottom: 16, flex: 1 }}>
+          Non-partisan · No advertising · Open methodology
         </p>
-        <a
-          href={`https://ko-fi.com/${KOFI_USERNAME}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{
-            display: "inline-flex",
-            alignItems: "center",
-            gap: 8,
-            background: "#29ABE0",
-            color: "#fff",
-            fontSize: 13,
-            fontWeight: 700,
-            fontFamily: "'Barlow Condensed', sans-serif",
-            letterSpacing: 1,
-            padding: "9px 20px",
-            textDecoration: "none",
-            whiteSpace: "nowrap",
-            alignSelf: "flex-start",
-            transition: "opacity 0.15s",
-          }}
-          onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
-          onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
-        >
-          ☕ Support on Ko-fi
-        </a>
+
+        <div>
+          <a
+            href={`https://ko-fi.com/${KOFI_USERNAME}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{
+              display: "inline-flex",
+              alignItems: "center",
+              gap: 8,
+              background: "#29ABE0",
+              color: "#fff",
+              fontSize: 10,
+              fontWeight: 700,
+              fontFamily: "'Barlow Condensed', sans-serif",
+              letterSpacing: 2,
+              textTransform: "uppercase",
+              padding: "9px 20px",
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+              transition: "opacity 0.15s",
+            }}
+            onMouseEnter={e => (e.currentTarget.style.opacity = "0.85")}
+            onMouseLeave={e => (e.currentTarget.style.opacity = "1")}
+          >
+            ☕ Support on Ko-fi
+          </a>
+        </div>
       </div>
 
     </div>
