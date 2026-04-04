@@ -17,6 +17,9 @@ input, textarea, select { font-family: 'Barlow Condensed', sans-serif; }
 ::-webkit-scrollbar-track { background: #0a0c10; }
 ::-webkit-scrollbar-thumb { background: #1e2530; }
 
+/* Hide scrollbar on the conflict selector nav */
+nav::-webkit-scrollbar { display: none; }
+
 @keyframes blink {
   0%, 100% { opacity: 1; }
   50%       { opacity: 0.2; }

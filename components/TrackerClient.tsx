@@ -168,16 +168,33 @@ export default function TrackerClient({ conflicts }: Props) {
       </div>
 
       {/* CONFLICT SELECTOR */}
-      <nav style={{ padding: "10px 20px", display: "flex", gap: 6, flexWrap: "wrap", background: "#0a0c10", borderBottom: "1px solid #1a2030" }}>
-        <SelectorBtn active={selected === null} color="#e74c3c" onClick={() => setSelected(null)}>
-          🌐 {region === "All" ? (filter === "active" ? "All Active" : "All Conflicts") : region}
-        </SelectorBtn>
-        {displayed.map((c) => (
-          <SelectorBtn key={c.id} active={selected === c.id} color={c.color} onClick={() => setSelected(c.id)}>
-            {c.flag} {c.name}
+      <div style={{ position: "relative", background: "#0a0c10", borderBottom: "1px solid #1a2030" }}>
+        <nav style={{
+          padding: "10px 20px",
+          display: "flex",
+          gap: 6,
+          flexWrap: "nowrap",
+          overflowX: "auto",
+          scrollbarWidth: "none",
+          msOverflowStyle: "none",
+          WebkitOverflowScrolling: "touch",
+        } as React.CSSProperties}>
+          <SelectorBtn active={selected === null} color="#e74c3c" onClick={() => setSelected(null)}>
+            🌐 {region === "All" ? (filter === "active" ? "All Active" : "All Conflicts") : region}
           </SelectorBtn>
-        ))}
-      </nav>
+          {displayed.map((c) => (
+            <SelectorBtn key={c.id} active={selected === c.id} color={c.color} onClick={() => setSelected(c.id)}>
+              {c.flag} {c.name}
+            </SelectorBtn>
+          ))}
+        </nav>
+        {/* Right fade to hint at scrollable content */}
+        <div style={{
+          position: "absolute", top: 0, right: 0, bottom: 0, width: 48,
+          background: "linear-gradient(to right, transparent, #0a0c10)",
+          pointerEvents: "none",
+        }} />
+      </div>
 
       {/* COUNTER */}
       <section style={{ textAlign: "center", padding: "40px 20px 28px", borderBottom: "1px solid #1a2030" }}>
