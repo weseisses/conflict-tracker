@@ -32,6 +32,8 @@ export default function TrackerClient({ conflicts }: Props) {
   const [sortBy, setSortBy]       = useState<SortBy>("cost");
   const [embedOpen, setEmbedOpen] = useState(false);
   const [copied, setCopied]       = useState(false);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [shareCopied, setShareCopied] = useState(false);
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 300);
@@ -111,6 +113,22 @@ export default function TrackerClient({ conflicts }: Props) {
   const displayColor = active ? active.color : "#e74c3c";
   const liveDisplay = fmtLive(displayCost);
   const maxCost     = Math.max(...displayed.map((c) => c.cost), 1);
+
+  // Shareable text for the current view — used in the share modal
+  const shareText = (() => {
+    const costDisplay = fmtLive(displayCost);
+    const costStr = `$${costDisplay.val} ${costDisplay.unit}`;
+    const rateStr = fmt(displayRate, 1);
+    if (active) {
+      const startStr = new Date(active.startDate + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", year: "numeric" });
+      const statusNote = active.status !== "ACTIVE" ? " (final estimate)" : "";
+      return `${active.flag} ${active.name} has cost an estimated ${costStr} since ${startStr}${statusNote} — ${rateStr}/day.\n\nTrack it live: ${SITE}`;
+    } else {
+      const n = displayedActive.length;
+      const regionLabel = region !== "All" ? ` in ${region}` : " worldwide";
+      return `${n} active conflicts${regionLabel}: estimated ${costStr} and counting — ${rateStr}/day burning right now.\n\nTrack it live: ${SITE}`;
+    }
+  })();
 
   // Region counts for badge labels
   const regionCounts = (r: Region) => {
@@ -264,14 +282,18 @@ export default function TrackerClient({ conflicts }: Props) {
             COUNTER FROZEN AT END DATE — FINAL ESTIMATE
           </div>
         )}
-        {active && (
-          <div style={{ marginTop: 18 }}>
+        <div style={{ marginTop: 18, display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap" }}>
+          <button onClick={() => setShareOpen(true)}
+            style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 10, fontWeight: 700, letterSpacing: 2, padding: "6px 14px", textTransform: "uppercase", cursor: "pointer" }}>
+            ↗ Share This Stat
+          </button>
+          {active && (
             <button onClick={() => setEmbedOpen(true)}
               style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 10, fontWeight: 700, letterSpacing: 2, padding: "6px 14px", textTransform: "uppercase", cursor: "pointer" }}>
               &lt;/&gt; Embed This Counter
             </button>
-          </div>
-        )}
+          )}
+        </div>
       </section>
 
       {/* EMBED MODAL */}
@@ -308,6 +330,69 @@ export default function TrackerClient({ conflicts }: Props) {
               </div>
               <div style={{ marginTop: 14, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
                 Recommended size: 480 × 140 px. The widget is responsive — it scales to fill its container. No API key required.
+              </div>
+            </div>
+          </div>
+        );
+      })()}
+
+      {/* SHARE MODAL */}
+      {shareOpen && (() => {
+        const tweetUrl  = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
+        const fbUrl     = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE)}&quote=${encodeURIComponent(shareText)}`;
+        const mailUrl   = `mailto:?subject=${encodeURIComponent("Global Conflict Cost Tracker")}&body=${encodeURIComponent(shareText)}`;
+        const linkedIn  = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE)}`;
+        return (
+          <div onClick={() => setShareOpen(false)}
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.78)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20 }}>
+            <div onClick={(e) => e.stopPropagation()}
+              style={{ background: "#0e1218", border: "1px solid #1e2a38", maxWidth: 520, width: "100%", padding: "28px 28px 24px" }}>
+
+              {/* Header */}
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 18 }}>
+                <div>
+                  <div style={{ fontSize: 10, letterSpacing: 3, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 4 }}>Share This Stat</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: 1, color: "#e8edf5" }}>
+                    {active ? `${active.flag} ${active.name}` : `${displayedActive.length} Active Conflict${displayedActive.length !== 1 ? "s" : ""}${region !== "All" ? ` · ${region}` : ""}`}
+                  </div>
+                </div>
+                <button onClick={() => setShareOpen(false)} style={{ background: "transparent", border: "none", color: "#3d4a5a", fontSize: 20, cursor: "pointer", lineHeight: 1, padding: "0 4px", flexShrink: 0 }}>✕</button>
+              </div>
+
+              {/* Shareable text preview */}
+              <div style={{ fontSize: 10, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>Shareable Text</div>
+              <div style={{ background: "#070a0d", border: "1px solid #1a2030", padding: "14px 16px", fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: "#c8d4e0", whiteSpace: "pre-wrap", lineHeight: 1.8, marginBottom: 18 }}>
+                {shareText}
+              </div>
+
+              {/* Share buttons grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+                <a href={tweetUrl} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#000", border: "1px solid #333", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}>
+                  𝕏&nbsp; Share on X
+                </a>
+                <a href={linkedIn} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#0a66c2", border: "1px solid #0a66c2", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}>
+                  in&nbsp; LinkedIn
+                </a>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(shareText).then(() => {
+                      setShareCopied(true);
+                      setTimeout(() => setShareCopied(false), 2000);
+                    });
+                  }}
+                  style={{ background: shareCopied ? "#1a3a2a" : "#1e2a38", border: `1px solid ${shareCopied ? "#2a5a3a" : "#2a3a50"}`, color: shareCopied ? "#4aaa6a" : "#c8d4e0", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", cursor: "pointer" }}>
+                  {shareCopied ? "✓ Copied!" : "⎘  Copy Text"}
+                </button>
+                <a href={mailUrl}
+                  style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  ✉&nbsp; Email
+                </a>
+              </div>
+
+              <div style={{ marginTop: 16, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
+                Sharing sends viewers directly to the live counter at conflictcost.org.
               </div>
             </div>
           </div>
