@@ -70,6 +70,21 @@ export default function TrackerClient({ conflicts }: Props) {
   const globalTotal = displayed.reduce((s, c) => s + c.cost, 0);
   const globalRate  = displayed.filter(c => c.status === "ACTIVE").reduce((s, c) => s + c.ratePerDay, 0);
 
+  // Earliest active conflict in the current view (for "Since" label)
+  const displayedActive = displayed.filter(c => c.status === "ACTIVE");
+  const earliestStart   = displayedActive.length > 0
+    ? displayedActive.reduce((min, c) => c.startDate < min ? c.startDate : min, displayedActive[0].startDate)
+    : null;
+
+  // Last updated — max casualties.asOf across ALL conflicts (format: "YYYY-MM")
+  const lastUpdatedRaw = conflicts.reduce((max, c) => {
+    const d = (c as any).casualties?.asOf ?? "";
+    return d > max ? d : max;
+  }, "");
+  const lastUpdated = lastUpdatedRaw
+    ? new Date(lastUpdatedRaw + "-02T00:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric" })
+    : "";
+
   const active      = conflictCosts.find((c) => c.id === selected) ?? null;
   const displayCost = active ? active.cost : globalTotal;
   const displayRate = active ? (active.status === "ACTIVE" ? active.ratePerDay : 0) : globalRate;
@@ -169,7 +184,7 @@ export default function TrackerClient({ conflicts }: Props) {
         <div style={{ fontSize: 10, letterSpacing: 4, color: "#3d4a5a", marginBottom: 10, textTransform: "uppercase" }}>
           {active
             ? `${active.name} · Since ${new Date(active.startDate + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })}${active.endDate ? ` → ${active.endDate}` : ""}`
-            : `Combined Estimate · ${region !== "All" ? region + " · " : ""}${filter === "active" ? `${displayed.length} Active` : `${displayed.length} Conflicts`}`}
+            : `Combined Estimate · ${region !== "All" ? region + " · " : ""}${filter === "active" ? `${displayed.length} Active` : `${displayed.length} Conflicts`}${earliestStart ? ` · Since ${new Date(earliestStart + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", year: "numeric" })}` : ""}`}
         </div>
         <div className="flicker" style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: "clamp(36px, 7vw, 80px)", color: "#f0f4f8", lineHeight: 1, textShadow: `0 0 60px ${displayColor}44` }}>
           <span style={{ color: displayColor }}>$</span>{liveDisplay.val}
@@ -290,6 +305,12 @@ export default function TrackerClient({ conflicts }: Props) {
               <StatCard label="Combined Daily Burn" value={fmt(globalRate, 1)}               color="#e74c3c" />
               <StatCard label="Per Second (shown)" value={fmt(globalRate / 86_400, 0)}      color="#e74c3c" />
             </div>
+
+            {lastUpdated && (
+              <div style={{ fontSize: 10, letterSpacing: 2, color: "#2d3a4a", textTransform: "uppercase", marginTop: 12 }}>
+                Data last updated {lastUpdated} · SIPRI · ACLED · UCDP · OHCHR
+              </div>
+            )}
 
             <EmailCapture />
           </div>

@@ -20,14 +20,14 @@ export function daysSince(dateStr: string): number {
 }
 
 export function fmt(n: number, decimals = 2): string {
-  if (n >= 1e12) return "$" + (n / 1e12).toFixed(decimals) + "T";
-  if (n >= 1e9)  return "$" + (n / 1e9).toFixed(decimals) + "B";
+  if (n >= 1e12) return "$" + (n / 1e12).toFixed(decimals) + " Trillion";
+  if (n >= 1e9)  return "$" + (n / 1e9).toFixed(decimals) + " Billion";
   if (n >= 1e6)  return "$" + (n / 1e6).toFixed(1) + "M";
   return "$" + Math.round(n).toLocaleString();
 }
 
 export function fmtLive(n: number): { val: string; unit: string } {
-  if (n >= 1e12) return { val: (n / 1e12).toFixed(3), unit: "T" };
-  if (n >= 1e9)  return { val: (n / 1e9).toFixed(3),  unit: "B" };
+  if (n >= 1e12) return { val: (n / 1e12).toFixed(3), unit: "Trillion" };
+  if (n >= 1e9)  return { val: (n / 1e9).toFixed(3),  unit: "Billion" };
   return { val: Math.round(n).toLocaleString(), unit: "" };
 }
