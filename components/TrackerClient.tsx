@@ -118,15 +118,15 @@ export default function TrackerClient({ conflicts }: Props) {
   const shareText = (() => {
     const costDisplay = fmtLive(displayCost);
     const costStr = `$${costDisplay.val} ${costDisplay.unit}`;
-    const rateStr = fmt(displayRate, 1);
+    const hourlyStr = fmt(displayRate / 24, 1);
     if (active) {
       const startStr = new Date(active.startDate + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", year: "numeric" });
       const statusNote = active.status !== "ACTIVE" ? " (final estimate)" : "";
-      return `${active.flag} ${active.name} has cost an estimated ${costStr} since ${startStr}${statusNote} — ${rateStr}/day.\n\nTrack it live: ${SITE}`;
+      return `${active.flag} ${active.name} has cost an estimated ${costStr} since ${startStr}${statusNote} — ${hourlyStr}/hr.\n\nTrack it live: ${SITE}`;
     } else {
       const n = displayedActive.length;
       const regionLabel = region !== "All" ? ` in ${region}` : " worldwide";
-      return `${n} active conflicts${regionLabel}: estimated ${costStr} and counting — ${rateStr}/day burning right now.\n\nTrack it live: ${SITE}`;
+      return `${n} active conflicts${regionLabel}: estimated ${costStr} and counting — ${hourlyStr}/hr burning right now.\n\nTrack it live: ${SITE}`;
     }
   })();
 
@@ -263,16 +263,29 @@ export default function TrackerClient({ conflicts }: Props) {
           <span style={{ color: displayColor, fontSize: "0.44em", verticalAlign: "middle", marginLeft: 6 }}>{liveDisplay.unit}</span>
         </div>
         {displayRate > 0 && (
-          <div style={{ display: "flex", justifyContent: "center", gap: 28, marginTop: 20, flexWrap: "wrap" }}>
+          <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 28, marginTop: 20, flexWrap: "wrap" }}>
             {[
-              { label: "/ sec",  val: fmt(displayRate / 86_400, 0) },
-              { label: "/ min",  val: fmt(displayRate / 1_440, 1) },
-              { label: "/ hour", val: fmt(displayRate / 24, 1) },
-              { label: "/ day",  val: fmt(displayRate, 1) },
+              { label: "/ sec",  val: fmt(displayRate / 86_400, 0), hero: false },
+              { label: "/ min",  val: fmt(displayRate / 1_440, 1),  hero: false },
+              { label: "/ hour", val: fmt(displayRate / 24, 1),     hero: true  },
+              { label: "/ day",  val: fmt(displayRate, 1),          hero: false },
             ].map((r) => (
               <div key={r.label} style={{ textAlign: "center" }}>
-                <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 17, color: "#f39c12" }}>{r.val}</div>
-                <div style={{ fontSize: 10, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginTop: 2 }}>{r.label}</div>
+                <div style={{
+                  fontFamily: "'Share Tech Mono', monospace",
+                  fontSize: r.hero ? 26 : 17,
+                  color: r.hero ? "#f39c12" : "#7a6030",
+                  textShadow: r.hero ? "0 0 20px #f39c1255" : "none",
+                  lineHeight: 1,
+                }}>{r.val}</div>
+                <div style={{
+                  fontSize: r.hero ? 11 : 10,
+                  letterSpacing: 2,
+                  color: r.hero ? "#7a6030" : "#2d3a4a",
+                  textTransform: "uppercase",
+                  marginTop: r.hero ? 5 : 3,
+                  fontWeight: r.hero ? 700 : 400,
+                }}>{r.label}</div>
               </div>
             ))}
           </div>

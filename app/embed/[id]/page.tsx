@@ -121,15 +121,27 @@ export default function EmbedPage({ params }: { params: { id: string } }) {
               FINAL ESTIMATE — ENDED {conflict.endDate}
             </div>
           ) : (
-            <div style={{ display: "flex", justifyContent: "center", gap: 20, marginTop: 8 }}>
+            <div style={{ display: "flex", justifyContent: "center", alignItems: "center", gap: 20, marginTop: 8 }}>
               {[
-                { label: "/day",  val: fmt(conflict.ratePerDay, 0) },
-                { label: "/hr",   val: fmt(conflict.ratePerDay / 24, 1) },
-                { label: "/sec",  val: fmt(conflict.ratePerDay / 86_400, 0) },
+                { label: "/day", val: fmt(conflict.ratePerDay, 0),          hero: false },
+                { label: "/hr",  val: fmt(conflict.ratePerDay / 24, 1),     hero: true  },
+                { label: "/sec", val: fmt(conflict.ratePerDay / 86_400, 0), hero: false },
               ].map(r => (
                 <div key={r.label} style={{ textAlign: "center" }}>
-                  <div style={{ fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: "#f39c12" }}>{r.val}</div>
-                  <div style={{ fontSize: 9, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase" }}>{r.label}</div>
+                  <div style={{
+                    fontFamily: "'Share Tech Mono', monospace",
+                    fontSize: r.hero ? 19 : 13,
+                    color: r.hero ? "#f39c12" : "#7a6030",
+                    textShadow: r.hero ? "0 0 14px #f39c1255" : "none",
+                    lineHeight: 1,
+                  }}>{r.val}</div>
+                  <div style={{
+                    fontSize: 9,
+                    letterSpacing: 2,
+                    color: r.hero ? "#7a6030" : "#3d4a5a",
+                    textTransform: "uppercase",
+                    marginTop: r.hero ? 4 : 2,
+                  }}>{r.label}</div>
                 </div>
               ))}
             </div>
