@@ -351,18 +351,19 @@ export default function TrackerClient({ conflicts }: Props) {
 
       {/* SHARE MODAL */}
       {shareOpen && (() => {
-        const tweetUrl  = `https://twitter.com/intent/tweet?text=${encodeURIComponent(shareText)}`;
-        const fbUrl     = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(SITE)}&quote=${encodeURIComponent(shareText)}`;
+        const sharePageUrl = active ? `${SITE}/share/${active.id}` : SITE;
+        const tweetUrl  = `https://twitter.com/intent/tweet?url=${encodeURIComponent(sharePageUrl)}&text=${encodeURIComponent(shareText.split("\n\n")[0])}`;
+        const linkedIn  = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sharePageUrl)}`;
         const mailUrl   = `mailto:?subject=${encodeURIComponent("Global Conflict Cost Tracker")}&body=${encodeURIComponent(shareText)}`;
-        const linkedIn  = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(SITE)}`;
+        const ogUrl     = active ? `/api/og?id=${active.id}` : `/api/og`;
         return (
           <div onClick={() => setShareOpen(false)}
-            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.78)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20 }}>
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.82)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20, overflowY: "auto" }}>
             <div onClick={(e) => e.stopPropagation()}
-              style={{ background: "#0e1218", border: "1px solid #1e2a38", maxWidth: 520, width: "100%", padding: "28px 28px 24px" }}>
+              style={{ background: "#0e1218", border: "1px solid #1e2a38", maxWidth: 560, width: "100%", padding: "24px 24px 20px" }}>
 
               {/* Header */}
-              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 18 }}>
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 16 }}>
                 <div>
                   <div style={{ fontSize: 10, letterSpacing: 3, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 4 }}>Share This Stat</div>
                   <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: 1, color: "#e8edf5" }}>
@@ -372,14 +373,24 @@ export default function TrackerClient({ conflicts }: Props) {
                 <button onClick={() => setShareOpen(false)} style={{ background: "transparent", border: "none", color: "#3d4a5a", fontSize: 20, cursor: "pointer", lineHeight: 1, padding: "0 4px", flexShrink: 0 }}>✕</button>
               </div>
 
-              {/* Shareable text preview */}
-              <div style={{ fontSize: 10, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>Shareable Text</div>
-              <div style={{ background: "#070a0d", border: "1px solid #1a2030", padding: "14px 16px", fontFamily: "'Share Tech Mono', monospace", fontSize: 13, color: "#c8d4e0", whiteSpace: "pre-wrap", lineHeight: 1.8, marginBottom: 18 }}>
+              {/* OG Card preview */}
+              <div style={{ fontSize: 10, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>Share Card Preview</div>
+              <div style={{ background: "#070a0d", border: "1px solid #1a2030", marginBottom: 14, overflow: "hidden", position: "relative" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={ogUrl}
+                  alt="Share card preview"
+                  style={{ width: "100%", display: "block", aspectRatio: "1200/630" }}
+                />
+              </div>
+
+              {/* Shareable text (compact) */}
+              <div style={{ background: "#070a0d", border: "1px solid #1a2030", padding: "10px 14px", fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "#7a8fa8", whiteSpace: "pre-wrap", lineHeight: 1.7, marginBottom: 14 }}>
                 {shareText}
               </div>
 
-              {/* Share buttons grid */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8 }}>
+              {/* Share buttons — 2×2 + download */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
                 <a href={tweetUrl} target="_blank" rel="noopener noreferrer"
                   style={{ background: "#000", border: "1px solid #333", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}>
                   𝕏&nbsp; Share on X
@@ -404,8 +415,14 @@ export default function TrackerClient({ conflicts }: Props) {
                 </a>
               </div>
 
-              <div style={{ marginTop: 16, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
-                Sharing sends viewers directly to the live counter at conflictcost.org.
+              {/* Download card — full width */}
+              <a href={ogUrl} download={active ? `${active.id}-cost.png` : "conflict-cost.png"} target="_blank" rel="noopener noreferrer"
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none" }}>
+                ↓&nbsp; Download Card Image
+              </a>
+
+              <div style={{ marginTop: 14, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
+                When shared on X, LinkedIn, or iMessage — the card previews automatically.
               </div>
             </div>
           </div>
