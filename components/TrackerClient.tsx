@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import Link from "next/link";
 import type { Conflict } from "../lib/types";
 import { calcCost, daysSince, fmt, fmtLive } from "../lib/cost";
@@ -44,6 +44,26 @@ export default function TrackerClient({ conflicts }: Props) {
       setTimeout(() => setCopied(false), 2000);
     });
   }, []);
+
+  // Drag-to-scroll for conflict nav
+  const navRef  = useRef<HTMLElement>(null);
+  const drag    = useRef({ active: false, startX: 0, scrollLeft: 0, moved: false });
+
+  const onNavMouseDown = (e: React.MouseEvent) => {
+    const el = navRef.current; if (!el) return;
+    drag.current = { active: true, startX: e.pageX - el.offsetLeft, scrollLeft: el.scrollLeft, moved: false };
+    el.style.cursor = "grabbing";
+  };
+  const onNavMouseMove = (e: React.MouseEvent) => {
+    const el = navRef.current; if (!el || !drag.current.active) return;
+    const dx = e.pageX - el.offsetLeft - drag.current.startX;
+    if (Math.abs(dx) > 4) { drag.current.moved = true; e.preventDefault(); }
+    el.scrollLeft = drag.current.scrollLeft - dx;
+  };
+  const onNavMouseUp = () => {
+    drag.current.active = false;
+    if (navRef.current) navRef.current.style.cursor = "grab";
+  };
 
   const conflictCosts = conflicts.map((c) => ({
     ...c,
@@ -169,31 +189,48 @@ export default function TrackerClient({ conflicts }: Props) {
 
       {/* CONFLICT SELECTOR */}
       <div style={{ position: "relative", background: "#0a0c10", borderBottom: "1px solid #1a2030" }}>
-        <nav style={{
-          padding: "10px 20px",
-          display: "flex",
-          gap: 6,
-          flexWrap: "nowrap",
-          overflowX: "auto",
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-          WebkitOverflowScrolling: "touch",
-        } as React.CSSProperties}>
-          <SelectorBtn active={selected === null} color="#e74c3c" onClick={() => setSelected(null)}>
+        {/* Left scroll arrow */}
+        <button
+          onClick={() => navRef.current && (navRef.current.scrollLeft -= 240)}
+          style={{ position: "absolute", left: 0, top: 0, bottom: 0, zIndex: 2, width: 32, background: "linear-gradient(to right, #0a0c10 60%, transparent)", border: "none", color: "#3d4a5a", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "flex-start", paddingLeft: 6 }}
+          aria-label="Scroll left"
+        >‹</button>
+
+        <nav
+          ref={navRef}
+          onMouseDown={onNavMouseDown}
+          onMouseMove={onNavMouseMove}
+          onMouseUp={onNavMouseUp}
+          onMouseLeave={onNavMouseUp}
+          style={{
+            padding: "10px 36px",
+            display: "flex",
+            gap: 6,
+            flexWrap: "nowrap",
+            overflowX: "auto",
+            scrollbarWidth: "none",
+            msOverflowStyle: "none",
+            WebkitOverflowScrolling: "touch",
+            cursor: "grab",
+            userSelect: "none",
+          } as React.CSSProperties}
+        >
+          <SelectorBtn active={selected === null} color="#e74c3c" onClick={() => !drag.current.moved && setSelected(null)}>
             🌐 {region === "All" ? (filter === "active" ? "All Active" : "All Conflicts") : region}
           </SelectorBtn>
           {displayed.map((c) => (
-            <SelectorBtn key={c.id} active={selected === c.id} color={c.color} onClick={() => setSelected(c.id)}>
+            <SelectorBtn key={c.id} active={selected === c.id} color={c.color} onClick={() => !drag.current.moved && setSelected(c.id)}>
               {c.flag} {c.name}
             </SelectorBtn>
           ))}
         </nav>
-        {/* Right fade to hint at scrollable content */}
-        <div style={{
-          position: "absolute", top: 0, right: 0, bottom: 0, width: 48,
-          background: "linear-gradient(to right, transparent, #0a0c10)",
-          pointerEvents: "none",
-        }} />
+
+        {/* Right scroll arrow */}
+        <button
+          onClick={() => navRef.current && (navRef.current.scrollLeft += 240)}
+          style={{ position: "absolute", right: 0, top: 0, bottom: 0, zIndex: 2, width: 32, background: "linear-gradient(to left, #0a0c10 60%, transparent)", border: "none", color: "#3d4a5a", fontSize: 14, cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "flex-end", paddingRight: 6 }}
+          aria-label="Scroll right"
+        >›</button>
       </div>
 
       {/* COUNTER */}
