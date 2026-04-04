@@ -10,8 +10,8 @@
     "anchor": 11500000000,
     "status": "ACTIVE",
     "parties": "U.S. + Israel vs. Iran",
-    "sources": "CSIS (Cancian & Park, Mar 2026) — $3.7B first 100 hrs, $16.5B by Day 12; Pentagon Congressional briefing (Military Times, Mar 2026) — $11.3B at Day 6; Penn Wharton Budget Model (Mar 2026) — ~$500M/day sustained; Middle East Monitor (Mar 2026) — ~$27.5B through Day 32",
-    "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B. Anchor of $11.5B calibrated to Day 32 total; $500M/day reflects current U.S. operational costs. Note: concurrent 2026 Israel–Hezbollah/Lebanon operations are tracked separately.",
+    "sources": "CSIS (Cancian & Park, Mar 2026) — $3.7B first 100 hrs, $16.5B by Day 12; Pentagon Congressional briefing (Military Times, Mar 2026) — $11.3B at Day 6; Penn Wharton Budget Model (Mar 2026) — ~$500M/day sustained; Middle East Monitor (Mar 2026) — ~$27.5B through Day 32; CNN Politics (Mar 6, 2026) — daily cost breakdown; Pentagon supplemental budget request to White House (Mar 19, 2026) — $200B for full campaign costs",
+    "summary": "Operation Epic Fury launched Feb 28, 2026. Costs far exceeded initial ops-only estimates. Pentagon confirmed $11.3B in first 6 days (primarily munitions replacement — $3.1B in first 100 hours alone per CSIS). CSIS estimated $16.5B by Day 12. Sustained rate stepped down to ~$500M/day by Days 25–32 as operations shifted to lower-cost munitions. Total through Day 32 (Apr 1): ~$27.5B; counter anchor calibrated to that total. On March 19, the Pentagon submitted a $200B supplemental budget request to the White House covering projected full-campaign costs — more than Iran's entire military ever spent. Daily rate estimates vary widely by analyst ($200M–$1.43B/day); $500M/day reflects Penn Wharton's sustained-operations estimate and remains the most-cited peer figure. Note: concurrent 2026 Israel–Hezbollah/Lebanon operations are tracked separately.",
     "comparables": [
       "The total has already exceeded the Manhattan Project in today's dollars — reached in under 5 weeks of fighting",
       "At $500M/day, this operation spends the WHO's entire annual global health budget ($6.8B) every 14 days",
@@ -20,14 +20,14 @@
     "casualties": {
       "asOf": "2026-04",
       "source": "CENTCOM statements; Military Times; DefenseScoop; Al Jazeera death toll tracker; Iranian Red Crescent; The Intercept (Apr 2026 — Pentagon undercounting allegation); Wikipedia 2026 Iran war",
-      "note": "Figures are actively contested. Iran has not published a verified military vs. civilian breakdown. The Intercept (Apr 1, 2026) alleges CENTCOM is underreporting U.S. casualties. Iranian Red Crescent and independent estimates diverge significantly from official U.S. characterisations of strikes as 'precision military operations'.",
+      "note": "Figures are actively contested. Iran has not published a verified military vs. civilian breakdown. The Intercept (Apr 1, 2026) alleges CENTCOM is underreporting U.S. casualties — citing at least 15 wounded excluded from official statements. Iranian Red Crescent and independent estimates diverge significantly from official U.S. characterisations of strikes as 'precision military operations'. CENTCOM has sent outdated casualty statements resulting in undercounts.",
       "entries": [
         { "label": "Total killed in Iran (all causes)", "count": "~1,937–2,400+" },
         { "label": "Iranian civilians (documented incidents)", "count": "significant — breakdown disputed" },
         { "label": "IRGC / Iranian military (KIA)", "count": "not independently verified" },
         { "label": "Senior Iranian officials killed", "count": "Defence Minister, IRGC C-in-C, Supreme Leader Khamenei" },
-        { "label": "U.S. troops killed (CENTCOM confirmed)", "count": "~15" },
-        { "label": "U.S. troops wounded", "count": "300–520+ (reporting contested)" }
+        { "label": "U.S. troops killed (CENTCOM confirmed)", "count": "~15+" },
+        { "label": "U.S. troops wounded (CENTCOM stated)", "count": "303 confirmed; 520+ per independent reporting (The Hill / The Intercept)" }
       ]
     }
   },
@@ -51,12 +51,14 @@
     ],
     "casualties": {
       "asOf": "2026-04",
-      "source": "Lebanese Ministry of Health; IDF spokesperson (Times of Israel, Apr 2026); Al Jazeera; ACLED Middle East Special Issue Mar 2026",
-      "note": "Ongoing conflict — figures are preliminary. Lebanese MoH total includes both civilian and combatant deaths and will rise. IDF soldier figures are confirmed deaths only; wounded not published.",
+      "source": "Lebanese Ministry of Health; IDF spokesperson (Times of Israel, Apr 2026); Al Jazeera (Apr 2, 2026 — 1,318 killed, 3,935 injured); Wikipedia — 2026 Lebanon war; ACLED Middle East Special Issue Mar 2026",
+      "note": "Ongoing conflict — figures are preliminary and rising. Lebanese MoH total includes both civilian and combatant deaths. Approximately 1 million people (20% of Lebanon's population) have been displaced. IDF soldier figures are confirmed deaths only; wounded not published.",
       "entries": [
-        { "label": "Total killed in Lebanon (MoH confirmed)", "count": "1,200+" },
+        { "label": "Total killed in Lebanon (MoH confirmed)", "count": "1,318+" },
+        { "label": "Total injured in Lebanon", "count": "3,935+" },
         { "label": "Hezbollah fighters (KIA, IDF est.)", "count": "~1,000+" },
-        { "label": "IDF soldiers (KIA confirmed)", "count": "~10" }
+        { "label": "IDF soldiers (KIA confirmed)", "count": "~10" },
+        { "label": "Displaced persons (Lebanon)", "count": "~1,000,000 (20% of population)" }
       ]
     }
   },
@@ -79,12 +81,14 @@
       "Russia's military spending alone ($165B/yr) now exceeds its entire federal healthcare budget for 145 million citizens — by more than 2×"
     ],
     "casualties": {
-      "asOf": "2026-02",
-      "source": "Mediazona / BBC Russia (open-source confirmed deaths, Nov 2025); The Economist (Feb 2026 model); OHCHR (civilian deaths, 2025 annual); Al Jazeera 4-year review (Feb 2026); Zelenskyy public statement (Feb 2026)",
-      "note": "Russia does not publish military casualties. Mediazona's confirmed figure (~150,000+) is an open-source floor — actual deaths are higher. The Economist's model (230,000–430,000 killed) uses actuarial and satellite methods and is the most cited independent estimate. Ukrainian figures are state-suppressed; Zelenskyy cited 55,000 KIA in Feb 2026, widely considered an undercount.",
+      "asOf": "2026-04",
+      "source": "Mediazona / BBC Russia (open-source confirmed deaths, Nov 2025); The Economist (Feb 2026 model); CSIS (Dec 2025 — 1.2M total casualties, 325,000+ deaths); UK MoD (Jun 2025 — 250,000 killed); OHCHR (civilian deaths, 2025 annual); Al Jazeera 4-year review (Feb 2026); Zelenskyy public statement (Feb 2026)",
+      "note": "Russia does not publish military casualties. Mediazona's confirmed figure (~150,000+) is an open-source floor. CSIS estimated Russia suffered 1.2 million total casualties (killed and wounded) including at least 325,000 deaths through December 2025 — this figure is within The Economist's modelled range. UK MoD (June 2025) estimated 250,000 killed. Ukrainian figures are state-suppressed; Zelenskyy cited 55,000 KIA in Feb 2026, widely considered an undercount.",
       "entries": [
         { "label": "Russia (KIA, Mediazona open-source confirmed)", "count": "150,000+" },
+        { "label": "Russia (KIA, CSIS est. through Dec 2025)", "count": "325,000+" },
         { "label": "Russia (KIA, Economist model est.)", "count": "230,000–430,000" },
+        { "label": "Russia (total casualties killed + wounded, CSIS)", "count": "~1,200,000" },
         { "label": "Ukraine (KIA, Zelenskyy Feb 2026)", "count": "~55,000 (likely undercount)" },
         { "label": "Ukraine (KIA, Western intel est.)", "count": "100,000–140,000" },
         { "label": "Civilians killed (OHCHR confirmed)", "count": "13,883" },
@@ -111,12 +115,14 @@
       "Israel's peak daily spending during active operations ($350M+/day) exceeded the entire annual UN Relief and Works Agency (UNRWA) budget in under 3 days"
     ],
     "casualties": {
-      "asOf": "2025-10",
-      "source": "Gaza Ministry of Health (confirmed deaths); IDF spokesperson; OHCHR; Lancet (Jul 2024 — indirect death projection)",
-      "note": "Gaza MoH figures are considered credible by the WHO and UN. The Lancet estimates up to 186,000 total deaths when accounting for indirect causes (disease, malnutrition, lack of medical care). Hamas fighter deaths are IDF estimates.",
+      "asOf": "2026-04",
+      "source": "Palestinian Ministry of Health / WAFA (Apr 1, 2026 — 72,289 killed); UNRWA Situation Reports 212 & 214; OHCHR; Lancet (Jul 2024 — indirect death projection); IDF spokesperson; UN OCHA Humanitarian Situation Update #353",
+      "note": "The cumulative MoH death toll has risen to 72,289 as of April 1, 2026 — nearly 25,000 more than the Oct 2025 ceasefire figure — reflecting ongoing ceasefire violations and continued registration of previously unrecorded deaths. Since the ceasefire took effect (Oct 10, 2025), Israel has violated it at least 2,073 times (Oct 10, 2025 – Mar 18, 2026), killing at least 713 Palestinians in that period. Gaza MoH figures are considered credible by the WHO and UN. The Lancet estimates up to 186,000 total deaths when accounting for indirect causes.",
       "entries": [
-        { "label": "Palestinians killed (Gaza MoH confirmed)", "count": "~46,800" },
+        { "label": "Palestinians killed (Gaza MoH confirmed, Apr 1 2026)", "count": "~72,289" },
+        { "label": "Palestinians injured (Gaza MoH)", "count": "~171,912" },
         { "label": "Palestinians killed (Lancet indirect est.)", "count": "up to 186,000" },
+        { "label": "Killed since ceasefire (Oct 10 2025 – Mar 18 2026)", "count": "713+" },
         { "label": "Hamas fighters killed (IDF est.)", "count": "17,000–20,000" },
         { "label": "IDF soldiers killed", "count": "~790 confirmed" },
         { "label": "Israeli civilians (Oct 7 + war)", "count": "~1,250" }
@@ -142,14 +148,15 @@
       "The conflict has created the world's largest displacement crisis — at a cost that equates to $250 per displaced person per year in military spending alone"
     ],
     "casualties": {
-      "asOf": "2025-09",
-      "source": "ACLED (documented fatalities to Nov 2024: 28,700+); OHCHR (Jan–Jun 2025: 3,384 civilians); UN OCHA; Sudan Doctors' Network; factually.co verified tally (Nov 2025)",
-      "note": "Documented ACLED figures (28,700+) and widely cited aggregate estimates (~150,000) diverge sharply — the gap reflects unrecorded violence, famine, and disease deaths that cannot be independently verified given near-total access restrictions. The true toll is almost certainly far higher than either figure.",
+      "asOf": "2026-04",
+      "source": "ACLED (documented fatalities to Nov 2024: 28,700+); OHCHR (Jan–Jun 2025: 3,384 civilians); UN OCHA; Sudan Doctors' Network; factually.co verified tally (Nov 2025); WFP (2026 — 24.6M facing acute hunger); Yale researchers warning (2026)",
+      "note": "Documented ACLED figures (28,700+) and widely cited aggregate estimates (~150,000) diverge sharply — the gap reflects unrecorded violence, famine, and disease deaths that cannot be independently verified given near-total access restrictions. Yale researchers have warned 2026 could be the conflict's bloodiest year yet, as fighting intensifies in Kordofan and drone strikes on civilian infrastructure (including hospitals and markets) escalate. A March 2026 SAF airstrike on a hospital in East Darfur killed 70 people. The WFP reports 24.6 million people in acute hunger.",
       "entries": [
-        { "label": "Killed — direct violence (ACLED documented)", "count": "28,700+" },
+        { "label": "Killed — direct violence (ACLED documented, to Nov 2024)", "count": "28,700+" },
         { "label": "Total killed inc. famine/disease (est.)", "count": "~150,000+" },
         { "label": "Civilians killed (OHCHR, Jan–Jun 2025 alone)", "count": "3,384+" },
-        { "label": "Displaced persons", "count": "12,000,000+ (world's largest crisis)" }
+        { "label": "Displaced persons", "count": "11,800,000+ (world's largest crisis)" },
+        { "label": "People in acute hunger (WFP 2026)", "count": "24,600,000+" }
       ]
     }
   },
@@ -172,16 +179,17 @@
       "The $13.7M/day rate means Myanmar's military spends more in a week than the entire annual UNICEF budget for the country"
     ],
     "casualties": {
-      "asOf": "2025-04",
-      "source": "AAPP (Assistance Association for Political Prisoners, Apr 2025); OHCHR (Jan 2025 four-year report); PRIO report (20-month study); IISS Armed Conflict Survey 2025",
-      "note": "Myanmar's military blocks independent access. AAPP tracks confirmed civilian deaths via open-source documentation — widely considered a floor. Combatant figures rely on resistance reporting and are less reliable.",
+      "asOf": "2026-04",
+      "source": "ACLED (96,000+ total killed, 2026); AAPP (Assistance Association for Political Prisoners, Apr 2025 — 6,486 confirmed civilian deaths); UN News (Jan 2026 — 3.6M displaced); OHCHR (Jan 2025 four-year report); HRW World Report 2026; Al Jazeera (Mar 27, 2026)",
+      "note": "Myanmar's military blocks independent access. AAPP tracks confirmed civilian deaths via open-source documentation — widely considered a floor. ACLED's broader estimate of 96,000+ total killed (all parties, all causes) reflects the full scale of the conflict since the Feb 2021 coup. The junta has escalated airstrikes on civilian targets through 2025–26, including strikes on schools, hospitals, and IDP camps. A January 2026 airstrike in Bhamo Township, Kachin State killed up to 50 civilians.",
       "entries": [
-        { "label": "Civilians killed (AAPP confirmed, to Apr 2025)", "count": "6,486" },
+        { "label": "Total killed — all parties (ACLED est.)", "count": "96,000+" },
+        { "label": "Civilians killed (AAPP confirmed, to Apr 2025)", "count": "6,486 (open-source floor)" },
         { "label": "Of which women", "count": "1,494" },
         { "label": "Of which children", "count": "751" },
         { "label": "Resistance / PDF fighters (KIA est.)", "count": "10,000–15,000" },
         { "label": "Junta forces (KIA est., resistance claims)", "count": "20,000–30,000" },
-        { "label": "Internally displaced", "count": "2,500,000+" }
+        { "label": "Internally displaced", "count": "3,600,000+" }
       ]
     }
   },
@@ -204,13 +212,13 @@
       "The five affected countries have per-capita GDPs of under $1,000 — yet are sustaining military expenditure that consumes up to 20% of government revenue"
     ],
     "casualties": {
-      "asOf": "2024-12",
-      "source": "ACLED 2024 Annual Report; IISS Armed Conflict Survey 2024",
-      "note": "Figures cover Mali, Burkina Faso, Niger, and Chad. Civilian deaths are the majority of recorded fatalities; combatant deaths on both sides are less reliably tracked.",
+      "asOf": "2026-04",
+      "source": "ACLED 2024 Annual Report; ACLED Africa Overview March 2026; IISS Armed Conflict Survey 2024; HRW (Apr 2, 2026 — government forces killing more civilians than militants); Japan Times (Apr 2, 2026)",
+      "note": "Figures cover Mali, Burkina Faso, Niger, and Chad. Political violence killed over 10,000 people in Burkina Faso, Mali, and Niger in 2025 alone. A significant new finding (HRW / ACLED, April 2026): government and allied forces in Burkina Faso and Mali have killed more than twice as many civilians as Islamist militants since 2023 — a major shift in the pattern of civilian harm. JNIM launched a broad coordinated offensive in February 2026, killing 120+ soldiers and militiamen across 30+ attacks in Burkina Faso.",
       "entries": [
-        { "label": "Civilians killed (ACLED, per year)", "count": "~10,000–14,000" },
+        { "label": "Civilians killed (ACLED, per year 2025)", "count": "~10,000+" },
         { "label": "Combatants killed — all sides (per year)", "count": "~6,000–10,000" },
-        { "label": "Cumulative killed since 2020 (est.)", "count": "~80,000–100,000" }
+        { "label": "Cumulative killed since 2020 (est.)", "count": "~80,000–100,000+" }
       ]
     }
   },
@@ -233,13 +241,14 @@
       "At $5.5M/day, the conflict costs more than the DRC's entire annual education budget — every 4 months"
     ],
     "casualties": {
-      "asOf": "2025-12",
-      "source": "ACLED; UN Security Council (Aug 2025); Human Rights Watch (Jun, Aug 2025); Al Jazeera DRC mapping project (Mar 2025); OHCHR (Aug 2025)",
-      "note": "The M23 resurgence has proven far deadlier than early estimates. Documented mass atrocities include: 773 killed in Goma in one week (Feb 2025); 319+ civilians in Rutshuru in July 2025; 400+ in South Kivu (Dec 2025). These individual incidents alone exceed original total estimates — figures below should be treated as minimums.",
+      "asOf": "2026-04",
+      "source": "ACLED; UN Security Council (Aug 2025, Mar 2026); Human Rights Watch (Jun, Aug 2025); Al Jazeera DRC mapping project (Mar 2025); OHCHR (Aug 2025); African Union (Feb 12, 2026 — ceasefire TOR signing); UN MONUSCO (Mar 2026); Security Council Report April 2026 forecast",
+      "note": "On February 11, Angola brokered a ceasefire between DRC and M23/AFC, with a Terms of Reference for implementation signed February 12. The ceasefire took effect February 18, 2026. However, the UN Security Council was briefed in March 2026 that the situation 'continues to deteriorate' despite diplomatic progress — both sides continue to trade accusations of violations. Conflict status remains ACTIVE as fighting persists. Documented mass atrocities include: 773 killed in Goma in one week (Feb 2025); 319+ civilians in Rutshuru in July 2025; 400+ in South Kivu (Dec 2025). 6.4M currently internally displaced; food insecurity projected to affect 26.6M people in 2026.",
       "entries": [
-        { "label": "Killed — M23 resurgence (est., 2022–2025)", "count": "30,000–50,000+" },
+        { "label": "Killed — M23 resurgence (est., 2022–present)", "count": "30,000–50,000+" },
         { "label": "Civilians (documented mass atrocities alone)", "count": "thousands confirmed" },
-        { "label": "Displaced (eastern DRC)", "count": "7,000,000+" }
+        { "label": "Internally displaced (eastern DRC)", "count": "6,400,000+" },
+        { "label": "People facing food insecurity (DRC, 2026 projection)", "count": "26,600,000+" }
       ]
     }
   },
@@ -514,9 +523,9 @@
       "The Lake Chad Basin humanitarian crisis (10.7M+ affected) costs the international community more to respond to each year than Nigeria spends fighting the insurgency itself"
     ],
     "casualties": {
-      "asOf": "2024-06",
-      "source": "ACLED Nigeria (34,261 documented conflict deaths Jun 2011–Jun 2018); CFR Boko Haram's Deadly Impact (50,000+ total cited); Global Centre for R2P; ISS Africa; UNHCR",
-      "note": "ACLED documented 34,261 killed in the 7-year period 2011–2018 alone — roughly 50% were classified as Boko Haram/ISWAP fighters. The total since 2009 (including pre-ACLED period and ISWAP expansion 2018–2024) is widely cited as 50,000–60,000+. Civilian deaths are heavily undercounted given severe access restrictions in Borno State.",
+      "asOf": "2026-04",
+      "source": "ACLED Nigeria (34,261 documented conflict deaths Jun 2011–Jun 2018); CFR Boko Haram's Deadly Impact (50,000+ total cited); Global Centre for R2P; ISS Africa; UNHCR; HRW World Report 2026; Critical Threats Africa File (Feb 5, 2026); International Christian Concern (Mar 30, 2026)",
+      "note": "ACLED documented 34,261 killed in 2011–2018 alone. The total since 2009 is widely cited as 50,000–60,000+. ISWAP has intensified operations significantly in 2025–26: daily attacks on civilians and security forces in Yobe and Borno states. Notable 2026 incidents include a massacre of 170 civilians in northwestern Nigeria (one of the deadliest single attacks in years) and the abduction of 300+ civilians in Ngoshe, Borno State in March 2026. Civilian deaths remain heavily undercounted given severe access restrictions.",
       "entries": [
         { "label": "Total killed (est., 2009–2024)", "count": "50,000–60,000+" },
         { "label": "Documented conflict deaths (ACLED, 2011–2018)", "count": "34,261" },
@@ -546,9 +555,9 @@
       "AMISOM at peak deployed 22,000 troops — more soldiers than the entire standing armies of 70 UN member states — yet could not permanently dislodge Al-Shabaab from rural Somalia"
     ],
     "casualties": {
-      "asOf": "2024-12",
-      "source": "ACLED Somalia (4,000+ civilian deaths from Al-Shabaab attacks, 2010–2021, per VOA); ACLED 2024 Al-Shabaab activity mapping; Mogadishu Medina Hospital data (54,000+ injuries since 2007); CFR Al-Shabaab conflict tracker; UNHCR",
-      "note": "ACLED's civilian-targeting figures (4,000+ since 2010) are a floor — Medina Hospital data and broader estimates suggest 10,000–30,000+ direct civilian deaths. Combatant figures from both AMISOM/AU and Al-Shabaab are not systematically published. Indirect deaths from displacement and famine across the conflict period are substantially higher. 2022 was the deadliest year since 2018, with 6,500+ reported fatalities (ACLED).",
+      "asOf": "2026-04",
+      "source": "ACLED Somalia (4,000+ civilian deaths from Al-Shabaab attacks, 2010–2021, per VOA); ACLED 2024 Al-Shabaab activity mapping; Mogadishu Medina Hospital data (54,000+ injuries since 2007); CFR Al-Shabaab conflict tracker; UNHCR; CTC West Point — Somalia at a Crossroads (2026); UN Security Council Resolution 2809 (2025); AU Peace and Security Council communiqué Feb 12, 2026",
+      "note": "ACLED's civilian-targeting figures (4,000+ since 2010) are a floor. The AUSSOM mission was re-authorized by the UN Security Council to December 31, 2026, with up to 11,826 uniformed personnel. The severe funding reduction from ATMIS ($1.5B/yr) to AUSSOM ($196M budget) threatens mission viability. Al-Shabaab lost its leader in a DRC-announced kill in Feb 2026 but the group remains resilient. Somali forces claimed 400+ Al-Shabaab kills by mid-March 2026 in major operations. 2022 was the deadliest year since 2018, with 6,500+ fatalities (ACLED).",
       "entries": [
         { "label": "Civilian deaths — Al-Shabaab attacks (ACLED, 2010–2021)", "count": "4,000+" },
         { "label": "Civilian deaths — direct all causes (est.)", "count": "10,000–30,000+" },
@@ -602,22 +611,22 @@
     "status": "ACTIVE",
     "parties": "Mozambique + Rwanda vs. Ansar al-Sunna (ISIS-Mozambique / al-Shabaab)",
     "sources": "ACLED / Club of Mozambique (6,515 deaths Mar 2026); ISS Africa — SAMIM withdrawal analysis (May 2024); EU Council European Peace Facility (€20M for RDF, Nov 2024 — top-up); Bloomberg — EU ending Rwanda funding May 2026 (Mar 2026); VOA — Rwanda 2,500 troop reinforcement (May 2024); ISS Africa — Rwanda costs ~6× EU total contribution",
-    "summary": "ISIS-linked insurgency (Ansar al-Sunna, locally called al-Shabaab) erupted October 5, 2017 in Mocímboa da Praia, Cabo Delgado. Insurgents seized Mocímboa da Praia town August 2020. SADC deployed SAMIM in June 2021 (~$10M/month); Rwanda deployed from July 2021, peaking at 4,000–6,500 troops. SAMIM withdrew July 2024 due to funding constraints. Rwanda and Tanzania are now primary external security providers. EU European Peace Facility committed ~€46M total 2021–2025 — roughly 17% of Rwanda's reported deployment costs. Rwanda's government stated its Cabo Delgado costs are at least 10× the EU's €20M 2024 disbursement (~$200M+ annually). EU announced end of Rwanda funding in May 2026; Rwanda threatened withdrawal. Insurgent strength estimated at 300–1,000 fighters. $600K/day reflects conflict-lifetime average; current rate is higher with Rwanda's active deployment.",
+    "summary": "ISIS-linked insurgency (Ansar al-Sunna, locally called al-Shabaab) erupted October 5, 2017 in Mocímboa da Praia, Cabo Delgado. Insurgents seized Mocímboa da Praia town August 2020. SADC deployed SAMIM in June 2021 (~$10M/month); Rwanda deployed from July 2021, peaking at 4,000–6,500 troops. SAMIM withdrew July 2024 due to funding constraints. Rwanda and Tanzania are now primary external security providers. EU European Peace Facility committed ~€46M total 2021–2025 — roughly 17% of Rwanda's reported deployment costs. Rwanda's government stated its Cabo Delgado costs are at least 10× the EU's €20M 2024 disbursement (~$200M+ annually). In March 2026, Rwanda formally threatened withdrawal if adequate funding is not secured. The EU announced it will end Rwanda funding in May 2026, creating a critical gap; Rwanda has not yet confirmed it will stay. Insurgent strength estimated at 300–1,000 fighters. $600K/day reflects conflict-lifetime average; current operational rate with Rwanda's full deployment is substantially higher.",
     "comparables": [
       "Cabo Delgado sits above one of the world's largest natural gas reserves — TotalEnergies' $20B LNG project remains suspended, costing far more in lost investment than the entire war",
       "Rwanda has committed hundreds of millions and thousands of troops to stabilize a neighbor's insurgency — while relying on EU support that has now been terminated with no replacement funding",
       "The 6,500+ documented deaths make this one of Africa's least-covered active conflicts — despite the same region hosting a Western LNG investment larger than the entire Mozambican GDP"
     ],
     "casualties": {
-      "asOf": "2026-03",
-      "source": "ACLED / Club of Mozambique (6,257 deaths — 8-year total to Oct 2025); ACLED Mozambique Conflict Monitor (6,515 total — Mar 2026); UNHCR; OCHA",
-      "note": "Of the 6,515 ACLED-documented deaths, at least 2,631 were civilians. Insurgent membership declined from a peak of several thousand to an estimated 300–1,000 due to Rwandan-Mozambican operations, though attacks resumed in strength in 2025–2026 following SAMIM's withdrawal.",
+      "asOf": "2026-04",
+      "source": "ACLED / Club of Mozambique (6,257 deaths — 8-year total to Oct 2025); ACLED Mozambique Conflict Monitor (6,515 total — Mar 2026); UNHCR; OCHA; Africanews (Mar 15, 2026 — Rwanda withdrawal threat); Zitamar Conflict Monitor (Mar 9–22, 2026); ACLED Conflict Monitor Update Mar 25, 2026",
+      "note": "Of the 6,515 ACLED-documented deaths, at least 2,631 were civilians. Rwanda threatened withdrawal from Cabo Delgado in March 2026 if international funding is not secured, citing that it has borne the majority of costs since 2021. EU announcement of ending Rwanda funding in May 2026 has created a funding crisis. The March 15, 2026 FADM killing of 13 civilians on fishing boats near Calugo village drew condemnation. Insurgent membership estimated at 300–1,000 fighters.",
       "entries": [
         { "label": "Total killed (ACLED documented, Oct 2017–Mar 2026)", "count": "6,515" },
         { "label": "Civilians killed (ACLED documented)", "count": "2,631+" },
         { "label": "Insurgents killed (ISIS-Mozambique est.)", "count": "~2,000–3,000" },
         { "label": "Mozambican + Rwandan forces (KIA est.)", "count": "several hundred" },
-        { "label": "Displaced persons (Cabo Delgado)", "count": "1,000,000+" }
+        { "label": "Displaced persons (Cabo Delgado)", "count": "1,300,000+" }
       ]
     }
   }
