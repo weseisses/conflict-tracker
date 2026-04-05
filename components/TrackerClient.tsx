@@ -45,12 +45,14 @@ export default function TrackerClient({ conflicts }: Props) {
   useEffect(() => { setComparableIdx(0); }, [selected]);
 
   // Auto-rotate comparables every 6 seconds
+  // (use `selected` + `conflicts` — `active` is declared later in the component)
   useEffect(() => {
-    const comps = active?.comparables;
+    if (!selected) return;
+    const comps = conflicts.find((c) => c.id === selected)?.comparables;
     if (!comps || comps.length <= 1) return;
     const id = setInterval(() => setComparableIdx((i) => (i + 1) % comps.length), 6000);
     return () => clearInterval(id);
-  }, [active?.id, active?.comparables?.length]);
+  }, [selected, conflicts]);
 
   const handleCopy = useCallback((text: string) => {
     navigator.clipboard.writeText(text).then(() => {
