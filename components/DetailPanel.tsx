@@ -3,6 +3,7 @@
 import type { Conflict } from "../lib/types";
 import { daysSince, fmt } from "../lib/cost";
 import StatCard from "./StatCard";
+import SpendChartPanel from "./SpendChartPanel";
 
 const SKULL = "✕"; // neutral marker — avoids emoji rendering inconsistency
 
@@ -71,6 +72,10 @@ export default function DetailPanel({ conflict: c, cost }: Props) {
           ))}
         </div>
       </div>
+
+      {c.spendChart && (
+        <SpendChartPanel conflict={c} chart={c.spendChart} />
+      )}
 
       {c.comparables && c.comparables.length > 0 && (
         <div style={{ marginBottom: c.casualties ? 10 : 0 }}>

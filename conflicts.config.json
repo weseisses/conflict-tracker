@@ -30,6 +30,51 @@
         { "label": "U.S. troops killed (CENTCOM confirmed through Apr 1)", "count": "15 (13 combat, 2 non-combat)" },
         { "label": "U.S. troops wounded (DCAS/Pentagon, Apr 4)", "count": "365 confirmed (Army 247, Navy 63, Air Force 36, USMC 19); 520+ per independent reporting (The Intercept)" }
       ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Iran expenditure undisclosed — see cards below",
+      "parties": [
+        {
+          "key": "us",
+          "flag": "🇺🇸",
+          "name": "United States",
+          "role": "Lead offensive",
+          "confidence": "high",
+          "explainer": "$3.7B in first 100 hours; $16.5B by Day 12 (CSIS/Pentagon). Rate settled at ~$310M/day as operations shifted from initial B-2 and Tomahawk strikes to sustained lower-cost munitions.",
+          "color": "#3b82f6",
+          "estimate": { "low": 19.2, "mid": 20.4, "high": 21.8 },
+          "dailyLabel": "~$310M/day"
+        },
+        {
+          "key": "israel",
+          "flag": "🇮🇱",
+          "name": "Israel",
+          "role": "Joint strikes + air defence",
+          "confidence": "medium",
+          "explainer": "Estimated from IDF operational tempo and Bank of Israel emergency budget supplement. Figures are partially entangled with the concurrent 2026 Lebanon War and cannot be cleanly isolated — range reflects this uncertainty.",
+          "color": "#eab308",
+          "estimate": { "low": 5.8, "mid": 7.1, "high": 8.6 },
+          "dailyLabel": "~$130–180M/day"
+        },
+        {
+          "key": "iran",
+          "flag": "🇮🇷",
+          "name": "Iran",
+          "role": "Defending party",
+          "confidence": "none",
+          "explainer": "IRGC and military budgets are classified and not publicly disclosed. Known activity: 500+ missiles launched, nationwide air defence activated. No reliable cumulative figure can be modelled from open sources.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2026-02-28", "rate": 2000000000 },
+        { "date": "2026-03-03", "rate": 1500000000 },
+        { "date": "2026-03-08", "rate": 800000000 },
+        { "date": "2026-03-15", "rate": 600000000 },
+        { "date": "2026-03-22", "rate": 520000000 },
+        { "date": "2026-03-29", "rate": 500000000 }
+      ]
     }
   },
   {
@@ -98,6 +143,55 @@
         { "label": "Civilians killed (OHCHR confirmed, to Jan 31 2026)", "count": "15,172" },
         { "label": "Civilians injured (OHCHR confirmed, to Jan 31 2026)", "count": "41,378" },
         { "label": "Total wounded (both sides est.)", "count": "600,000–1,000,000+" }
+      ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "rates estimated from SIPRI, Kiel Institute, IMF anchors",
+      "parties": [
+        {
+          "key": "russia",
+          "flag": "🇷🇺",
+          "name": "Russia",
+          "role": "Invading party",
+          "confidence": "medium",
+          "explainer": "Federal defence budget grew from $65B (2021) to $165B+ annually, financed via oil revenues and wartime bonds. Spending as % of GDP reached 7.5% in 2025 — highest since the Cold War.",
+          "color": "#ef4444",
+          "estimate": { "low": 580, "mid": 630, "high": 680 },
+          "dailyLabel": "~$450M/day (2025)"
+        },
+        {
+          "key": "western",
+          "flag": "🌍",
+          "name": "Allied Military Aid",
+          "role": "Foreign military assistance",
+          "confidence": "medium",
+          "explainer": "Peaked 2023–24 via US USAI packages, EU European Peace Facility, and UK commitments. US withdrew 99% of direct support in 2025; European contributions increased but did not fully compensate. Kiel Institute tracked $188B+ committed through Dec 2025.",
+          "color": "#22c55e",
+          "estimate": { "low": 380, "mid": 420, "high": 460 },
+          "dailyLabel": "~$175M/day (2025)"
+        },
+        {
+          "key": "ukraine",
+          "flag": "🇺🇦",
+          "name": "Ukraine",
+          "role": "Defending party",
+          "confidence": "medium",
+          "explainer": "Domestic defence outlays rose from $6B (2021) to $71B (2025), financed by wartime taxation, IMF/World Bank budget support, and war bonds. Figures per Ukrainian Ministry of Finance and IMF Article IV consultations.",
+          "color": "#60a5fa",
+          "estimate": { "low": 155, "mid": 175, "high": 195 },
+          "dailyLabel": "~$145M/day (2025)"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2022-02-24", "rates": { "russia": 380000000, "western": 25000000, "ukraine": 45000000 } },
+        { "date": "2022-06-01", "rates": { "russia": 420000000, "western": 105000000, "ukraine": 55000000 } },
+        { "date": "2023-01-01", "rates": { "russia": 455000000, "western": 205000000, "ukraine": 115000000 } },
+        { "date": "2023-07-01", "rates": { "russia": 470000000, "western": 215000000, "ukraine": 130000000 } },
+        { "date": "2024-01-01", "rates": { "russia": 480000000, "western": 210000000, "ukraine": 140000000 } },
+        { "date": "2024-07-01", "rates": { "russia": 490000000, "western": 195000000, "ukraine": 143000000 } },
+        { "date": "2025-01-01", "rates": { "russia": 500000000, "western": 175000000, "ukraine": 145000000 } },
+        { "date": "2025-07-01", "rates": { "russia": 505000000, "western": 175000000, "ukraine": 145000000 } }
       ]
     }
   },

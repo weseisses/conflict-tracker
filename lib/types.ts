@@ -10,6 +10,31 @@ export interface Casualties {
   entries: CasualtyEntry[];
 }
 
+export interface SpendParty {
+  key: string;
+  flag: string;
+  name: string;
+  role: string;
+  confidence: "high" | "medium" | "none";
+  explainer: string;       // 1–2 sentence context shown in the card
+  color: string;
+  estimate?: { low: number; mid: number; high: number }; // USD billions
+  dailyLabel?: string;     // e.g. "~$425M/day"
+}
+
+export interface RatePoint {
+  date: string;                        // "YYYY-MM-DD" — when this rate takes effect
+  rate?: number;                       // combined USD/day (single-line mode)
+  rates?: Record<string, number>;      // per-party USD/day (multi-line mode)
+}
+
+export interface SpendChartConfig {
+  mode: "multi" | "single";
+  parties: SpendParty[];
+  rateHistory?: RatePoint[];  // absent → straight line from conflict.ratePerDay
+  note?: string;              // small caption shown next to section label
+}
+
 export interface Conflict {
   id: string;
   name: string;
@@ -26,4 +51,5 @@ export interface Conflict {
   summary: string;
   comparables?: string[];    // "compared to what?" equivalency lines
   casualties?: Casualties;   // human cost — static estimates with source dates
+  spendChart?: SpendChartConfig;
 }
