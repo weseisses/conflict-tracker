@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import type { Conflict } from "../../../lib/types";
 import { calcCost, fmt } from "../../../lib/cost";
@@ -15,7 +15,7 @@ function fmtLiveCombined(n: number): { val: string; unit: string } {
   return { val: Math.round(n).toLocaleString(), unit: "" };
 }
 
-export default function GlobalEmbedPage() {
+function GlobalEmbedInner() {
   const searchParams = useSearchParams();
   const regionParam  = searchParams.get("region"); // e.g. "Europe", null = worldwide
   const [now, setNow] = useState(() => new Date());
@@ -158,5 +158,13 @@ export default function GlobalEmbedPage() {
 
       </div>
     </>
+  );
+}
+
+export default function GlobalEmbedPage() {
+  return (
+    <Suspense fallback={<div style={{ background: "#0c0f14", width: "100%", height: "100%" }} />}>
+      <GlobalEmbedInner />
+    </Suspense>
   );
 }
