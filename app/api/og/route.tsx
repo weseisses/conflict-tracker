@@ -37,23 +37,41 @@ const STATUS_COLOR: Record<string, string> = {
 };
 
 async function loadFont(): Promise<ArrayBuffer | null> {
-  // Direct font file URLs — no CSS parsing needed, edge-compatible
-  const sources = [
-    "https://cdn.jsdelivr.net/npm/@fontsource/barlow-condensed@5.0.20/files/barlow-condensed-latin-700-normal.woff2",
-    "https://cdn.jsdelivr.net/npm/@fontsource/inter@5.0.16/files/inter-latin-700-normal.woff2",
-    "https://fonts.gstatic.com/s/barlowcondensed/v12/HTxxL3I-JCGChYJ8VI-L6OO_au7B6t7y_3HcuKECcrs.woff2",
+  // Satori ONLY supports OTF/TTF — NOT woff2.
+  // Request Google Fonts CSS with an old browser UA → Google returns TTF URLs.
+  const families = [
+    "Barlow+Condensed:wght@700",
+    "Inter:wght@700",
   ];
-  for (const url of sources) {
+  for (const family of families) {
     try {
       const controller = new AbortController();
-      const id = setTimeout(() => controller.abort(), 6000);
-      const res = await fetch(url, { signal: controller.signal });
-      clearTimeout(id);
-      if (res.ok) {
-        const buf = await res.arrayBuffer();
-        if (buf.byteLength > 1000) return buf;
-      }
-    } catch { /* try next */ }
+      const tid = setTimeout(() => controller.abort(), 8000);
+      const cssRes = await fetch(
+        `https://fonts.googleapis.com/css2?family=${family}`,
+        {
+          signal: controller.signal,
+          headers: {
+            // Old UA makes Google return TTF instead of woff2
+            "User-Agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
+          },
+        }
+      );
+      clearTimeout(tid);
+      if (!cssRes.ok) continue;
+      const css = await cssRes.text();
+      // Extract the font file URL (will be a .ttf with this UA)
+      const match = css.match(/url\(([^)]+)\)/);
+      if (!match) continue;
+      const fontUrl = match[1].replace(/['"]/g, "");
+      const controller2 = new AbortController();
+      const tid2 = setTimeout(() => controller2.abort(), 8000);
+      const fontRes = await fetch(fontUrl, { signal: controller2.signal });
+      clearTimeout(tid2);
+      if (!fontRes.ok) continue;
+      const buf = await fontRes.arrayBuffer();
+      if (buf.byteLength > 1000) return buf;
+    } catch { /* try next family */ }
   }
   return null;
 }
