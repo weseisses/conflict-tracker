@@ -156,6 +156,13 @@ const CS: Record<string, { label: string; color: string; bg: string; border: str
 // ─── Party card ───────────────────────────────────────────────────────────────
 function PartyCard({ p, isLast }: { p: SpendParty; isLast: boolean }) {
   const cs = CS[p.confidence];
+  const figure = p.estimate
+    ? fmtB(p.estimate.mid)
+    : "—";
+  const figureColor = p.confidence === "none" || !p.estimate
+    ? "#374151"
+    : p.color;
+
   return (
     <div style={{
       padding: "12px 14px",
@@ -163,44 +170,22 @@ function PartyCard({ p, isLast }: { p: SpendParty; isLast: boolean }) {
       borderTop: `2px solid ${p.confidence === "none" ? "#1f2937" : p.color}`,
       opacity: p.confidence === "none" ? 0.65 : 1,
     }}>
-      {/* Header */}
-      <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 8 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 7 }}>
-          <span style={{ fontSize: 17 }}>{p.flag}</span>
-          <div>
-            <div style={{ fontSize: 11, fontWeight: 700, color: "#e2e8f0" }}>{p.name}</div>
-            <div style={{ fontSize: 9, color: "#475569", letterSpacing: 0.5, textTransform: "uppercase" }}>{p.role}</div>
-          </div>
-        </div>
+      {/* Title row: name · figure · qualifier pill */}
+      <div style={{ display: "flex", alignItems: "baseline", gap: 8, marginBottom: 8, flexWrap: "wrap" }}>
+        <span style={{ fontSize: 11, fontWeight: 700, color: "#e2e8f0", letterSpacing: 0.3 }}>
+          {p.name}
+        </span>
+        <span style={{ fontSize: 14, fontWeight: 700, color: figureColor, fontVariantNumeric: "tabular-nums" }}>
+          {figure}
+        </span>
         <span style={{
           fontSize: 8, fontWeight: 700, letterSpacing: 1,
           padding: "2px 5px", borderRadius: 2,
           background: cs.bg, border: `1px solid ${cs.border}`, color: cs.color,
-          whiteSpace: "nowrap", marginLeft: 6,
+          whiteSpace: "nowrap",
         }}>
           {cs.label}
         </span>
-      </div>
-
-      {/* Figure */}
-      <div style={{ marginBottom: 8 }}>
-        {p.estimate ? (
-          <>
-            <div style={{ fontSize: 17, fontWeight: 700, color: p.confidence === "none" ? "#374151" : p.color }}>
-              {fmtB(p.estimate.mid)}
-            </div>
-            {p.estimate.low !== p.estimate.mid && (
-              <div style={{ fontSize: 9, color: "#374151", marginTop: 1 }}>
-                {fmtB(p.estimate.low)}–{fmtB(p.estimate.high)}
-              </div>
-            )}
-          </>
-        ) : (
-          <div style={{ fontSize: 17, color: "#374151", fontWeight: 700 }}>—</div>
-        )}
-        {p.dailyLabel && (
-          <div style={{ fontSize: 9, color: "#374151", marginTop: 2 }}>{p.dailyLabel}</div>
-        )}
       </div>
 
       {/* Explainer */}
