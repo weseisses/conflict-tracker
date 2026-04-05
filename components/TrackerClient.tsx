@@ -34,11 +34,23 @@ export default function TrackerClient({ conflicts }: Props) {
   const [copied, setCopied]       = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
   const [shareCopied, setShareCopied] = useState(false);
+  const [comparableIdx, setComparableIdx] = useState(0);
 
   useEffect(() => {
     const id = setInterval(() => setNow(new Date()), 300);
     return () => clearInterval(id);
   }, []);
+
+  // Reset comparable index when switching conflicts
+  useEffect(() => { setComparableIdx(0); }, [selected]);
+
+  // Auto-rotate comparables every 6 seconds
+  useEffect(() => {
+    const comps = active?.comparables;
+    if (!comps || comps.length <= 1) return;
+    const id = setInterval(() => setComparableIdx((i) => (i + 1) % comps.length), 6000);
+    return () => clearInterval(id);
+  }, [active?.id, active?.comparables?.length]);
 
   const handleCopy = useCallback((text: string) => {
     navigator.clipboard.writeText(text).then(() => {
@@ -293,6 +305,51 @@ export default function TrackerClient({ conflicts }: Props) {
         {active && active.status !== "ACTIVE" && (
           <div style={{ marginTop: 14, fontSize: 12, color: "#4a5568", fontFamily: "'Share Tech Mono', monospace", letterSpacing: 2 }}>
             COUNTER FROZEN AT END DATE — FINAL ESTIMATE
+          </div>
+        )}
+
+        {/* COMPARABLE CALLOUT — rotates through context anchors */}
+        {active?.comparables && active.comparables.length > 0 && (
+          <div style={{ maxWidth: 620, margin: "22px auto 0", textAlign: "center" }}>
+            <div style={{ fontSize: 9, letterSpacing: 4, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 10 }}>
+              ≈ context
+            </div>
+            <div
+              key={comparableIdx}
+              className="fadeUp"
+              style={{
+                fontSize: 14,
+                color: "#8a9ab0",
+                lineHeight: 1.8,
+                minHeight: 46,
+                borderLeft: `3px solid ${active.color}`,
+                paddingLeft: 16,
+                textAlign: "left",
+              }}
+            >
+              {active.comparables[comparableIdx]}
+            </div>
+            {active.comparables.length > 1 && (
+              <div style={{ display: "flex", justifyContent: "flex-end", gap: 5, marginTop: 10 }}>
+                {active.comparables.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setComparableIdx(i)}
+                    style={{
+                      width: i === comparableIdx ? 18 : 6,
+                      height: 6,
+                      borderRadius: 3,
+                      background: i === comparableIdx ? active.color : "#1e2a38",
+                      border: "none",
+                      cursor: "pointer",
+                      padding: 0,
+                      transition: "all 0.3s",
+                    }}
+                    aria-label={`Context ${i + 1}`}
+                  />
+                ))}
+              </div>
+            )}
           </div>
         )}
         <div style={{ marginTop: 18, display: "flex", justifyContent: "center", gap: 10, flexWrap: "wrap" }}>

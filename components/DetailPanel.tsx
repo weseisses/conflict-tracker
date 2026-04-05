@@ -73,15 +73,19 @@ export default function DetailPanel({ conflict: c, cost }: Props) {
       </div>
 
       {c.comparables && c.comparables.length > 0 && (
-        <div style={{ background: "#0c0f14", border: "1px solid #1a2030", borderLeft: `3px solid ${c.color}`, padding: "14px 18px", marginBottom: c.casualties ? 10 : 0 }}>
-          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: c.color, marginBottom: 12 }}>
-            Compared To
+        <div style={{ marginBottom: c.casualties ? 10 : 0 }}>
+          <div style={{ fontSize: 10, fontWeight: 700, letterSpacing: 3, textTransform: "uppercase", color: c.color, marginBottom: 10 }}>
+            ≈ Compared To
           </div>
-          <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
             {c.comparables.map((line, i) => (
-              <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
-                <div style={{ color: c.color, fontSize: 16, lineHeight: 1.2, flexShrink: 0, marginTop: 1, opacity: 0.7 }}>≈</div>
-                <div style={{ fontSize: 13, color: "#8a9ab0", lineHeight: 1.75 }}>{line}</div>
+              <div key={i} style={{
+                background: "#0c0f14",
+                border: "1px solid #1a2030",
+                borderLeft: `4px solid ${c.color}`,
+                padding: "14px 18px",
+              }}>
+                <div style={{ fontSize: 14, color: "#c8d4e0", lineHeight: 1.8, fontWeight: 500 }}>{line}</div>
               </div>
             ))}
           </div>
