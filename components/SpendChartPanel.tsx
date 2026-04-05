@@ -76,7 +76,7 @@ function getCumAt(
   return Math.max(0, cum);
 }
 
-/** Build 60 evenly-spaced points; returns combined series + per-party series. */
+/** Build 80 evenly-spaced points; returns combined series + per-party series. */
 function buildSeries(
   conflict: Conflict,
   chart:    SpendChartConfig,
@@ -91,7 +91,7 @@ function buildSeries(
     ? new Date(conflict.endDate + "T00:00:00Z").getTime()
     : now.getTime();
 
-  const N  = 60;
+  const N  = 80;
   const ts = Array.from({ length: N }, (_, i) => startTs + (i / (N - 1)) * (endTs - startTs));
 
   const rh = chart.rateHistory ?? [];
@@ -122,7 +122,7 @@ function yTicks(maxB: number): number[] {
   const STEPS = [1, 2, 5, 10, 25, 50, 100, 200, 250, 500, 750, 1000, 1500];
   const step  = STEPS.find((s) => maxB / s >= 3 && maxB / s <= 7) ??
                 STEPS.find((s) => maxB / s <= 7) ?? 500;
-  const out: number[] = [];
+  const out: number[] = [0];
   for (let v = step; v <= maxB * 1.05; v += step) out.push(v);
   return out;
 }
@@ -328,10 +328,10 @@ export default function SpendChartPanel({
 
             {/* Lines */}
             {chart.mode === "single" && (
-              <path d={buildPath(combined, maxB)} fill="none" stroke={conflict.color} strokeWidth={2} />
+              <path d={buildPath(combined, maxB)} fill="none" stroke={conflict.color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
             )}
             {activePts.map((p) => (
-              <path key={p.key} d={buildPath(parties[p.key], maxB)} fill="none" stroke={p.color} strokeWidth={2} />
+              <path key={p.key} d={buildPath(parties[p.key], maxB)} fill="none" stroke={p.color} strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
             ))}
 
             {/* Hover crosshair */}
