@@ -41,7 +41,6 @@ function getCumAt(
   return Math.max(0, cum);
 }
 
-/** Returns N evenly-spaced cumulative-billions values + per-party map */
 function buildSeries(c: Conflict, chart: SpendChartConfig, now: Date, N = 50) {
   const startTs = new Date(c.startDate + "T00:00:00Z").getTime();
   const endTs   = c.endDate ? new Date(c.endDate + "T00:00:00Z").getTime() : now.getTime();
@@ -65,37 +64,22 @@ function buildSeries(c: Conflict, chart: SpendChartConfig, now: Date, N = 50) {
   return { ts, combined, parties };
 }
 
-/** Build SVG polyline points string from a series */
-function toPolyline(
-  series: number[], maxB: number,
-  cw: number, ch: number, ox: number, oy: number,
-): string {
+// Build SVG polyline points string — NO text elements
+function toPolyline(series: number[], maxB: number, cw: number, ch: number, ox: number, oy: number): string {
   const N = series.length;
   return series
-    .map((v, i) => {
-      const x = (ox + (i / (N - 1)) * cw).toFixed(1);
-      const y = (oy + ch - (v / maxB) * ch).toFixed(1);
-      return `${x},${y}`;
-    })
+    .map((v, i) => `${(ox + (i / (N - 1)) * cw).toFixed(1)},${(oy + ch - (v / maxB) * ch).toFixed(1)}`)
     .join(" ");
 }
 
-/** Build a closed area path (line + bottom) */
-function toAreaPath(
-  series: number[], maxB: number,
-  cw: number, ch: number, ox: number, oy: number,
-): string {
-  const N   = series.length;
-  const bot = oy + ch;
-  const pts = series.map((v, i) => {
-    const x = (ox + (i / (N - 1)) * cw).toFixed(1);
-    const y = (oy + ch - (v / maxB) * ch).toFixed(1);
-    return `${x},${y}`;
-  });
+function toAreaPath(series: number[], maxB: number, cw: number, ch: number, ox: number, oy: number): string {
+  const N = series.length, bot = oy + ch;
+  const pts = series.map((v, i) =>
+    `${(ox + (i / (N - 1)) * cw).toFixed(1)},${(oy + ch - (v / maxB) * ch).toFixed(1)}`
+  );
   return `M${ox.toFixed(1)},${bot} L${pts.join(" L")} L${(ox + cw).toFixed(1)},${bot} Z`;
 }
 
-// Y tick values
 function yTicks(maxB: number): number[] {
   const STEPS = [1, 2, 5, 10, 25, 50, 100, 200, 250, 500, 750, 1000, 1500];
   const step  = STEPS.find(s => maxB / s >= 3 && maxB / s <= 6) ??
@@ -105,10 +89,8 @@ function yTicks(maxB: number): number[] {
   return out;
 }
 
-// X year labels
 function xYearLabels(ts: number[]): { pct: number; label: string }[] {
   const out: { pct: number; label: string }[] = [];
-  const spanMs = ts[ts.length - 1] - ts[0];
   let lastYear = -1;
   ts.forEach((t, i) => {
     const y = new Date(t).getUTCFullYear();
@@ -117,7 +99,7 @@ function xYearLabels(ts: number[]): { pct: number; label: string }[] {
   return out;
 }
 
-// Font loader (same as main og route)
+// Font loader
 async function loadFont(reqUrl: string): Promise<ArrayBuffer | null> {
   try {
     const base = new URL(reqUrl);
@@ -134,13 +116,11 @@ async function loadFont(reqUrl: string): Promise<ArrayBuffer | null> {
   return null;
 }
 
-// ─── Image dimensions & layout ────────────────────────────────────────────────
+// ─── Layout constants ─────────────────────────────────────────────────────────
 const W = 1200, H = 630;
-
-// Chart area within the image
-const CX = 80,  CY = 160;   // top-left of chart
-const CW = 920, CH = 310;   // chart width / height
-const CHART_RIGHT = CX + CW;
+// Chart area origin (pixels from image top-left)
+const CX = 96, CY = 148;
+const CW = 1010, CH = 290;
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -150,53 +130,48 @@ export async function GET(request: Request) {
   const conflict = conflicts.find(c => c.id === id);
   if (!conflict || !conflict.spendChart) return new Response("Not found", { status: 404 });
 
-  const chart   = conflict.spendChart;
-  const now     = new Date();
-  const asOf    = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
-  const totalCost = calcCost(conflict, now);
-  const accent  = conflict.color || "#3b82f6";
+  const chart      = conflict.spendChart;
+  const now        = new Date();
+  const asOf       = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
+  const totalCost  = calcCost(conflict, now);
+  const accent     = conflict.color || "#3b82f6";
 
   const fontData = await loadFont(request.url);
-  const fonts = fontData
+  const fonts    = fontData
     ? [{ name: "F", data: fontData, weight: 700 as const, style: "normal" as const }]
     : [];
   const ff = fontData ? "F, sans-serif" : "sans-serif";
 
-  // Build series
   const { ts, combined, parties } = buildSeries(conflict, chart, now);
   const activePts = chart.parties.filter(p => p.confidence !== "none" && parties[p.key]);
   const isMulti   = chart.mode === "multi" && activePts.length > 0;
 
-  const maxB = Math.max(...combined, ...Object.values(parties).flat()) * 1.1;
+  const maxB  = Math.max(...combined, ...Object.values(parties).flat()) * 1.1;
   const ticks = yTicks(maxB);
   const xlabs = xYearLabels(ts);
 
-  // Polylines
   const combinedPoly = toPolyline(combined, maxB, CW, CH, CX, CY);
   const combinedArea = toAreaPath(combined, maxB, CW, CH, CX, CY);
-
-  const partyPolys = activePts.map(p => ({
+  const partyPolys   = activePts.map(p => ({
     ...p,
     poly: toPolyline(parties[p.key], maxB, CW, CH, CX, CY),
     area: toAreaPath(parties[p.key], maxB, CW, CH, CX, CY),
   }));
 
-  // Source string
   const sourceStr = chart.parties.some(p => p.confidence === "high")
     ? "SIPRI · CSIS · Kiel Institute · Pentagon · conflictcost.org"
     : "SIPRI · ACLED · Brown Univ. Costs of War · conflictcost.org";
 
   return new ImageResponse((
     <div style={{ display: "flex", flexDirection: "column", width: W, height: H,
-                  background: "#080b10", fontFamily: ff, position: "relative" }}>
+                  background: "#080b10", fontFamily: ff, position: "relative", overflow: "hidden" }}>
 
       {/* Accent stripe */}
-      <div style={{ display: "flex", position: "absolute", top: 0, left: 0,
-                    width: W, height: 5, background: accent }} />
+      <div style={{ display: "flex", position: "absolute", top: 0, left: 0, width: W, height: 5, background: accent }} />
 
       {/* ── HEADER ── */}
       <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between",
-                    alignItems: "center", padding: "22px 48px 0" }}>
+                    alignItems: "center", padding: "26px 48px 0" }}>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 12 }}>
           <div style={{ display: "flex", background: "#e74c3c", color: "#fff",
                         fontSize: 12, fontWeight: 800, letterSpacing: 3, padding: "3px 10px" }}>
@@ -207,23 +182,19 @@ export async function GET(request: Request) {
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "row", alignItems: "center", gap: 10 }}>
-          <div style={{ display: "flex", fontSize: 11, letterSpacing: 2, color: "#3d4a58" }}>
-            AS OF {asOf}
-          </div>
+          <div style={{ display: "flex", fontSize: 11, letterSpacing: 2, color: "#3d4a58" }}>AS OF {asOf}</div>
           <div style={{ display: "flex", fontSize: 11, color: "#2a3a48" }}>·</div>
-          <div style={{ display: "flex", fontSize: 11, letterSpacing: 2, color: "#3d4a58" }}>
-            conflictcost.org
-          </div>
+          <div style={{ display: "flex", fontSize: 11, letterSpacing: 2, color: "#3d4a58" }}>conflictcost.org</div>
         </div>
       </div>
 
       {/* ── CONFLICT NAME + TOTAL ── */}
       <div style={{ display: "flex", flexDirection: "row", alignItems: "baseline",
-                    gap: 16, padding: "14px 48px 0" }}>
+                    gap: 16, padding: "12px 48px 0" }}>
         <div style={{ display: "flex", fontSize: 22, fontWeight: 800, color: "#e8edf5", letterSpacing: 1 }}>
           {conflict.name.toUpperCase()}
         </div>
-        <div style={{ display: "flex", fontSize: 28, fontWeight: 800, color: accent }}>
+        <div style={{ display: "flex", fontSize: 30, fontWeight: 800, color: accent }}>
           {fmtB(totalCost)}
         </div>
         <div style={{ display: "flex", fontSize: 11, letterSpacing: 3,
@@ -237,42 +208,49 @@ export async function GET(request: Request) {
         </div>
       </div>
 
-      {/* ── SVG CHART ── */}
-      <div style={{ display: "flex", position: "absolute",
-                    top: CY, left: 0, width: W, height: CH + 30 }}>
-        <svg
-          width={W} height={CH + 30}
-          viewBox={`0 0 ${W} ${CH + 30}`}
-          style={{ position: "absolute", top: 0, left: 0 }}
-        >
-          {/* Grid lines */}
+      {/* ── Y-AXIS LABELS (HTML divs, no SVG text) ── */}
+      {ticks.map(t => {
+        const yPct = 1 - t / maxB;
+        const top  = CY + yPct * CH - 7; // -7 to vertically centre the label
+        return (
+          <div key={t} style={{
+            display: "flex", position: "absolute",
+            top, left: 0, width: CX - 10,
+            justifyContent: "flex-end",
+            fontSize: 10, color: "#374151", fontFamily: "monospace",
+          }}>
+            {fmtB(t)}
+          </div>
+        );
+      })}
+
+      {/* ── X-AXIS LABELS ── */}
+      {xlabs.map(({ pct, label }) => {
+        const left = CX + pct * CW - 18; // -18 to centre 4-char year
+        return (
+          <div key={label} style={{
+            display: "flex", position: "absolute",
+            top: CY + CH + 6,
+            left,
+            fontSize: 11, color: "#374151", fontFamily: "monospace",
+            width: 36, justifyContent: "center",
+          }}>
+            {label}
+          </div>
+        );
+      })}
+
+      {/* ── SVG CHART (lines, areas, grid — no text) ── */}
+      <div style={{ display: "flex", position: "absolute", top: CY, left: 0, width: W, height: CH }}>
+        <svg width={W} height={CH} viewBox={`0 0 ${W} ${CH}`}>
+          {/* Grid lines only — no text */}
           {ticks.map(t => {
             const y = (CH - (t / maxB) * CH).toFixed(1);
-            return (
-              <g key={t}>
-                <line x1={CX} y1={y} x2={CHART_RIGHT} y2={y}
-                      stroke="#1a2030" strokeWidth="1" />
-                <text x={CX - 8} y={parseFloat(y) + 4}
-                      textAnchor="end" fontSize="10" fill="#374151" fontFamily="monospace">
-                  {fmtB(t)}
-                </text>
-              </g>
-            );
+            return <line key={t} x1={CX} y1={y} x2={CX + CW} y2={y} stroke="#1a2030" strokeWidth="1" />;
           })}
 
-          {/* X labels */}
-          {xlabs.map(({ pct, label }) => (
-            <text key={label}
-                  x={(CX + pct * CW).toFixed(1)} y={CH + 22}
-                  textAnchor="middle" fontSize="11" fill="#374151" fontFamily="monospace">
-              {label}
-            </text>
-          ))}
-
           {/* Area fills */}
-          {!isMulti && (
-            <path d={combinedArea} fill={accent} fillOpacity="0.08" />
-          )}
+          {!isMulti && <path d={combinedArea} fill={accent} fillOpacity="0.08" />}
           {isMulti && partyPolys.map(p => (
             <path key={p.key} d={p.area} fill={p.color} fillOpacity="0.07" />
           ))}
@@ -287,12 +265,12 @@ export async function GET(request: Request) {
         </svg>
       </div>
 
-      {/* ── PARTY LEGEND (multi) or single label ── */}
+      {/* ── PARTY LEGEND ── */}
       <div style={{
         display: "flex", flexDirection: "row", gap: 32, alignItems: "center",
         position: "absolute",
-        top: CY + CH + 36,
-        left: 48,
+        top: CY + CH + 34,
+        left: CX,
       }}>
         {isMulti
           ? partyPolys.map(p => (
@@ -328,7 +306,7 @@ export async function GET(request: Request) {
         borderTop: "1px solid #1a2030", paddingTop: 14,
       }}>
         <div style={{ display: "flex", fontSize: 11, color: "#2d3a4a", letterSpacing: 1 }}>
-          Cumulative direct military expenditure — all major parties · estimates only
+          Cumulative direct military expenditure · estimates only
         </div>
         <div style={{ display: "flex", fontSize: 10, color: "#2d3a4a", letterSpacing: 1.5 }}>
           {sourceStr}
