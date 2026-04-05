@@ -369,19 +369,27 @@ export default function TrackerClient({ conflicts }: Props) {
             style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 10, fontWeight: 700, letterSpacing: 2, padding: "6px 14px", textTransform: "uppercase", cursor: "pointer" }}>
             ↗ Share This Stat
           </button>
-          {active && (
-            <button onClick={() => setEmbedOpen(true)}
-              style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 10, fontWeight: 700, letterSpacing: 2, padding: "6px 14px", textTransform: "uppercase", cursor: "pointer" }}>
-              &lt;/&gt; Embed This Counter
-            </button>
-          )}
+          <button onClick={() => setEmbedOpen(true)}
+            style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 10, fontWeight: 700, letterSpacing: 2, padding: "6px 14px", textTransform: "uppercase", cursor: "pointer" }}>
+            &lt;/&gt; Embed This Counter
+          </button>
         </div>
       </section>
 
       {/* EMBED MODAL */}
-      {embedOpen && active && (() => {
-        const iframeUrl = `${SITE}/embed/${active.id}`;
-        const snippet = `<iframe\n  src="${iframeUrl}"\n  width="480"\n  height="140"\n  frameborder="0"\n  style="border:none;overflow:hidden"\n  allowtransparency="true"\n  title="${active.name} cost tracker"\n></iframe>`;
+      {embedOpen && (() => {
+        const embedPath = active
+          ? `/embed/${active.id}`
+          : region !== "All"
+            ? `/embed/global?region=${encodeURIComponent(region)}`
+            : "/embed/global";
+        const embedLabel = active
+          ? `${active.flag} ${active.name}`
+          : region !== "All"
+            ? `Active Conflicts · ${region}`
+            : "All Active Conflicts · Worldwide";
+        const iframeUrl = `${SITE}${embedPath}`;
+        const snippet = `<iframe\n  src="${iframeUrl}"\n  width="480"\n  height="140"\n  frameborder="0"\n  style="border:none;overflow:hidden"\n  allowtransparency="true"\n  title="${embedLabel} cost tracker"\n></iframe>`;
         return (
           <div onClick={() => setEmbedOpen(false)}
             style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.7)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20 }}>
@@ -390,13 +398,13 @@ export default function TrackerClient({ conflicts }: Props) {
               <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 18 }}>
                 <div>
                   <div style={{ fontSize: 10, letterSpacing: 3, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 4 }}>Embed Widget</div>
-                  <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: 1, color: "#e8edf5" }}>{active.flag} {active.name}</div>
+                  <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: 1, color: "#e8edf5" }}>{embedLabel}</div>
                 </div>
                 <button onClick={() => setEmbedOpen(false)} style={{ background: "transparent", border: "none", color: "#3d4a5a", fontSize: 20, cursor: "pointer", lineHeight: 1, padding: "0 4px" }}>✕</button>
               </div>
               <div style={{ fontSize: 11, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>Preview</div>
               <div style={{ background: "#070a0d", border: "1px solid #1a2030", marginBottom: 20, overflow: "hidden", height: 140 }}>
-                <iframe src={`/embed/${active.id}`} width="100%" height="140" style={{ border: "none", display: "block" }} title={`${active.name} embed preview`} />
+                <iframe src={embedPath} width="100%" height="140" style={{ border: "none", display: "block" }} title={`${embedLabel} embed preview`} />
               </div>
               <div style={{ fontSize: 11, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>HTML Snippet</div>
               <pre style={{ background: "#070a0d", border: "1px solid #1a2030", padding: "14px 16px", fontFamily: "'Share Tech Mono', monospace", fontSize: 12, color: "#7a9ab0", overflowX: "auto", whiteSpace: "pre", marginBottom: 14, lineHeight: 1.7 }}>{snippet}</pre>
@@ -405,7 +413,7 @@ export default function TrackerClient({ conflicts }: Props) {
                   style={{ flex: 1, background: copied ? "#1a3a2a" : "#1e2a38", border: `1px solid ${copied ? "#2a5a3a" : "#2a3a50"}`, color: copied ? "#4aaa6a" : "#c8d4e0", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "9px 16px", textTransform: "uppercase", cursor: "pointer" }}>
                   {copied ? "✓ Copied!" : "Copy Code"}
                 </button>
-                <a href={`/embed/${active.id}`} target="_blank" rel="noopener noreferrer"
+                <a href={embedPath} target="_blank" rel="noopener noreferrer"
                   style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "9px 16px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center" }}>
                   Preview ↗
                 </a>
@@ -430,8 +438,11 @@ export default function TrackerClient({ conflicts }: Props) {
             : allSuffix
               ? `${SITE}/share/all`
               : SITE;
-        const tweetUrl  = `https://twitter.com/intent/tweet?url=${encodeURIComponent(sharePageUrl)}&text=${encodeURIComponent(shareText.split("\n\n")[0])}`;
+        const headline  = shareText.split("\n\n")[0];
+        const tweetUrl  = `https://twitter.com/intent/tweet?url=${encodeURIComponent(sharePageUrl)}&text=${encodeURIComponent(headline)}`;
         const linkedIn  = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sharePageUrl)}`;
+        const facebookUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(sharePageUrl)}`;
+        const redditUrl = `https://reddit.com/submit?url=${encodeURIComponent(sharePageUrl)}&title=${encodeURIComponent(headline)}`;
         const mailUrl   = `mailto:?subject=${encodeURIComponent("Global Conflict Cost Tracker")}&body=${encodeURIComponent(shareText)}`;
         const ogUrl     = active
           ? `/api/og?id=${active.id}`
@@ -471,15 +482,23 @@ export default function TrackerClient({ conflicts }: Props) {
                 {shareText}
               </div>
 
-              {/* Share buttons — 2×2 + download */}
-              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 8 }}>
+              {/* Share buttons — 3×2 grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 8 }}>
                 <a href={tweetUrl} target="_blank" rel="noopener noreferrer"
-                  style={{ background: "#000", border: "1px solid #333", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}>
-                  𝕏&nbsp; Share on X
+                  style={{ background: "#000", border: "1px solid #333", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  𝕏 X
                 </a>
                 <a href={linkedIn} target="_blank" rel="noopener noreferrer"
-                  style={{ background: "#0a66c2", border: "1px solid #0a66c2", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 7 }}>
-                  in&nbsp; LinkedIn
+                  style={{ background: "#0a66c2", border: "1px solid #0a66c2", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  in LinkedIn
+                </a>
+                <a href={facebookUrl} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#1877f2", border: "1px solid #1877f2", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  f Facebook
+                </a>
+                <a href={redditUrl} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#ff4500", border: "1px solid #ff4500", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  ⬆ Reddit
                 </a>
                 <button
                   onClick={() => {
@@ -488,23 +507,63 @@ export default function TrackerClient({ conflicts }: Props) {
                       setTimeout(() => setShareCopied(false), 2000);
                     });
                   }}
-                  style={{ background: shareCopied ? "#1a3a2a" : "#1e2a38", border: `1px solid ${shareCopied ? "#2a5a3a" : "#2a3a50"}`, color: shareCopied ? "#4aaa6a" : "#c8d4e0", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", cursor: "pointer" }}>
-                  {shareCopied ? "✓ Copied!" : "⎘  Copy Text"}
+                  style={{ background: shareCopied ? "#1a3a2a" : "#1e2a38", border: `1px solid ${shareCopied ? "#2a5a3a" : "#2a3a50"}`, color: shareCopied ? "#4aaa6a" : "#c8d4e0", fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px", textTransform: "uppercase", cursor: "pointer" }}>
+                  {shareCopied ? "✓ Copied!" : "⎘ Copy Text"}
                 </button>
                 <a href={mailUrl}
-                  style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
-                  ✉&nbsp; Email
+                  style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px", textTransform: "uppercase", textDecoration: "none", display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  ✉ Email
                 </a>
               </div>
 
+              {/* Instagram row — manual workflow */}
+              <button
+                onClick={() => {
+                  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                  navigator.clipboard.writeText(shareText).catch(() => {});
+                  if (isMobile) {
+                    // Open image in new tab so user can long-press → Save to Photos
+                    window.open(`${SITE}${ogUrl}`, "_blank");
+                  } else {
+                    window.open("https://www.instagram.com/", "_blank");
+                  }
+                  setShareCopied(true);
+                  setTimeout(() => setShareCopied(false), 3000);
+                }}
+                style={{ width: "100%", background: "linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045)", border: "none", color: "#fff", fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 12px", textTransform: "uppercase", cursor: "pointer", marginBottom: 8, display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+                📷 Instagram — {shareCopied ? "Caption Copied! Open Instagram & Post" : "Copy Caption & Open Instagram"}
+              </button>
+
               {/* Download card — full width */}
-              <a href={ogUrl} download={active ? `${active.id}-cost.png` : "conflict-cost.png"} target="_blank" rel="noopener noreferrer"
-                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", textDecoration: "none" }}>
-                ↓&nbsp; Download Card Image
-              </a>
+              <button
+                onClick={async () => {
+                  const filename = active ? `${active.id}-cost.png` : "conflict-cost.png";
+                  const fullOgUrl = `${SITE}${ogUrl}`;
+                  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                  if (isMobile) {
+                    // Open image in new tab — user long-presses to Save to Photos
+                    window.open(fullOgUrl, "_blank");
+                  } else {
+                    try {
+                      const res  = await fetch(fullOgUrl);
+                      const blob = await res.blob();
+                      const url  = URL.createObjectURL(blob);
+                      const a    = document.createElement("a");
+                      a.href     = url;
+                      a.download = filename;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    } catch {
+                      window.open(fullOgUrl, "_blank");
+                    }
+                  }
+                }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8, width: "100%", background: "transparent", border: "1px solid #1e2530", color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2, padding: "10px 12px", textTransform: "uppercase", cursor: "pointer" }}>
+                ↓&nbsp; {/iPhone|iPad|iPod|Android/i.test(typeof navigator !== "undefined" ? navigator.userAgent : "") ? "Open Image (Long-Press to Save)" : "Download Card Image"}
+              </button>
 
               <div style={{ marginTop: 14, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
-                When shared on X, LinkedIn, or iMessage — the card previews automatically.
+                When shared on X, LinkedIn, or Facebook — the card previews automatically.
               </div>
             </div>
           </div>
