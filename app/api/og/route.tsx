@@ -69,6 +69,7 @@ export async function GET(request: Request) {
   const ff = fontData ? "F, sans-serif" : "sans-serif";
 
   const conflict = id ? conflicts.find(c => c.id === id) ?? null : null;
+  const asOf = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
 
   // ─── SINGLE CONFLICT ─────────────────────────────────────────────────────
   if (conflict) {
@@ -103,8 +104,10 @@ export async function GET(request: Request) {
               CONFLICT COST TRACKER
             </div>
           </div>
-          <div style={{ display:"flex", fontSize:13, letterSpacing:3, color:"#2d3a4a" }}>
-            conflictcost.org
+          <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
+            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a" }}>AS OF {asOf}</div>
+            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#1e2838" }}>·</div>
+            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a" }}>conflictcost.org</div>
           </div>
         </div>
 
@@ -225,7 +228,11 @@ export async function GET(request: Request) {
         <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
           <div style={{ display:"flex", width:7, height:7, borderRadius:"50%", background:"#e74c3c" }} />
           <div style={{ display:"flex", fontSize:12, letterSpacing:3, color:"#e74c3c" }}>LIVE</div>
-          <div style={{ display:"flex", fontSize:12, letterSpacing:2, color:"#2d3a4a", marginLeft:10 }}>
+          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a", marginLeft:10 }}>
+            AS OF {asOf}
+          </div>
+          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#1e2838" }}>·</div>
+          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a" }}>
             conflictcost.org
           </div>
         </div>
