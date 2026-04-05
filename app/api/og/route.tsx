@@ -68,8 +68,9 @@ export async function GET(request: Request) {
     : [];
   const ff = fontData ? "F, sans-serif" : "sans-serif";
 
-  const region   = searchParams.get("region"); // e.g. "Europe", "Middle East"
-  const conflict = id ? conflicts.find(c => c.id === id) ?? null : null;
+  const region     = searchParams.get("region"); // e.g. "Europe", "Middle East"
+  const includeAll = searchParams.get("all") === "1"; // include ended/frozen/ceasefire
+  const conflict   = id ? conflicts.find(c => c.id === id) ?? null : null;
   const asOf = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
 
   // ─── SINGLE CONFLICT ─────────────────────────────────────────────────────
@@ -191,23 +192,31 @@ export async function GET(request: Request) {
   }
 
   // ─── GLOBAL / REGIONAL ────────────────────────────────────────────────────
-  const active   = conflicts.filter(c =>
-    c.status === "ACTIVE" && (!region || c.region === region)
+  const displayed  = conflicts.filter(c =>
+    (includeAll ? true : c.status === "ACTIVE") && (!region || c.region === region)
   );
-  const withCost = active.map(c => ({ ...c, cost: calcCost(c, now) }));
-  const totCost  = withCost.reduce((s, c) => s + c.cost, 0);
-  const totRate  = active.reduce((s, c) => s + c.ratePerDay, 0);
-  const tFmt     = fmtBig(totCost);
-  const hourly   = fmtRate(totRate / 24);
-  const daily    = fmtRate(totRate);
-  const top4     = [...withCost].sort((a, b) => b.cost - a.cost).slice(0, 4);
-  const maxBar   = 340; // px — bar for #1 conflict
+  const activeOnly = displayed.filter(c => c.status === "ACTIVE");
+  const withCost   = displayed.map(c => ({ ...c, cost: calcCost(c, now) }));
+  const totCost    = withCost.reduce((s, c) => s + c.cost, 0);
+  const totRate    = activeOnly.reduce((s, c) => s + c.ratePerDay, 0); // current burn (active only)
+  const tFmt       = fmtBig(totCost);
+  const hourly     = fmtRate(totRate / 24);
+  const daily      = fmtRate(totRate);
+  const top4       = [...withCost].sort((a, b) => b.cost - a.cost).slice(0, 4);
+  const maxBar     = 340; // px — bar for #1 conflict
 
-  // Earliest active conflict start date
-  const earliest = active.reduce((min, c) => c.startDate < min ? c.startDate : min, active[0]?.startDate ?? "");
+  // Earliest conflict start date in set
+  const earliest = displayed.reduce((min, c) => c.startDate < min ? c.startDate : min, displayed[0]?.startDate ?? "");
   const sinceStr = earliest
     ? new Date(earliest + "T00:00:00Z").toLocaleDateString("en-US", { month: "short", year: "numeric" }).toUpperCase()
     : "";
+
+  // Headline copy
+  const headlineCopy = includeAll
+    ? (region ? `All tracked conflicts · ${region}` : "Combined cost of all tracked conflicts")
+    : (region
+        ? `Cost of active ${activeOnly.length === 1 ? "war" : "wars"} · ${region}`
+        : "Combined cost of active wars");
 
   return new ImageResponse((
     <div style={{ display:"flex", flexDirection:"column", width:W, height:H,
@@ -244,7 +253,7 @@ export async function GET(request: Request) {
       {/* HEADLINE + NUMBER */}
       <div style={{ display:"flex", fontSize:12, letterSpacing:5, color:"#3d4a5a",
                     textTransform:"uppercase", marginBottom:6 }}>
-        {region ? `Cost of active ${active.length === 1 ? "war" : "wars"} · ${region}` : "Combined cost of active wars"}
+        {headlineCopy}
       </div>
       <div style={{ display:"flex", flexDirection:"row", alignItems:"flex-end", gap:6, marginBottom:14 }}>
         <div style={{ display:"flex", fontSize:86, color:"#e74c3c", fontWeight:800, lineHeight:"1" }}>$</div>
@@ -261,7 +270,7 @@ export async function GET(request: Request) {
         <div style={{ display:"flex", flexDirection:"column", background:"#152535",
                       borderLeft:"4px solid #e74c3c", padding:"10px 20px", gap:4 }}>
           <div style={{ display:"flex", fontSize:38, color:"#f39c12", fontWeight:800 }}>{hourly}</div>
-          <div style={{ display:"flex", fontSize:10, letterSpacing:5, color:"#9a7840" }}>/ HOUR</div>
+          <div style={{ display:"flex", fontSize:10, letterSpacing:5, color:"#9a7840" }}>{includeAll ? "ACTIVE / HOUR" : "/ HOUR"}</div>
         </div>
         <div style={{ display:"flex", flexDirection:"column", gap:7 }}>
           <div style={{ display:"flex", fontSize:15, color:"#5a6a7c" }}>
@@ -270,7 +279,9 @@ export async function GET(request: Request) {
           </div>
           <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
             <div style={{ display:"flex", fontSize:14, color:"#c8d4e0", fontWeight:800, letterSpacing:1 }}>
-              {active.length} ACTIVE CONFLICT{active.length !== 1 ? "S" : ""}{region ? ` · ${region.toUpperCase()}` : " WORLDWIDE"}
+              {includeAll
+                ? `${displayed.length} CONFLICT${displayed.length !== 1 ? "S" : ""} TRACKED · ${activeOnly.length} ACTIVE${region ? ` · ${region.toUpperCase()}` : ""}`
+                : `${activeOnly.length} ACTIVE CONFLICT${activeOnly.length !== 1 ? "S" : ""}${region ? ` · ${region.toUpperCase()}` : " WORLDWIDE"}`}
             </div>
             {sinceStr && (
               <div style={{ display:"flex", fontSize:12, color:"#3d4a5a", letterSpacing:2 }}>
@@ -287,16 +298,26 @@ export async function GET(request: Request) {
       {/* TOP 4 CONFLICTS */}
       <div style={{ display:"flex", flexDirection:"column", gap:9 }}>
         {top4.map((c) => {
-          const pct    = totCost > 0 ? (c.cost / totCost * 100) : 0;
-          const barW   = Math.max(6, Math.round((c.cost / top4[0].cost) * maxBar));
-          const cFmt   = fmtBig(c.cost);
-          const name   = c.name.length > 22 ? c.name.slice(0, 22) + "…" : c.name;
+          const pct      = totCost > 0 ? (c.cost / totCost * 100) : 0;
+          const barW     = Math.max(6, Math.round((c.cost / top4[0].cost) * maxBar));
+          const cFmt     = fmtBig(c.cost);
+          const isActive = c.status === "ACTIVE";
+          const maxLen   = includeAll && !isActive ? 18 : 22;
+          const name     = c.name.length > maxLen ? c.name.slice(0, maxLen) + "…" : c.name;
+          const sBadge   = c.status === "CEASEFIRE" ? "CSFR" : c.status === "FROZEN" ? "FRZ" : c.status === "ENDED" ? "END" : null;
+          const sColor   = STATUS_COLOR[c.status] || "#4a5568";
           return (
             <div key={c.id} style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:14 }}>
-              {/* flag + name */}
+              {/* flag + name + status badge */}
               <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:8, width:230 }}>
                 <span style={{ fontSize:18 }}>{c.flag}</span>
                 <div style={{ display:"flex", fontSize:13, color:"#7a8fa8", fontWeight:700, letterSpacing:0.5 }}>{name}</div>
+                {includeAll && sBadge && (
+                  <div style={{ display:"flex", fontSize:8, color:sColor, border:`1px solid ${sColor}`,
+                                padding:"1px 4px", letterSpacing:1, opacity:0.9 }}>
+                    {sBadge}
+                  </div>
+                )}
               </div>
               {/* bar */}
               <div style={{ display:"flex", height:5, background:"#0d1520", flex:1 }}>

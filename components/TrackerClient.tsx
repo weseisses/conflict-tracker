@@ -41,6 +41,16 @@ export default function TrackerClient({ conflicts }: Props) {
     return () => clearInterval(id);
   }, []);
 
+  // Read ?region= and ?filter= URL params on first mount
+  useEffect(() => {
+    const p = new URLSearchParams(window.location.search);
+    const r = p.get("region");
+    if (r && (["Middle East","Europe","Africa","Asia"] as string[]).includes(r)) {
+      setRegion(r as Region);
+    }
+    if (p.get("filter") === "all") setFilter("all");
+  }, []);
+
   // Reset comparable index when switching conflicts
   useEffect(() => { setComparableIdx(0); }, [selected]);
 
@@ -410,19 +420,24 @@ export default function TrackerClient({ conflicts }: Props) {
 
       {/* SHARE MODAL */}
       {shareOpen && (() => {
+        const allSuffix  = !active && filter === "all";
         const sharePageUrl = active
           ? `${SITE}/share/${active.id}`
           : region !== "All"
-            ? `${SITE}/share/region/${encodeURIComponent(region)}`
-            : SITE;
+            ? allSuffix
+              ? `${SITE}/share/region/${encodeURIComponent(region)}/all`
+              : `${SITE}/share/region/${encodeURIComponent(region)}`
+            : allSuffix
+              ? `${SITE}/share/all`
+              : SITE;
         const tweetUrl  = `https://twitter.com/intent/tweet?url=${encodeURIComponent(sharePageUrl)}&text=${encodeURIComponent(shareText.split("\n\n")[0])}`;
         const linkedIn  = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sharePageUrl)}`;
         const mailUrl   = `mailto:?subject=${encodeURIComponent("Global Conflict Cost Tracker")}&body=${encodeURIComponent(shareText)}`;
         const ogUrl     = active
           ? `/api/og?id=${active.id}`
           : region !== "All"
-            ? `/api/og?region=${encodeURIComponent(region)}`
-            : `/api/og`;
+            ? `/api/og?region=${encodeURIComponent(region)}${allSuffix ? "&all=1" : ""}`
+            : allSuffix ? `/api/og?all=1` : `/api/og`;
         return (
           <div onClick={() => setShareOpen(false)}
             style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.82)", display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000, padding: 20, overflowY: "auto" }}>
