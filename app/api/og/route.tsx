@@ -68,6 +68,7 @@ export async function GET(request: Request) {
     : [];
   const ff = fontData ? "F, sans-serif" : "sans-serif";
 
+  const region   = searchParams.get("region"); // e.g. "Europe", "Middle East"
   const conflict = id ? conflicts.find(c => c.id === id) ?? null : null;
   const asOf = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
 
@@ -189,8 +190,10 @@ export async function GET(request: Request) {
     ), { width:W, height:H, fonts });
   }
 
-  // ─── GLOBAL ───────────────────────────────────────────────────────────────
-  const active   = conflicts.filter(c => c.status === "ACTIVE");
+  // ─── GLOBAL / REGIONAL ────────────────────────────────────────────────────
+  const active   = conflicts.filter(c =>
+    c.status === "ACTIVE" && (!region || c.region === region)
+  );
   const withCost = active.map(c => ({ ...c, cost: calcCost(c, now) }));
   const totCost  = withCost.reduce((s, c) => s + c.cost, 0);
   const totRate  = active.reduce((s, c) => s + c.ratePerDay, 0);
@@ -241,7 +244,7 @@ export async function GET(request: Request) {
       {/* HEADLINE + NUMBER */}
       <div style={{ display:"flex", fontSize:12, letterSpacing:5, color:"#3d4a5a",
                     textTransform:"uppercase", marginBottom:6 }}>
-        Combined cost of active war
+        {region ? `Cost of active war · ${region}` : "Combined cost of active war"}
       </div>
       <div style={{ display:"flex", flexDirection:"row", alignItems:"flex-end", gap:6, marginBottom:14 }}>
         <div style={{ display:"flex", fontSize:86, color:"#e74c3c", fontWeight:800, lineHeight:"1" }}>$</div>
@@ -267,7 +270,7 @@ export async function GET(request: Request) {
           </div>
           <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
             <div style={{ display:"flex", fontSize:14, color:"#c8d4e0", fontWeight:800, letterSpacing:1 }}>
-              {active.length} ACTIVE CONFLICTS
+              {active.length} ACTIVE CONFLICT{active.length !== 1 ? "S" : ""}{region ? ` · ${region.toUpperCase()}` : " WORLDWIDE"}
             </div>
             {sinceStr && (
               <div style={{ display:"flex", fontSize:12, color:"#3d4a5a", letterSpacing:2 }}>
