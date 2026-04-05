@@ -3,6 +3,8 @@
 import { useRef, useState, useCallback } from "react";
 import type { Conflict, SpendChartConfig, SpendParty, RatePoint } from "../lib/types";
 
+const SITE = "https://conflictcost.org";
+
 // ─── SVG coordinate constants ─────────────────────────────────────────────────
 const VB_W = 800;
 const VB_H = 200;
@@ -205,7 +207,9 @@ export default function SpendChartPanel({
   chart:    SpendChartConfig;
 }) {
   const svgRef    = useRef<SVGSVGElement>(null);
-  const [hov, setHov] = useState<number | null>(null);
+  const [hov, setHov]           = useState<number | null>(null);
+  const [shareOpen, setShareOpen] = useState(false);
+  const [copied, setCopied]       = useState(false);
   const now       = new Date();
 
   const { timestamps, combined, parties } = buildSeries(conflict, chart, now);
@@ -239,10 +243,23 @@ export default function SpendChartPanel({
         display: "flex", justifyContent: "space-between", alignItems: "center",
       }}>
         <span>Spend Over Time</span>
-        <span style={{ fontSize: 9, color: "#2d3a4a", fontWeight: 400, letterSpacing: 1, textTransform: "none" }}>
-          {chart.mode === "multi" ? "expenditure by party" : "combined · all parties"}
-          {chart.note ? ` · ${chart.note}` : ""}
-        </span>
+        <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+          <span style={{ fontSize: 9, color: "#2d3a4a", fontWeight: 400, letterSpacing: 1, textTransform: "none" }}>
+            {chart.mode === "multi" ? "expenditure by party" : "combined · all parties"}
+            {chart.note ? ` · ${chart.note}` : ""}
+          </span>
+          <button
+            onClick={() => setShareOpen(true)}
+            style={{
+              background: "transparent", border: "1px solid #1e2a38",
+              color: "#3d4a5a", fontSize: 9, fontWeight: 700,
+              letterSpacing: 1.5, padding: "3px 8px", cursor: "pointer",
+              textTransform: "uppercase", whiteSpace: "nowrap",
+            }}
+          >
+            ↗ Share Chart
+          </button>
+        </div>
       </div>
 
       {/* Outer border — chart + cards share one border */}
@@ -394,6 +411,176 @@ export default function SpendChartPanel({
           </div>
         )}
       </div>
+
+      {/* ── Share This Chart modal ── */}
+      {shareOpen && (() => {
+        const ogUrl        = `/api/og/chart?id=${conflict.id}`;
+        const sharePageUrl = `${SITE}/share/chart/${conflict.id}`;
+        const isMulti      = chart.mode === "multi";
+        const headline     = isMulti
+          ? `${conflict.flag} ${conflict.name} — cumulative military expenditure by party. Track live: ${sharePageUrl}`
+          : `${conflict.flag} ${conflict.name} — estimated spend over time. Track live: ${sharePageUrl}`;
+        const tweetUrl     = `https://twitter.com/intent/tweet?url=${encodeURIComponent(sharePageUrl)}&text=${encodeURIComponent(`${conflict.flag} ${conflict.name} — ${isMulti ? "military expenditure by party" : "spend over time"}. conflictcost.org`)}`;
+        const linkedIn     = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sharePageUrl)}`;
+        const facebookUrl  = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(sharePageUrl)}`;
+        const redditUrl    = `https://reddit.com/submit?url=${encodeURIComponent(sharePageUrl)}&title=${encodeURIComponent(`${conflict.name} — Military Expenditure Over Time`)}`;
+        const mailUrl      = `mailto:?subject=${encodeURIComponent(`${conflict.name} — Conflict Cost Chart`)}&body=${encodeURIComponent(headline)}`;
+
+        return (
+          <div
+            onClick={() => setShareOpen(false)}
+            style={{ position: "fixed", inset: 0, background: "rgba(0,0,0,0.82)",
+                     display: "flex", alignItems: "center", justifyContent: "center",
+                     zIndex: 1000, padding: 20, overflowY: "auto" }}
+          >
+            <div
+              onClick={(e) => e.stopPropagation()}
+              style={{ background: "#0e1218", border: "1px solid #1e2a38",
+                       maxWidth: 560, width: "100%", padding: "24px 24px 20px" }}
+            >
+              {/* Header */}
+              <div style={{ display: "flex", alignItems: "flex-start", justifyContent: "space-between", marginBottom: 16 }}>
+                <div>
+                  <div style={{ fontSize: 10, letterSpacing: 3, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 4 }}>
+                    Share This Chart
+                  </div>
+                  <div style={{ fontSize: 16, fontWeight: 700, letterSpacing: 1, color: "#e8edf5" }}>
+                    {conflict.flag} {conflict.name} — {isMulti ? "Expenditure by Party" : "Spend Over Time"}
+                  </div>
+                </div>
+                <button
+                  onClick={() => setShareOpen(false)}
+                  style={{ background: "transparent", border: "none", color: "#3d4a5a",
+                           fontSize: 20, cursor: "pointer", lineHeight: 1, padding: "0 4px", flexShrink: 0 }}
+                >
+                  ✕
+                </button>
+              </div>
+
+              {/* Chart OG preview */}
+              <div style={{ fontSize: 10, letterSpacing: 2, color: "#3d4a5a", textTransform: "uppercase", marginBottom: 8 }}>
+                Chart Preview
+              </div>
+              <div style={{ background: "#070a0d", border: "1px solid #1a2030", marginBottom: 14, overflow: "hidden" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={ogUrl}
+                  alt="Chart share preview"
+                  style={{ width: "100%", display: "block", aspectRatio: "1200/630" }}
+                />
+              </div>
+
+              {/* Share buttons — 3×2 grid */}
+              <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr 1fr", gap: 8, marginBottom: 8 }}>
+                <a href={tweetUrl} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#000", border: "1px solid #333", color: "#fff",
+                           fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px",
+                           textTransform: "uppercase", textDecoration: "none",
+                           display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  𝕏 X
+                </a>
+                <a href={linkedIn} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#0a66c2", border: "1px solid #0a66c2", color: "#fff",
+                           fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px",
+                           textTransform: "uppercase", textDecoration: "none",
+                           display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  in LinkedIn
+                </a>
+                <a href={facebookUrl} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#1877f2", border: "1px solid #1877f2", color: "#fff",
+                           fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px",
+                           textTransform: "uppercase", textDecoration: "none",
+                           display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  f Facebook
+                </a>
+                <a href={redditUrl} target="_blank" rel="noopener noreferrer"
+                  style={{ background: "#ff4500", border: "1px solid #ff4500", color: "#fff",
+                           fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px",
+                           textTransform: "uppercase", textDecoration: "none",
+                           display: "flex", alignItems: "center", justifyContent: "center", gap: 5 }}>
+                  ⬆ Reddit
+                </a>
+                <button
+                  onClick={() => {
+                    navigator.clipboard.writeText(headline).then(() => {
+                      setCopied(true);
+                      setTimeout(() => setCopied(false), 2000);
+                    });
+                  }}
+                  style={{ background: copied ? "#1a3a2a" : "#1e2a38",
+                           border: `1px solid ${copied ? "#2a5a3a" : "#2a3a50"}`,
+                           color: copied ? "#4aaa6a" : "#c8d4e0",
+                           fontSize: 11, fontWeight: 700, letterSpacing: 1,
+                           padding: "10px 8px", textTransform: "uppercase", cursor: "pointer" }}>
+                  {copied ? "✓ Copied!" : "⎘ Copy Link"}
+                </button>
+                <a href={mailUrl}
+                  style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568",
+                           fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px",
+                           textTransform: "uppercase", textDecoration: "none",
+                           display: "flex", alignItems: "center", justifyContent: "center" }}>
+                  ✉ Email
+                </a>
+              </div>
+
+              {/* Instagram row */}
+              <button
+                onClick={() => {
+                  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                  navigator.clipboard.writeText(headline).catch(() => {});
+                  if (isMobile) {
+                    window.open(`${SITE}${ogUrl}`, "_blank");
+                  } else {
+                    window.open("https://www.instagram.com/", "_blank");
+                  }
+                  setCopied(true);
+                  setTimeout(() => setCopied(false), 3000);
+                }}
+                style={{ width: "100%", background: "linear-gradient(90deg,#833ab4,#fd1d1d,#fcb045)",
+                         border: "none", color: "#fff", fontSize: 11, fontWeight: 700,
+                         letterSpacing: 1, padding: "10px 12px", textTransform: "uppercase",
+                         cursor: "pointer", marginBottom: 8,
+                         display: "flex", alignItems: "center", justifyContent: "center", gap: 6 }}>
+                📷 Instagram — {copied ? "Caption Copied! Open Instagram & Post" : "Copy Caption & Open Instagram"}
+              </button>
+
+              {/* Download */}
+              <button
+                onClick={async () => {
+                  const filename  = `${conflict.id}-chart.png`;
+                  const fullOgUrl = `${SITE}${ogUrl}`;
+                  const isMobile  = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                  if (isMobile) {
+                    window.open(fullOgUrl, "_blank");
+                  } else {
+                    try {
+                      const res  = await fetch(fullOgUrl);
+                      const blob = await res.blob();
+                      const url  = URL.createObjectURL(blob);
+                      const a    = document.createElement("a");
+                      a.href     = url;
+                      a.download = filename;
+                      a.click();
+                      URL.revokeObjectURL(url);
+                    } catch {
+                      window.open(fullOgUrl, "_blank");
+                    }
+                  }
+                }}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                         width: "100%", background: "transparent", border: "1px solid #1e2530",
+                         color: "#4a5568", fontSize: 11, fontWeight: 700, letterSpacing: 2,
+                         padding: "10px 12px", textTransform: "uppercase", cursor: "pointer" }}>
+                ↓&nbsp; Download Chart Image
+              </button>
+
+              <div style={{ marginTop: 14, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
+                When shared on X, LinkedIn, or Facebook — the chart image previews automatically.
+              </div>
+            </div>
+          </div>
+        );
+      })()}
     </div>
   );
 }
