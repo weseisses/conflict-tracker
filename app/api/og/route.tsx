@@ -36,67 +36,23 @@ const STATUS_COLOR: Record<string, string> = {
   ENDED:     "#4a5568",
 };
 
-function isWoff(buf: ArrayBuffer): boolean {
-  // wOFF = 0x774F4646, wOF2 = 0x774F4632 — Satori rejects both
-  const sig = new DataView(buf).getUint32(0, false);
-  return sig === 0x774F4646 || sig === 0x774F4632;
-}
-
-async function tryFetch(url: string, ms = 8000): Promise<ArrayBuffer | null> {
+async function loadFont(reqUrl: string): Promise<ArrayBuffer | null> {
+  // Satori ONLY supports OTF/TTF — never woff/woff2.
+  // Primary: fetch bold.ttf from our own static files (committed to public/fonts/).
+  // This has zero external dependency and is guaranteed to be a valid TTF.
   try {
+    const base = new URL(reqUrl);
+    const fontUrl = `${base.protocol}//${base.host}/fonts/bold.ttf`;
     const ctrl = new AbortController();
-    const t = setTimeout(() => ctrl.abort(), ms);
-    const res = await fetch(url, { signal: ctrl.signal });
+    const t = setTimeout(() => ctrl.abort(), 8000);
+    const res = await fetch(fontUrl, { signal: ctrl.signal });
     clearTimeout(t);
-    if (!res.ok) return null;
-    const buf = await res.arrayBuffer();
-    if (buf.byteLength < 1000) return null;
-    if (isWoff(buf)) return null; // reject woff/woff2 — Satori needs TTF/OTF
-    return buf;
-  } catch { return null; }
-}
-
-async function loadFont(): Promise<ArrayBuffer | null> {
-  // Satori ONLY supports OTF/TTF — not woff/woff2.
-  // Try Google Fonts CSS with legacy UA (should return TTF), then static CDN fallbacks.
-
-  // 1. Google Fonts → legacy CSS → extract TTF URL
-  for (const family of ["Barlow+Condensed:wght@700", "Inter:wght@700"]) {
-    try {
-      const ctrl = new AbortController();
-      const t = setTimeout(() => ctrl.abort(), 8000);
-      const cssRes = await fetch(
-        `https://fonts.googleapis.com/css2?family=${family}`,
-        {
-          signal: ctrl.signal,
-          headers: { "User-Agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)" },
-        }
-      );
-      clearTimeout(t);
-      if (!cssRes.ok) continue;
-      const css = await cssRes.text();
-      const m = css.match(/url\(['"]?([^'")\s]+\.ttf)['"]?\)/i);
-      if (!m) continue;
-      const buf = await tryFetch(m[1]);
-      if (buf) return buf;
-    } catch { /* next */ }
-  }
-
-  // 2. Known stable TTF URLs from Google Fonts static CDN
-  const ttfUrls = [
-    // Inter Bold Latin
-    "https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.ttf",
-    // Barlow Condensed Bold Latin
-    "https://fonts.gstatic.com/s/barlowcondensed/v12/HTxxL3I-JCGChYJ8VI-L6OO_au7B6t7y_3HcuKECcrs.ttf",
-    // Roboto Condensed Bold — reliable fallback
-    "https://fonts.gstatic.com/s/robotocondensed/v25/ieVi2ZhZI2eCN5jzbjEETS9weq8-19eDpCEYat9hmD0.ttf",
-  ];
-  for (const url of ttfUrls) {
-    const buf = await tryFetch(url);
-    if (buf) return buf;
-  }
-
-  return null; // Satori will use built-in Noto Sans
+    if (res.ok) {
+      const buf = await res.arrayBuffer();
+      if (buf.byteLength > 1000) return buf;
+    }
+  } catch { /* fall through */ }
+  return null; // Satori will use built-in Noto Sans as last resort
 }
 
 const W = 1200, H = 630;
@@ -106,7 +62,7 @@ export async function GET(request: Request) {
   const id  = searchParams.get("id");
   const now = new Date();
 
-  const fontData = await loadFont();
+  const fontData = await loadFont(request.url);
   const fonts = fontData
     ? [{ name: "F", data: fontData, weight: 700 as const, style: "normal" as const }]
     : [];
