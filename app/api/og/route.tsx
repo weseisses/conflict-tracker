@@ -36,44 +36,67 @@ const STATUS_COLOR: Record<string, string> = {
   ENDED:     "#4a5568",
 };
 
+function isWoff(buf: ArrayBuffer): boolean {
+  // wOFF = 0x774F4646, wOF2 = 0x774F4632 — Satori rejects both
+  const sig = new DataView(buf).getUint32(0, false);
+  return sig === 0x774F4646 || sig === 0x774F4632;
+}
+
+async function tryFetch(url: string, ms = 8000): Promise<ArrayBuffer | null> {
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), ms);
+    const res = await fetch(url, { signal: ctrl.signal });
+    clearTimeout(t);
+    if (!res.ok) return null;
+    const buf = await res.arrayBuffer();
+    if (buf.byteLength < 1000) return null;
+    if (isWoff(buf)) return null; // reject woff/woff2 — Satori needs TTF/OTF
+    return buf;
+  } catch { return null; }
+}
+
 async function loadFont(): Promise<ArrayBuffer | null> {
-  // Satori ONLY supports OTF/TTF — NOT woff2.
-  // Request Google Fonts CSS with an old browser UA → Google returns TTF URLs.
-  const families = [
-    "Barlow+Condensed:wght@700",
-    "Inter:wght@700",
-  ];
-  for (const family of families) {
+  // Satori ONLY supports OTF/TTF — not woff/woff2.
+  // Try Google Fonts CSS with legacy UA (should return TTF), then static CDN fallbacks.
+
+  // 1. Google Fonts → legacy CSS → extract TTF URL
+  for (const family of ["Barlow+Condensed:wght@700", "Inter:wght@700"]) {
     try {
-      const controller = new AbortController();
-      const tid = setTimeout(() => controller.abort(), 8000);
+      const ctrl = new AbortController();
+      const t = setTimeout(() => ctrl.abort(), 8000);
       const cssRes = await fetch(
         `https://fonts.googleapis.com/css2?family=${family}`,
         {
-          signal: controller.signal,
-          headers: {
-            // Old UA makes Google return TTF instead of woff2
-            "User-Agent": "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 6.0)",
-          },
+          signal: ctrl.signal,
+          headers: { "User-Agent": "Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)" },
         }
       );
-      clearTimeout(tid);
+      clearTimeout(t);
       if (!cssRes.ok) continue;
       const css = await cssRes.text();
-      // Extract the font file URL (will be a .ttf with this UA)
-      const match = css.match(/url\(([^)]+)\)/);
-      if (!match) continue;
-      const fontUrl = match[1].replace(/['"]/g, "");
-      const controller2 = new AbortController();
-      const tid2 = setTimeout(() => controller2.abort(), 8000);
-      const fontRes = await fetch(fontUrl, { signal: controller2.signal });
-      clearTimeout(tid2);
-      if (!fontRes.ok) continue;
-      const buf = await fontRes.arrayBuffer();
-      if (buf.byteLength > 1000) return buf;
-    } catch { /* try next family */ }
+      const m = css.match(/url\(['"]?([^'")\s]+\.ttf)['"]?\)/i);
+      if (!m) continue;
+      const buf = await tryFetch(m[1]);
+      if (buf) return buf;
+    } catch { /* next */ }
   }
-  return null;
+
+  // 2. Known stable TTF URLs from Google Fonts static CDN
+  const ttfUrls = [
+    // Inter Bold Latin
+    "https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuFuYAZ9hiJ-Ek-_EeA.ttf",
+    // Barlow Condensed Bold Latin
+    "https://fonts.gstatic.com/s/barlowcondensed/v12/HTxxL3I-JCGChYJ8VI-L6OO_au7B6t7y_3HcuKECcrs.ttf",
+    // Roboto Condensed Bold — reliable fallback
+    "https://fonts.gstatic.com/s/robotocondensed/v25/ieVi2ZhZI2eCN5jzbjEETS9weq8-19eDpCEYat9hmD0.ttf",
+  ];
+  for (const url of ttfUrls) {
+    const buf = await tryFetch(url);
+    if (buf) return buf;
+  }
+
+  return null; // Satori will use built-in Noto Sans
 }
 
 const W = 1200, H = 630;
