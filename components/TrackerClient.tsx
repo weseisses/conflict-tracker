@@ -51,6 +51,12 @@ export default function TrackerClient({ conflicts, initialConflict }: Props) {
     if (p.get("filter") === "all") setFilter("all");
   }, []);
 
+  // Sync URL bar with selected conflict
+  useEffect(() => {
+    const url = selected ? `/conflict/${selected}` : "/";
+    window.history.replaceState({}, "", url);
+  }, [selected]);
+
   // Reset comparable index when switching conflicts
   useEffect(() => { setComparableIdx(0); }, [selected]);
 
