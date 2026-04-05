@@ -9,7 +9,7 @@ import DetailPanel from "./DetailPanel";
 import StatCard from "./StatCard";
 import EmailCapture from "./EmailCapture";
 
-interface Props { conflicts: Conflict[]; }
+interface Props { conflicts: Conflict[]; initialConflict?: string; }
 
 const SITE = "https://conflictcost.org";
 
@@ -24,9 +24,9 @@ const SORT_OPTIONS = [
 ] as const;
 type SortBy = typeof SORT_OPTIONS[number]["value"];
 
-export default function TrackerClient({ conflicts }: Props) {
+export default function TrackerClient({ conflicts, initialConflict }: Props) {
   const [now, setNow]             = useState(() => new Date());
-  const [selected, setSelected]   = useState<string | null>(null);
+  const [selected, setSelected]   = useState<string | null>(initialConflict ?? null);
   const [filter, setFilter]       = useState<"active" | "all">("active");
   const [region, setRegion]       = useState<Region>("All");
   const [sortBy, setSortBy]       = useState<SortBy>("cost");
