@@ -106,9 +106,9 @@ export async function GET(request: Request) {
             </div>
           </div>
           <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a" }}>AS OF {asOf}</div>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#1e2838" }}>·</div>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a" }}>conflictcost.org</div>
+            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#4d5e6e" }}>AS OF {asOf}</div>
+            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#3a4a58" }}>·</div>
+            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#4d5e6e" }}>conflictcost.org</div>
           </div>
         </div>
 
@@ -152,23 +152,23 @@ export async function GET(request: Request) {
         {/* RATES */}
         <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:28 }}>
           <div style={{ display:"flex", flexDirection:"column",
-                        background:"#0d1520", borderLeft:`4px solid ${accent}`,
+                        background:"#152535", borderLeft:`4px solid ${accent}`,
                         padding:"12px 22px", gap:6 }}>
             <div style={{ display:"flex", fontSize:44, color:"#f39c12", fontWeight:800 }}>
               {hourly}
             </div>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:5, color:"#7a6030" }}>
+            <div style={{ display:"flex", fontSize:11, letterSpacing:5, color:"#9a7840" }}>
               / HOUR
             </div>
           </div>
           <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-            <div style={{ display:"flex", fontSize:17, color:"#3a4a5a" }}>
+            <div style={{ display:"flex", fontSize:17, color:"#5a6a7c" }}>
               {daily}
-              <span style={{ color:"#2a3a4a", marginLeft:8 }}>/ DAY</span>
+              <span style={{ color:"#4a5a6a", marginLeft:8 }}>/ DAY</span>
             </div>
-            <div style={{ display:"flex", fontSize:17, color:"#3a4a5a" }}>
+            <div style={{ display:"flex", fontSize:17, color:"#5a6a7c" }}>
               {perSec}
-              <span style={{ color:"#2a3a4a", marginLeft:8 }}>/ SEC</span>
+              <span style={{ color:"#4a5a6a", marginLeft:8 }}>/ SEC</span>
             </div>
           </div>
         </div>
@@ -179,10 +179,10 @@ export async function GET(request: Request) {
         {/* FOOTER */}
         <div style={{ display:"flex", flexDirection:"row", justifyContent:"space-between",
                       alignItems:"center" }}>
-          <div style={{ display:"flex", fontSize:13, color:"#2d3a4a", letterSpacing:1 }}>
+          <div style={{ display:"flex", fontSize:13, color:"#4d5e6e", letterSpacing:1 }}>
             {conflict.parties}
           </div>
-          <div style={{ display:"flex", fontSize:11, color:"#1e2838", letterSpacing:2 }}>
+          <div style={{ display:"flex", fontSize:11, color:"#3a4a58", letterSpacing:2 }}>
             SIPRI · ACLED · OHCHR
           </div>
         </div>
@@ -231,11 +231,11 @@ export async function GET(request: Request) {
         <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
           <div style={{ display:"flex", width:7, height:7, borderRadius:"50%", background:"#e74c3c" }} />
           <div style={{ display:"flex", fontSize:12, letterSpacing:3, color:"#e74c3c" }}>LIVE</div>
-          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a", marginLeft:10 }}>
+          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#4d5e6e", marginLeft:10 }}>
             AS OF {asOf}
           </div>
-          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#1e2838" }}>·</div>
-          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#2d3a4a" }}>
+          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#3a4a58" }}>·</div>
+          <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#4d5e6e" }}>
             conflictcost.org
           </div>
         </div>
@@ -244,7 +244,7 @@ export async function GET(request: Request) {
       {/* HEADLINE + NUMBER */}
       <div style={{ display:"flex", fontSize:12, letterSpacing:5, color:"#3d4a5a",
                     textTransform:"uppercase", marginBottom:6 }}>
-        {region ? `Cost of active war · ${region}` : "Combined cost of active war"}
+        {region ? `Cost of active ${active.length === 1 ? "war" : "wars"} · ${region}` : "Combined cost of active wars"}
       </div>
       <div style={{ display:"flex", flexDirection:"row", alignItems:"flex-end", gap:6, marginBottom:14 }}>
         <div style={{ display:"flex", fontSize:86, color:"#e74c3c", fontWeight:800, lineHeight:"1" }}>$</div>
@@ -258,15 +258,15 @@ export async function GET(request: Request) {
 
       {/* RATES + CONTEXT */}
       <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:24, marginBottom:18 }}>
-        <div style={{ display:"flex", flexDirection:"column", background:"#0d1520",
+        <div style={{ display:"flex", flexDirection:"column", background:"#152535",
                       borderLeft:"4px solid #e74c3c", padding:"10px 20px", gap:4 }}>
           <div style={{ display:"flex", fontSize:38, color:"#f39c12", fontWeight:800 }}>{hourly}</div>
-          <div style={{ display:"flex", fontSize:10, letterSpacing:5, color:"#7a6030" }}>/ HOUR</div>
+          <div style={{ display:"flex", fontSize:10, letterSpacing:5, color:"#9a7840" }}>/ HOUR</div>
         </div>
         <div style={{ display:"flex", flexDirection:"column", gap:7 }}>
-          <div style={{ display:"flex", fontSize:15, color:"#3a4a5a" }}>
+          <div style={{ display:"flex", fontSize:15, color:"#5a6a7c" }}>
             {daily}
-            <span style={{ color:"#2a3a4a", marginLeft:8 }}>/ DAY</span>
+            <span style={{ color:"#4a5a6a", marginLeft:8 }}>/ DAY</span>
           </div>
           <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
             <div style={{ display:"flex", fontSize:14, color:"#c8d4e0", fontWeight:800, letterSpacing:1 }}>
@@ -296,7 +296,7 @@ export async function GET(request: Request) {
               {/* flag + name */}
               <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:8, width:230 }}>
                 <span style={{ fontSize:18 }}>{c.flag}</span>
-                <div style={{ display:"flex", fontSize:12, color:"#7a8fa8", fontWeight:700, letterSpacing:0.5 }}>{name}</div>
+                <div style={{ display:"flex", fontSize:13, color:"#7a8fa8", fontWeight:700, letterSpacing:0.5 }}>{name}</div>
               </div>
               {/* bar */}
               <div style={{ display:"flex", height:5, background:"#0d1520", flex:1 }}>
@@ -304,10 +304,10 @@ export async function GET(request: Request) {
               </div>
               {/* amount + pct */}
               <div style={{ display:"flex", flexDirection:"row", alignItems:"baseline", gap:7, width:150, justifyContent:"flex-end" }}>
-                <div style={{ display:"flex", fontSize:15, color:"#e8edf5", fontWeight:800 }}>
+                <div style={{ display:"flex", fontSize:17, color:"#e8edf5", fontWeight:800 }}>
                   ${cFmt.val}{cFmt.unit ? " " + cFmt.unit.slice(0,1).toUpperCase() : ""}
                 </div>
-                <div style={{ display:"flex", fontSize:10, color:"#3d4a5a", letterSpacing:1 }}>
+                <div style={{ display:"flex", fontSize:11, color:"#3d4a5a", letterSpacing:1 }}>
                   {pct.toFixed(1)}%
                 </div>
               </div>
@@ -320,10 +320,10 @@ export async function GET(request: Request) {
 
       {/* FOOTER */}
       <div style={{ display:"flex", flexDirection:"row", justifyContent:"space-between", alignItems:"center" }}>
-        <div style={{ display:"flex", fontSize:11, color:"#2d3a4a", letterSpacing:1 }}>
+        <div style={{ display:"flex", fontSize:11, color:"#4d5e6e", letterSpacing:1 }}>
           Direct military expenditure — all major parties
         </div>
-        <div style={{ display:"flex", fontSize:10, color:"#2d3a4a", letterSpacing:2 }}>
+        <div style={{ display:"flex", fontSize:10, color:"#4d5e6e", letterSpacing:2 }}>
           Source: SIPRI · ACLED · OHCHR · Brown Univ. Costs of War
         </div>
       </div>
