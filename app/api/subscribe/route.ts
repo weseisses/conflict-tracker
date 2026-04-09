@@ -28,19 +28,18 @@ export async function POST(req: NextRequest) {
       }),
     });
 
-    // 201 = new subscriber, 200 = already subscribed (both fine for the user)
+    const data = await res.json().catch(() => ({}));
+
     if (res.ok) {
       return NextResponse.json({ ok: true }, { status: 200 });
     }
 
-    const data = await res.json().catch(() => ({}));
-
-    // Buttondown returns 422 with code "email_already_exists" if already subscribed
-    if (res.status === 422 && (data as any)?.code === "email_already_exists") {
+    // Buttondown returns 400 with code "email_already_exists" if already subscribed
+    if ((data as any)?.code === "email_already_exists") {
       return NextResponse.json({ ok: true, alreadySubscribed: true }, { status: 200 });
     }
 
-    console.error("Buttondown error:", res.status, data);
+    console.error("Buttondown error:", res.status, JSON.stringify(data));
     return NextResponse.json({ error: "Subscription failed." }, { status: 502 });
 
   } catch (err) {
