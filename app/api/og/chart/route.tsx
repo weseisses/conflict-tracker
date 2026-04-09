@@ -67,7 +67,7 @@ function getCumAt(
   return Math.max(0, cum);
 }
 
-function buildSeries(c: Conflict, chart: SpendChartConfig, now: Date, N = 60) {
+function buildSeries(c: Conflict, chart: SpendChartConfig, now: Date, N = 80) {
   const startTs = new Date(c.startDate + "T00:00:00Z").getTime();
   const endTs   = c.endDate ? new Date(c.endDate + "T00:00:00Z").getTime() : now.getTime();
   const ts      = Array.from({ length: N }, (_, i) => startTs + (i / (N - 1)) * (endTs - startTs));
@@ -110,7 +110,7 @@ function yTicks(maxB: number): number[] {
   const STEPS = [1, 2, 5, 10, 25, 50, 100, 200, 250, 500, 750, 1000, 1500];
   const step  = STEPS.find(s => maxB / s >= 3 && maxB / s <= 6) ??
                 STEPS.find(s => maxB / s <= 6) ?? 500;
-  const out: number[] = [];
+  const out: number[] = [0];
   for (let v = step; v <= maxB * 1.05; v += step) out.push(v);
   return out;
 }
@@ -361,10 +361,10 @@ export async function GET(request: Request) {
           ))}
           {/* Lines */}
           {!isMulti && (
-            <polyline points={combinedPoly} fill="none" stroke={accent} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <polyline points={combinedPoly} fill="none" stroke={accent} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           )}
           {isMulti && partyPolys.map(p => (
-            <polyline key={p.key} points={p.poly} fill="none" stroke={p.color} strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+            <polyline key={p.key} points={p.poly} fill="none" stroke={p.color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
           ))}
         </svg>
       </div>
