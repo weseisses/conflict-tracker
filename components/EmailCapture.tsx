@@ -33,9 +33,16 @@ export default function EmailCapture() {
         body: JSON.stringify({ email: email.trim() }),
       });
 
+      const data = await res.json().catch(() => ({}));
+
       if (!res.ok) {
-        const data = await res.json().catch(() => ({}));
         throw new Error((data as any)?.error || "Request failed");
+      }
+
+      if ((data as any)?.alreadySubscribed) {
+        setState("error");
+        setErrMsg("This email is already subscribed.");
+        return;
       }
 
       setState("success");
