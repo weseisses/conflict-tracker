@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 
-const BUTTONDOWN_USERNAME = "conflictcost";
 const KOFI_USERNAME = "conflictcost";
 
 type State = "idle" | "loading" | "success" | "error";
@@ -28,20 +27,22 @@ export default function EmailCapture() {
     setErrMsg("");
 
     try {
-      const formData = new FormData();
-      formData.append("email_address", email.trim());
-      formData.append("tag", "conflictcost");
+      const res = await fetch("/api/subscribe", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: email.trim() }),
+      });
 
-      await fetch(
-        `https://buttondown.com/api/emails/embed-subscribe/${BUTTONDOWN_USERNAME}`,
-        { method: "POST", body: formData, mode: "no-cors" }
-      );
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}));
+        throw new Error((data as any)?.error || "Request failed");
+      }
 
       setState("success");
       setEmail("");
-    } catch {
+    } catch (err: unknown) {
       setState("error");
-      setErrMsg("Something went wrong — please try again.");
+      setErrMsg(err instanceof Error ? err.message : "Something went wrong — please try again.");
     }
   }
 
