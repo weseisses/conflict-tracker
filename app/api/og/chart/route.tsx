@@ -234,7 +234,9 @@ export async function GET(request: Request) {
   const xlabs = xLabels(ts);
 
   // Chart height in base units; scale for actual px
-  const CH_BASE = isMulti ? 290 : 386;
+  // Multi: 260 (–30 vs old 290) frees 30 units for taller party cards (now 126)
+  // Single: 386 unchanged — no party cards needed
+  const CH_BASE = isMulti ? 260 : 386;
   const CH = CH_BASE * S;
 
   const combinedPoly = toPolyline(combined, maxB, CW, CH, CX);
@@ -391,7 +393,7 @@ export async function GET(request: Request) {
       {isMulti && (
         <div style={{
           display: "flex", flexDirection: "row",
-          position: "absolute", top: cardsTop, left: 0, right: 0, height: 96 * S,
+          position: "absolute", top: cardsTop, left: 0, right: 0, height: 126 * S,
           borderTop: `1px solid #1a2030`,
         }}>
           {chart.parties.map((p, i) => {
@@ -422,8 +424,8 @@ export async function GET(request: Request) {
                     {cs.label}
                   </div>
                 </div>
-                <div style={{ display: "flex", fontSize: 10 * S, color: "#4a5568", lineHeight: 1.5, overflow: "hidden" }}>
-                  {p.explainer.length > 120 ? p.explainer.slice(0, 117) + "..." : p.explainer}
+                <div style={{ display: "flex", fontSize: 10 * S, color: "#4a5568", lineHeight: 1.5 }}>
+                  {p.explainer}
                 </div>
               </div>
             );
