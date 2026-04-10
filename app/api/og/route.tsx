@@ -91,13 +91,14 @@ export async function GET(request: Request) {
       .toUpperCase();
 
     // ── Layout constants (all in actual output px = base × S) ──────────────
-    //  Corners sit at ~18 base units from top edge, ~20 base units from bottom.
-    //  Centre block: estimated visual height ~240 base units.
-    //  Content zone: 50–580 base units (header+footer each ~50 base).
-    //  Centre of content zone: 315 base → block top ≈ 315 − 120 = 195 base.
-    const CORNER_TOP    = 20  * S;   // top of header corner text
-    const FOOTER_TOP    = 592 * S;   // top of footer corner text  (630−38)×S
-    const CENTER_TOP    = 195 * S;   // top of vertically-centred content block
+    //  Dead space reduced ~25% vs. original by:
+    //    · Moving CENTER_TOP from 195→158 base (content up, tighter top gap)
+    //    · Moving FOOTER_TOP from 592→558 base (footer up, tighter bottom gap)
+    //    · Scaling hero number 80→96, hourly 40→48, name 28→32 (fills space)
+    //  Dead space: top 114 + bottom 120 = 234 base (was 304, −23 %).
+    const CORNER_TOP    = 16  * S;   // top of header corner text
+    const FOOTER_TOP    = 558 * S;   // top of footer corner text
+    const CENTER_TOP    = 158 * S;   // top of vertically-centred content block
 
     return new ImageResponse((
       <div style={{ display:"flex", width:SW, height:SH,
@@ -137,10 +138,10 @@ export async function GET(request: Request) {
 
           {/* Flag + name + status */}
           <div style={{ display:"flex", flexDirection:"row",
-                        alignItems:"center", gap:18*S, marginBottom:14*S }}>
-            <span style={{ fontSize:44*S }}>{conflict.flag}</span>
+                        alignItems:"center", gap:18*S, marginBottom:20*S }}>
+            <span style={{ fontSize:50*S }}>{conflict.flag}</span>
             <div style={{ display:"flex", flexDirection:"column", gap:6*S }}>
-              <div style={{ display:"flex", fontSize:28*S, fontWeight:800,
+              <div style={{ display:"flex", fontSize:32*S, fontWeight:800,
                             color:"#e8edf5", letterSpacing:1, fontFamily:ff }}>
                 {conflict.name.toUpperCase()}
               </div>
@@ -165,16 +166,16 @@ export async function GET(request: Request) {
 
           {/* Big cost number */}
           <div style={{ display:"flex", flexDirection:"row",
-                        alignItems:"flex-end", gap:4*S, marginBottom:20*S }}>
-            <span style={{ display:"flex", fontSize:80*S, color:accent,
+                        alignItems:"flex-end", gap:4*S, marginBottom:26*S }}>
+            <span style={{ display:"flex", fontSize:96*S, color:accent,
                            fontWeight:800, lineHeight:"1", fontFamily:ff }}>$</span>
-            <span style={{ display:"flex", fontSize:80*S, color:"#f0f4f8",
+            <span style={{ display:"flex", fontSize:96*S, color:"#f0f4f8",
                            fontWeight:800, lineHeight:"1", fontFamily:ff }}>
               {cFmt.val}
             </span>
             {cFmt.unit ? (
-              <span style={{ display:"flex", fontSize:34*S, color:accent,
-                             fontWeight:700, paddingBottom:10*S, marginLeft:8*S,
+              <span style={{ display:"flex", fontSize:40*S, color:accent,
+                             fontWeight:700, paddingBottom:12*S, marginLeft:10*S,
                              fontFamily:ff }}>
                 {cFmt.unit}
               </span>
@@ -187,7 +188,7 @@ export async function GET(request: Request) {
             <div style={{ display:"flex", flexDirection:"column",
                           background:"#152535", borderLeft:`${4*S}px solid ${accent}`,
                           padding:`${12*S}px ${22*S}px`, gap:6*S }}>
-              <div style={{ display:"flex", fontSize:40*S, color:"#f39c12",
+              <div style={{ display:"flex", fontSize:48*S, color:"#f39c12",
                             fontWeight:800, fontFamily:ff }}>
                 {hourly}
               </div>
@@ -197,11 +198,11 @@ export async function GET(request: Request) {
               </div>
             </div>
             <div style={{ display:"flex", flexDirection:"column", gap:12*S }}>
-              <div style={{ display:"flex", fontSize:17*S, color:"#5a6a7c", fontFamily:ff }}>
+              <div style={{ display:"flex", fontSize:20*S, color:"#5a6a7c", fontFamily:ff }}>
                 {daily}
                 <span style={{ color:"#4a5a6a", marginLeft:8*S }}> / DAY</span>
               </div>
-              <div style={{ display:"flex", fontSize:17*S, color:"#5a6a7c", fontFamily:ff }}>
+              <div style={{ display:"flex", fontSize:20*S, color:"#5a6a7c", fontFamily:ff }}>
                 {perSec}
                 <span style={{ color:"#4a5a6a", marginLeft:8*S }}> / SEC</span>
               </div>
