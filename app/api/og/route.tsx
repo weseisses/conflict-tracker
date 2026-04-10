@@ -73,8 +73,12 @@ export async function GET(request: Request) {
   const conflict   = id ? conflicts.find(c => c.id === id) ?? null : null;
   const asOf = now.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }).toUpperCase();
 
-  // ─── SINGLE CONFLICT ─────────────────────────────────────────────────────
+  // ─── SINGLE CONFLICT — 2× retina (2400×1260), centred layout ────────────
   if (conflict) {
+    const S  = 2;
+    const SW = 1200 * S;   // 2400
+    const SH = 630  * S;   // 1260
+
     const cost    = calcCost(conflict, now);
     const cFmt    = fmtBig(cost);
     const hourly  = fmtRate(conflict.ratePerDay / 24);
@@ -86,109 +90,139 @@ export async function GET(request: Request) {
       .toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" })
       .toUpperCase();
 
+    // ── Layout constants (all in actual output px = base × S) ──────────────
+    //  Corners sit at ~18 base units from top edge, ~20 base units from bottom.
+    //  Centre block: estimated visual height ~240 base units.
+    //  Content zone: 50–580 base units (header+footer each ~50 base).
+    //  Centre of content zone: 315 base → block top ≈ 315 − 120 = 195 base.
+    const CORNER_TOP    = 20  * S;   // top of header corner text
+    const FOOTER_TOP    = 592 * S;   // top of footer corner text  (630−38)×S
+    const CENTER_TOP    = 195 * S;   // top of vertically-centred content block
+
     return new ImageResponse((
-      <div style={{ display:"flex", flexDirection:"column", width:W, height:H,
-                    background:"#080b10", fontFamily:ff, padding:"48px 60px 44px" }}>
+      <div style={{ display:"flex", width:SW, height:SH,
+                    background:"#080b10", fontFamily:ff, position:"relative", overflow:"hidden" }}>
 
-        {/* accent stripe */}
+        {/* ── Accent stripe ── */}
         <div style={{ display:"flex", position:"absolute", top:0, left:0,
-                      width:W, height:6, background:accent }} />
+                      width:SW, height:4*S, background:accent }} />
 
-        {/* HEADER */}
-        <div style={{ display:"flex", flexDirection:"row", justifyContent:"space-between",
-                      alignItems:"center", marginBottom:28 }}>
-          <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:14 }}>
-            <div style={{ display:"flex", background:"#e74c3c", color:"#fff",
-                          fontSize:13, fontWeight:800, letterSpacing:3, padding:"4px 12px" }}>
-              GLOBAL
-            </div>
-            <div style={{ display:"flex", fontSize:15, fontWeight:700, letterSpacing:3, color:"#7a8fa8" }}>
-              CONFLICT COST TRACKER
-            </div>
+        {/* ── Top-left: branding ── */}
+        <div style={{ display:"flex", position:"absolute", top:CORNER_TOP, left:48*S,
+                      flexDirection:"row", alignItems:"center", gap:12*S }}>
+          <div style={{ display:"flex", background:"#e74c3c", color:"#fff",
+                        fontSize:13*S, fontWeight:800, letterSpacing:3,
+                        padding:`${4*S}px ${12*S}px` }}>
+            GLOBAL
           </div>
-          <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:10 }}>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#4d5e6e" }}>AS OF {asOf}</div>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#3a4a58" }}>·</div>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:2, color:"#4d5e6e" }}>conflictcost.org</div>
+          <div style={{ display:"flex", fontSize:15*S, fontWeight:700,
+                        letterSpacing:3, color:"#7a8fa8", fontFamily:ff }}>
+            CONFLICT COST TRACKER
           </div>
         </div>
 
-        {/* NAME */}
-        <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:18, marginBottom:18 }}>
-          <span style={{ fontSize:56 }}>{conflict.flag}</span>
-          <div style={{ display:"flex", flexDirection:"column", gap:6 }}>
-            <div style={{ display:"flex", fontSize:32, fontWeight:800, color:"#e8edf5", letterSpacing:1 }}>
-              {conflict.name.toUpperCase()}
-            </div>
-            <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:16 }}>
-              <div style={{ display:"flex", fontSize:12, letterSpacing:3, color:"#3d4a5a" }}>
-                SINCE {started}
+        {/* ── Top-right: date + url ── */}
+        <div style={{ display:"flex", position:"absolute", top:CORNER_TOP + 4*S, right:48*S,
+                      flexDirection:"row", alignItems:"center", gap:10*S }}>
+          <div style={{ display:"flex", fontSize:11*S, letterSpacing:2,
+                        color:"#4d5e6e", fontFamily:ff }}>AS OF {asOf}</div>
+          <div style={{ display:"flex", fontSize:11*S, color:"#3a4a58", fontFamily:ff }}>·</div>
+          <div style={{ display:"flex", fontSize:11*S, letterSpacing:2,
+                        color:"#4d5e6e", fontFamily:ff }}>conflictcost.org</div>
+        </div>
+
+        {/* ── Centred main content ── */}
+        <div style={{ display:"flex", position:"absolute", top:CENTER_TOP,
+                      left:0, right:0, flexDirection:"column", alignItems:"center" }}>
+
+          {/* Flag + name + status */}
+          <div style={{ display:"flex", flexDirection:"row",
+                        alignItems:"center", gap:18*S, marginBottom:14*S }}>
+            <span style={{ fontSize:44*S }}>{conflict.flag}</span>
+            <div style={{ display:"flex", flexDirection:"column", gap:6*S }}>
+              <div style={{ display:"flex", fontSize:28*S, fontWeight:800,
+                            color:"#e8edf5", letterSpacing:1, fontFamily:ff }}>
+                {conflict.name.toUpperCase()}
               </div>
-              <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:6 }}>
-                <div style={{ display:"flex", width:7, height:7, borderRadius:"50%",
-                              background:sCl }} />
-                <div style={{ display:"flex", fontSize:12, letterSpacing:3, color:sCl }}>
-                  {conflict.status}
+              <div style={{ display:"flex", flexDirection:"row",
+                            alignItems:"center", gap:16*S }}>
+                <div style={{ display:"flex", fontSize:11*S, letterSpacing:3,
+                              color:"#3d4a5a", fontFamily:ff }}>
+                  SINCE {started}
+                </div>
+                <div style={{ display:"flex", flexDirection:"row",
+                              alignItems:"center", gap:6*S }}>
+                  <div style={{ display:"flex", width:7*S, height:7*S,
+                                borderRadius:"50%", background:sCl }} />
+                  <div style={{ display:"flex", fontSize:11*S, letterSpacing:3,
+                                color:sCl, fontFamily:ff }}>
+                    {conflict.status}
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* BIG COST */}
-        <div style={{ display:"flex", flexDirection:"row", alignItems:"flex-end",
-                      gap:4, marginBottom:22 }}>
-          <span style={{ display:"flex", fontSize:92, color:accent, fontWeight:800, lineHeight:"1" }}>$</span>
-          <span style={{ display:"flex", fontSize:92, color:"#f0f4f8", fontWeight:800, lineHeight:"1" }}>
-            {cFmt.val}
-          </span>
-          {cFmt.unit ? (
-            <span style={{ display:"flex", fontSize:38, color:accent, fontWeight:700,
-                           paddingBottom:12, marginLeft:8 }}>
-              {cFmt.unit}
+          {/* Big cost number */}
+          <div style={{ display:"flex", flexDirection:"row",
+                        alignItems:"flex-end", gap:4*S, marginBottom:20*S }}>
+            <span style={{ display:"flex", fontSize:80*S, color:accent,
+                           fontWeight:800, lineHeight:"1", fontFamily:ff }}>$</span>
+            <span style={{ display:"flex", fontSize:80*S, color:"#f0f4f8",
+                           fontWeight:800, lineHeight:"1", fontFamily:ff }}>
+              {cFmt.val}
             </span>
-          ) : null}
+            {cFmt.unit ? (
+              <span style={{ display:"flex", fontSize:34*S, color:accent,
+                             fontWeight:700, paddingBottom:10*S, marginLeft:8*S,
+                             fontFamily:ff }}>
+                {cFmt.unit}
+              </span>
+            ) : null}
+          </div>
+
+          {/* Rate boxes */}
+          <div style={{ display:"flex", flexDirection:"row",
+                        alignItems:"center", gap:24*S }}>
+            <div style={{ display:"flex", flexDirection:"column",
+                          background:"#152535", borderLeft:`${4*S}px solid ${accent}`,
+                          padding:`${12*S}px ${22*S}px`, gap:6*S }}>
+              <div style={{ display:"flex", fontSize:40*S, color:"#f39c12",
+                            fontWeight:800, fontFamily:ff }}>
+                {hourly}
+              </div>
+              <div style={{ display:"flex", fontSize:10*S, letterSpacing:5,
+                            color:"#9a7840", fontFamily:ff }}>
+                / HOUR
+              </div>
+            </div>
+            <div style={{ display:"flex", flexDirection:"column", gap:12*S }}>
+              <div style={{ display:"flex", fontSize:17*S, color:"#5a6a7c", fontFamily:ff }}>
+                {daily}
+                <span style={{ color:"#4a5a6a", marginLeft:8*S }}> / DAY</span>
+              </div>
+              <div style={{ display:"flex", fontSize:17*S, color:"#5a6a7c", fontFamily:ff }}>
+                {perSec}
+                <span style={{ color:"#4a5a6a", marginLeft:8*S }}> / SEC</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* RATES */}
-        <div style={{ display:"flex", flexDirection:"row", alignItems:"center", gap:28 }}>
-          <div style={{ display:"flex", flexDirection:"column",
-                        background:"#152535", borderLeft:`4px solid ${accent}`,
-                        padding:"12px 22px", gap:6 }}>
-            <div style={{ display:"flex", fontSize:44, color:"#f39c12", fontWeight:800 }}>
-              {hourly}
-            </div>
-            <div style={{ display:"flex", fontSize:11, letterSpacing:5, color:"#9a7840" }}>
-              / HOUR
-            </div>
-          </div>
-          <div style={{ display:"flex", flexDirection:"column", gap:10 }}>
-            <div style={{ display:"flex", fontSize:17, color:"#5a6a7c" }}>
-              {daily}
-              <span style={{ color:"#4a5a6a", marginLeft:8 }}>/ DAY</span>
-            </div>
-            <div style={{ display:"flex", fontSize:17, color:"#5a6a7c" }}>
-              {perSec}
-              <span style={{ color:"#4a5a6a", marginLeft:8 }}>/ SEC</span>
-            </div>
-          </div>
+        {/* ── Bottom-left: parties ── */}
+        <div style={{ display:"flex", position:"absolute", top:FOOTER_TOP, left:48*S,
+                      fontSize:12*S, color:"#4d5e6e", letterSpacing:1, fontFamily:ff }}>
+          {conflict.parties}
         </div>
 
-        {/* spacer */}
-        <div style={{ display:"flex", flex:1 }} />
-
-        {/* FOOTER */}
-        <div style={{ display:"flex", flexDirection:"row", justifyContent:"space-between",
-                      alignItems:"center" }}>
-          <div style={{ display:"flex", fontSize:13, color:"#4d5e6e", letterSpacing:1 }}>
-            {conflict.parties}
-          </div>
-          <div style={{ display:"flex", fontSize:11, color:"#3a4a58", letterSpacing:2 }}>
-            SIPRI · ACLED · OHCHR
-          </div>
+        {/* ── Bottom-right: sources ── */}
+        <div style={{ display:"flex", position:"absolute", top:FOOTER_TOP, right:48*S,
+                      fontSize:11*S, color:"#3a4a58", letterSpacing:2, fontFamily:ff }}>
+          SIPRI · ACLED · OHCHR
         </div>
+
       </div>
-    ), { width:W, height:H, fonts });
+    ), { width:SW, height:SH, fonts });
   }
 
   // ─── GLOBAL / REGIONAL ────────────────────────────────────────────────────
