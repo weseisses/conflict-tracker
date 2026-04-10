@@ -110,6 +110,38 @@
         { "label": "IDF soldiers (KIA confirmed through Apr 8)", "count": "~8" },
         { "label": "Displaced persons (Lebanon)", "count": "~1,200,000 (~20% of population)" }
       ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Hezbollah expenditure undisclosed",
+      "parties": [
+        {
+          "key": "israel",
+          "flag": "🇮🇱",
+          "name": "Israel",
+          "role": "Offensive operations",
+          "confidence": "medium",
+          "explainer": "Estimated from IDF operational tempo and Bloomberg's $1.6B/week figure for all Israeli ops. Lebanon-specific costs isolated at ~$150M/day, excluding concurrent Iran/Epic Fury expenditure.",
+          "color": "#8e44ad",
+          "estimate": { "low": 4.5, "mid": 5.5, "high": 6.8 },
+          "dailyLabel": "~$150M/day"
+        },
+        {
+          "key": "hezbollah",
+          "flag": "🇱🇧",
+          "name": "Hezbollah",
+          "role": "Defending party",
+          "confidence": "none",
+          "explainer": "Hezbollah's operational budget is not publicly disclosed. Iran provides an estimated $700M–$1B/yr in total support (CSIS), a portion of which funds Lebanese operations — no reliable daily figure can be modelled.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2026-03-02", "rate": 220000000 },
+        { "date": "2026-03-09", "rate": 175000000 },
+        { "date": "2026-03-16", "rate": 150000000 },
+        { "date": "2026-04-08", "rate": 200000000 }
+      ]
     }
   },
   {
@@ -233,6 +265,50 @@
         { "label": "IDF soldiers killed", "count": "~790 confirmed" },
         { "label": "Israeli civilians (Oct 7 + war)", "count": "~1,250" }
       ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "Israel direct costs + US military aid; Hamas/Houthi undisclosed",
+      "parties": [
+        {
+          "key": "israel",
+          "flag": "🇮🇱",
+          "name": "Israel",
+          "role": "Primary offensive",
+          "confidence": "high",
+          "explainer": "Bank of Israel reports direct defense costs of ~$77B through end-2025, covering ground operations, air campaign, Iron Dome intercepts, and reserve mobilization. Israel approved a $45B 2026 defense budget (Breaking Defense, Mar 2026) as post-ceasefire residual operations continue.",
+          "color": "#e67e22",
+          "estimate": { "low": 72, "mid": 77, "high": 82 },
+          "dailyLabel": "~$105M/day avg"
+        },
+        {
+          "key": "us_aid",
+          "flag": "🇺🇸",
+          "name": "U.S. Military Aid",
+          "role": "Arms, munitions, logistics",
+          "confidence": "high",
+          "explainer": "Brown University Costs of War: $21.7B in U.S. military aid through 2025, comprising emergency weapons packages, Iron Dome resupply, JDAM conversion kits, and naval assets deployed to the eastern Mediterranean.",
+          "color": "#3b82f6",
+          "estimate": { "low": 20, "mid": 22, "high": 24 },
+          "dailyLabel": "~$30M/day avg"
+        },
+        {
+          "key": "hamas",
+          "flag": "🇵🇸",
+          "name": "Hamas / Armed Groups",
+          "role": "Defending party",
+          "confidence": "none",
+          "explainer": "Hamas operating budget is not publicly disclosed. Pre-war estimates placed Hamas military spending at $100–350M/yr — a fraction of opposing forces. Tunnel construction, weapons acquisition, and rocket production costs are not independently verifiable.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2023-10-07", "rates": { "israel": 200000000, "us_aid": 50000000 } },
+        { "date": "2023-12-01", "rates": { "israel": 150000000, "us_aid": 32000000 } },
+        { "date": "2024-06-01", "rates": { "israel": 110000000, "us_aid": 25000000 } },
+        { "date": "2025-01-01", "rates": { "israel": 90000000, "us_aid": 20000000 } },
+        { "date": "2025-10-10", "rates": { "israel": 70000000, "us_aid": 30000000 } }
+      ]
     }
   },
   {
@@ -264,6 +340,38 @@
         { "label": "Civilians killed (OHCHR, Jan–Jun 2025 alone)", "count": "3,384+" },
         { "label": "Displaced persons (UN 2026)", "count": "14,000,000+ (world's largest crisis)" },
         { "label": "People in acute hunger (WFP 2026)", "count": "24,600,000+" }
+      ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "SAF and RSF spending not independently audited",
+      "parties": [
+        {
+          "key": "saf",
+          "flag": "🇸🇩",
+          "name": "Sudanese Armed Forces (SAF)",
+          "role": "Government military",
+          "confidence": "medium",
+          "explainer": "Pre-war Sudanese military budget was ~$1B/yr. Wartime spending roughly tripled (Nuba Reports). SAF recaptured Khartoum in March 2025, suggesting sustained offensive capability. Gulf state support (UAE backing RSF, Saudi/Egypt backing SAF) complicates the picture.",
+          "color": "#f39c12",
+          "estimate": { "low": 5, "mid": 7, "high": 10 }
+        },
+        {
+          "key": "rsf",
+          "flag": "🇸🇩",
+          "name": "Rapid Support Forces (RSF)",
+          "role": "Paramilitary challenger",
+          "confidence": "none",
+          "explainer": "RSF funding draws from Sudanese gold revenues, UAE support, and captured SAF equipment — none of which is publicly audited. The RSF controlled much of Sudan's gold mining infrastructure through 2024, providing significant self-financing capacity.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2023-04-15", "rate": 5000000 },
+        { "date": "2023-07-01", "rate": 8000000 },
+        { "date": "2024-01-01", "rate": 8000000 },
+        { "date": "2025-03-01", "rate": 9000000 },
+        { "date": "2025-06-01", "rate": 8000000 }
       ]
     }
   },
@@ -298,6 +406,37 @@
         { "label": "Junta forces (KIA est., resistance claims)", "count": "20,000–30,000" },
         { "label": "Internally displaced", "count": "5,200,000+" }
       ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Junta spending only; PDF/resistance funding undisclosed",
+      "parties": [
+        {
+          "key": "junta",
+          "flag": "🇲🇲",
+          "name": "Military Junta (SAC)",
+          "role": "Governing military authority",
+          "confidence": "medium",
+          "explainer": "SIPRI 2024 (released April 2025): Myanmar military spending surged 66% to $5.0B/yr — highest rate of increase in Asia-Pacific, consuming 29% of government expenditure and 6.8% of GDP. Previous estimate of $2.5B/yr predated this surge.",
+          "color": "#9b59b6",
+          "estimate": { "low": 22, "mid": 26, "high": 30 }
+        },
+        {
+          "key": "pdf",
+          "flag": "🇲🇲",
+          "name": "People's Defence Force + EAOs",
+          "role": "Resistance coalition",
+          "confidence": "none",
+          "explainer": "The PDF and allied Ethnic Armed Organizations (EAOs) are funded through diaspora donations, local taxation in controlled territories, and in some cases cross-border trade. No centralized budget exists — aggregate spending is not independently verifiable.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2021-02-01", "rate": 7000000 },
+        { "date": "2022-01-01", "rate": 9000000 },
+        { "date": "2023-01-01", "rate": 11000000 },
+        { "date": "2024-01-01", "rate": 13700000 }
+      ]
     }
   },
   {
@@ -326,6 +465,37 @@
         { "label": "Civilians killed (ACLED, per year 2025)", "count": "~10,000+" },
         { "label": "Combatants killed — all sides (per year)", "count": "~6,000–10,000" },
         { "label": "Cumulative killed since 2020 (est.)", "count": "~80,000–100,000+" }
+      ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Blended multi-country estimate; France + Russian Africa Corps included",
+      "parties": [
+        {
+          "key": "govts",
+          "flag": "🌍",
+          "name": "Sahel Governments + Partners",
+          "role": "Counter-insurgency coalition",
+          "confidence": "medium",
+          "explainer": "Combined defense budgets of Mali, Burkina Faso, Niger, and Chad total ~$1.5B/yr. France's Barkhane force (~3,000 troops, $600M/yr at peak) withdrew in 2023; Russian Africa Corps (formerly Wagner) moved in at lower cost. The G5 Sahel joint force collapsed in 2023 following the coups.",
+          "color": "#27ae60",
+          "estimate": { "low": 18, "mid": 23, "high": 28 }
+        },
+        {
+          "key": "jihadists",
+          "flag": "🌍",
+          "name": "JNIM / ISGS",
+          "role": "Islamist insurgents",
+          "confidence": "none",
+          "explainer": "JNIM and ISGS are self-financing through taxation of local populations, kidnap-for-ransom, and cross-border smuggling. No reliable expenditure figure exists. JNIM controls territory spanning parts of Mali, Burkina Faso, and Niger, generating significant local revenue.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2020-01-01", "rate": 5000000 },
+        { "date": "2022-01-01", "rate": 4500000 },
+        { "date": "2023-07-01", "rate": 3500000 },
+        { "date": "2024-01-01", "rate": 4000000 }
       ]
     }
   },
@@ -357,6 +527,38 @@
         { "label": "Internally displaced (eastern DRC)", "count": "6,400,000+" },
         { "label": "People facing food insecurity (DRC, 2026 projection)", "count": "26,600,000+" }
       ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "DRC + SADC coalition; Rwanda officially denies involvement",
+      "parties": [
+        {
+          "key": "fardc",
+          "flag": "🇨🇩",
+          "name": "DRC + SADC Forces (FARDC)",
+          "role": "Government + regional coalition",
+          "confidence": "medium",
+          "explainer": "DRC military spending surged 105% in 2023 — the largest single-year increase of any country globally (SIPRI), driven by the M23 resurgence. DRC defense budget reached ~$1.5–2B/yr by 2023. SADC's SAMIM regional force deployed June 2021 and withdrew July 2024, adding additional coalition costs.",
+          "color": "#16a085",
+          "estimate": { "low": 7, "mid": 10, "high": 13 }
+        },
+        {
+          "key": "m23",
+          "flag": "🇷🇼",
+          "name": "M23 / Rwanda (RDF)",
+          "role": "Armed group + external backer",
+          "confidence": "none",
+          "explainer": "Rwanda officially denies direct military involvement, but UN Group of Experts has confirmed Rwanda Defence Force (RDF) troops embedded with M23. Rwandan military spending ($547M/yr, SIPRI) does not disclose DRC-specific costs. M23 receives weapons, logistics, and personnel from Rwanda — the financial quantum is not independently auditable.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2022-11-01", "rate": 3000000 },
+        { "date": "2023-07-01", "rate": 5000000 },
+        { "date": "2024-01-01", "rate": 5500000 },
+        { "date": "2025-01-01", "rate": 6000000 },
+        { "date": "2025-12-01", "rate": 5500000 }
+      ]
     }
   },
   {
@@ -387,6 +589,45 @@
         { "label": "Iranian civilians near strike sites", "count": "50–150" },
         { "label": "IDF personnel (KIA)", "count": "~10" },
         { "label": "U.S. forces (KIA)", "count": "0 confirmed" }
+      ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "Israel direct losses ~$12B; U.S. support ~$6B over 12 days",
+      "parties": [
+        {
+          "key": "israel",
+          "flag": "🇮🇱",
+          "name": "Israel",
+          "role": "Offensive party",
+          "confidence": "medium",
+          "explainer": "The New Arab estimated Israel's direct military losses at $12B over 12 days — comprising munitions expenditure, air defense interceptions (Iran fired 550 ballistic missiles and 1,000 drones), and operational costs for 200+ jet sorties across 5 strike waves. IDF's largest single operation in its history.",
+          "color": "#1abc9c",
+          "estimate": { "low": 10, "mid": 12, "high": 14 }
+        },
+        {
+          "key": "us",
+          "flag": "🇺🇸",
+          "name": "United States",
+          "role": "Intelligence, logistics, naval support",
+          "confidence": "medium",
+          "explainer": "U.S. support included positioning carrier strike groups in the eastern Mediterranean and Red Sea, providing real-time intelligence sharing, and pre-positioning munitions. TRT World and Al Jazeera Centre for Studies estimated total U.S. support costs at ~$6B across the 12-day operation.",
+          "color": "#3b82f6",
+          "estimate": { "low": 5, "mid": 6, "high": 7 }
+        },
+        {
+          "key": "iran",
+          "flag": "🇮🇷",
+          "name": "Iran",
+          "role": "Defending party",
+          "confidence": "none",
+          "explainer": "Iran's response costs — 550 ballistic missiles and 1,000 drone launches, nationwide air defense activation, IRGC operations — are not publicly disclosed. Iran's total annual IRGC budget is itself classified. No reliable figure can be modelled from open sources.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2025-06-13", "rates": { "israel": 1200000000, "us": 600000000 } },
+        { "date": "2025-06-20", "rates": { "israel": 800000000, "us": 400000000 } }
       ]
     }
   },
@@ -420,6 +661,54 @@
         { "label": "Saudi coalition forces (KIA est.)", "count": "~15,000–18,000" },
         { "label": "Civilians killed — direct (ACLED)", "count": "~15,000–25,000" }
       ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "Saudi-led coalition + U.S. support; Houthi spending undisclosed",
+      "parties": [
+        {
+          "key": "saudi",
+          "flag": "🇸🇦",
+          "name": "Saudi-Led Coalition",
+          "role": "Intervening coalition",
+          "confidence": "medium",
+          "explainer": "Saudi Arabia and UAE led the coalition with an estimated $5–7B/yr in direct military costs at peak. Saudi defense spending grew from $81B (2015) to $86B (2016) — the Yemen campaign consumed an estimated 10–15% of that budget. UAE withdrew most forces by 2019; Saudi costs declined thereafter.",
+          "color": "#c0392b",
+          "estimate": { "low": 110, "mid": 135, "high": 160 },
+          "dailyLabel": "~$46M/day avg"
+        },
+        {
+          "key": "us_aid",
+          "flag": "🇺🇸",
+          "name": "U.S. Military Support",
+          "role": "Refueling, intelligence, arms",
+          "confidence": "high",
+          "explainer": "GAO confirmed $54.6B in U.S. military support to Saudi Arabia and UAE for Yemen operations, 2015–2021 — comprising arms sales, mid-air refueling (until 2018), and intelligence sharing. Biden paused offensive arms sales in 2021; support effectively ended by 2022.",
+          "color": "#3b82f6",
+          "estimate": { "low": 50, "mid": 55, "high": 60 },
+          "dailyLabel": "~$19M/day avg"
+        },
+        {
+          "key": "houthis",
+          "flag": "🇾🇪",
+          "name": "Houthis (Ansar Allah)",
+          "role": "Defending party",
+          "confidence": "none",
+          "explainer": "Houthi funding comes primarily from Iran (estimated $100M+/yr in weapons and support per U.S. Treasury designations) and captured Yemeni state assets. The group has no publicly disclosed budget. Missile and drone production costs benefit from Iranian technology transfer.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2015-03-26", "rates": { "saudi": 110000000, "us_aid": 30000000 } },
+        { "date": "2016-01-01", "rates": { "saudi": 125000000, "us_aid": 35000000 } },
+        { "date": "2017-01-01", "rates": { "saudi": 90000000, "us_aid": 28000000 } },
+        { "date": "2018-01-01", "rates": { "saudi": 65000000, "us_aid": 22000000 } },
+        { "date": "2019-01-01", "rates": { "saudi": 48000000, "us_aid": 18000000 } },
+        { "date": "2020-01-01", "rates": { "saudi": 35000000, "us_aid": 12000000 } },
+        { "date": "2021-01-01", "rates": { "saudi": 28000000, "us_aid": 6000000 } },
+        { "date": "2022-01-01", "rates": { "saudi": 22000000, "us_aid": 3000000 } },
+        { "date": "2023-01-01", "rates": { "saudi": 18000000, "us_aid": 1000000 } }
+      ]
     }
   },
   {
@@ -451,6 +740,37 @@
         { "label": "Civilians killed in massacres (OHCHR documented)", "count": "thousands confirmed" },
         { "label": "Displaced persons", "count": "~2,000,000" }
       ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Ethiopian federal + Eritrean spending; Eritrea undisclosed",
+      "parties": [
+        {
+          "key": "ethiopia",
+          "flag": "🇪🇹",
+          "name": "Ethiopia + Eritrea",
+          "role": "Federal coalition",
+          "confidence": "medium",
+          "explainer": "Ethiopia's military budget doubled to $1.03B/yr at peak (SIPRI 2022), driven by the Tigray campaign. Eritrea deployed forces but does not publish defense expenditure. Combined wartime spending is estimated at the equivalent of $2.8M/day — roughly the increase above Ethiopia's pre-war military baseline.",
+          "color": "#8e44ad",
+          "estimate": { "low": 1.5, "mid": 2, "high": 2.5 }
+        },
+        {
+          "key": "tplf",
+          "flag": "🇪🇹",
+          "name": "TPLF / Tigray Defence Forces",
+          "role": "Defending party",
+          "confidence": "none",
+          "explainer": "TPLF/TDF funding came from local taxation, captured federal equipment, and diaspora support — none of which is audited. The TDF fielded an estimated 250,000 fighters at peak, suggesting substantial expenditure, but no independent cost figure exists.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2020-11-04", "rate": 2000000 },
+        { "date": "2021-06-01", "rate": 3500000 },
+        { "date": "2022-01-01", "rate": 3000000 },
+        { "date": "2022-08-01", "rate": 2500000 }
+      ]
     }
   },
   {
@@ -480,6 +800,39 @@
         { "label": "Total killed 2014–2020 (est.)", "count": "~15,000–20,000" },
         { "label": "Combatants (all factions)", "count": "~12,000–16,000" },
         { "label": "Civilians", "count": "~3,000–5,000" }
+      ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Multi-proxy conflict; Turkey, UAE, Russia, Egypt costs estimated",
+      "parties": [
+        {
+          "key": "gna_turkey",
+          "flag": "🇱🇾",
+          "name": "GNA / GNU + Turkey",
+          "role": "UN-recognised government + backer",
+          "confidence": "medium",
+          "explainer": "Turkey committed an estimated $2B+ in arms, drones, and military personnel to back the GNA (later GNU). Turkish involvement escalated significantly in 2019–2020 with the deployment of Syrian mercenaries and Bayraktar TB2 drones — the first large-scale combat use of armed drones in the region.",
+          "color": "#2980b9",
+          "estimate": { "low": 5, "mid": 8, "high": 12 }
+        },
+        {
+          "key": "lna_backers",
+          "flag": "🇦🇪",
+          "name": "LNA (Haftar) + UAE/Russia/Egypt",
+          "role": "Counter-government coalition",
+          "confidence": "medium",
+          "explainer": "UAE provided Haftar's LNA with advanced weaponry including Chinese-made drones, in violation of the UN arms embargo. Russia deployed Wagner Group mercenaries (estimated 1,000–2,000 at peak). Egypt provided air support and training. Combined proxy spending estimated at $5–10B over the conflict — none publicly audited.",
+          "color": "#64748b",
+          "estimate": { "low": 5, "mid": 10, "high": 15 }
+        }
+      ],
+      "rateHistory": [
+        { "date": "2014-05-16", "rate": 3000000 },
+        { "date": "2016-01-01", "rate": 6000000 },
+        { "date": "2019-04-01", "rate": 11000000 },
+        { "date": "2020-01-01", "rate": 13000000 },
+        { "date": "2020-06-01", "rate": 8000000 }
       ]
     }
   },
@@ -514,6 +867,54 @@
         { "label": "ISIS fighters", "count": "~55,000" },
         { "label": "Displaced / refugees", "count": "~13,000,000 (half of pre-war population)" }
       ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "Assad regime + Russia vs. US-led coalition; opposition/ISIS undisclosed",
+      "parties": [
+        {
+          "key": "regime",
+          "flag": "🇸🇾",
+          "name": "Assad Regime + Russia + Iran",
+          "role": "Government coalition",
+          "confidence": "medium",
+          "explainer": "Russia's direct military intervention (from Sept 2015) cost an estimated $4–6M/day at peak. Iran spent an estimated $6B+/yr supporting Assad through IRGC advisors, Hezbollah deployment, and weapons transfers (CSIS). Assad's own military budget declined as his army shrank from 300,000 to ~100,000.",
+          "color": "#d35400",
+          "estimate": { "low": 100, "mid": 130, "high": 160 }
+        },
+        {
+          "key": "coalition",
+          "flag": "🇺🇸",
+          "name": "U.S.-Led Coalition",
+          "role": "Anti-ISIS campaign",
+          "confidence": "high",
+          "explainer": "Operation Inherent Resolve (Aug 2014–2019 in Syria) cost $24.7B in confirmed U.S. spending (CRS). At peak, the Pentagon reported ~$14M/day in U.S. costs alone. UK, France, Australia, and others added further coalition contributions. Costs sharply declined after ISIS's territorial defeat in March 2019.",
+          "color": "#3b82f6",
+          "estimate": { "low": 30, "mid": 38, "high": 45 }
+        },
+        {
+          "key": "opposition",
+          "flag": "🇸🇾",
+          "name": "Opposition / ISIS / Kurds",
+          "role": "Non-state armed groups",
+          "confidence": "none",
+          "explainer": "The Syrian opposition was funded by Gulf states (Qatar, Saudi Arabia), Turkey, and the CIA's Timber Sycamore program (~$1B total). ISIS self-funded through oil, extortion, and taxes on occupied territories at an estimated $1–2M/day at peak. No aggregate auditable figure exists.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2011-03-15", "rates": { "regime": 10000000, "coalition": 0 } },
+        { "date": "2013-01-01", "rates": { "regime": 18000000, "coalition": 0 } },
+        { "date": "2014-08-08", "rates": { "regime": 20000000, "coalition": 10000000 } },
+        { "date": "2015-09-01", "rates": { "regime": 30000000, "coalition": 14000000 } },
+        { "date": "2016-01-01", "rates": { "regime": 32000000, "coalition": 12000000 } },
+        { "date": "2017-01-01", "rates": { "regime": 25000000, "coalition": 10000000 } },
+        { "date": "2018-01-01", "rates": { "regime": 18000000, "coalition": 7000000 } },
+        { "date": "2019-03-23", "rates": { "regime": 14000000, "coalition": 2000000 } },
+        { "date": "2020-01-01", "rates": { "regime": 10000000, "coalition": 1000000 } },
+        { "date": "2022-01-01", "rates": { "regime": 7000000, "coalition": 500000 } },
+        { "date": "2024-01-01", "rates": { "regime": 5000000, "coalition": 500000 } }
+      ]
     }
   },
   {
@@ -545,6 +946,52 @@
         { "label": "Afghan security forces (KIA est.)", "count": "~66,000" },
         { "label": "Taliban / insurgents (KIA est.)", "count": "~52,893" },
         { "label": "Afghan civilians (UNAMA confirmed)", "count": "~46,319" }
+      ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "US + NATO direct war costs 2011–2021; Taliban undisclosed",
+      "parties": [
+        {
+          "key": "us",
+          "flag": "🇺🇸",
+          "name": "United States",
+          "role": "Lead coalition power",
+          "confidence": "high",
+          "explainer": "Direct DoD war appropriations averaged ~$42B/yr (2011–2021) per the Congressional Research Service, covering combat operations, Afghan security force training, and base infrastructure. Peak spending was ~$120B/yr in 2010–2012, declining as U.S. forces drew down from 100,000 to 2,500 troops by the 2021 withdrawal.",
+          "color": "#3b82f6",
+          "estimate": { "low": 380, "mid": 420, "high": 460 },
+          "dailyLabel": "~$87M/day avg"
+        },
+        {
+          "key": "nato_afghan",
+          "flag": "🌍",
+          "name": "NATO + Afghan Forces",
+          "role": "Coalition + host nation",
+          "confidence": "medium",
+          "explainer": "NATO non-US allies contributed ~$12B+ in direct war costs and training. The Afghan National Security Forces (ANSF) were funded primarily through the Afghan Security Forces Fund (~$5–6B/yr U.S. appropriation) plus Afghan domestic budget contributions. SIGAR tracked over $90B in total U.S. reconstruction aid including ANSF funding.",
+          "color": "#22c55e",
+          "estimate": { "low": 80, "mid": 95, "high": 110 },
+          "dailyLabel": "~$26M/day avg"
+        },
+        {
+          "key": "taliban",
+          "flag": "🇦🇫",
+          "name": "Taliban",
+          "role": "Insurgent force",
+          "confidence": "none",
+          "explainer": "Taliban funding derives from opium/heroin production (the group taxed ~90% of global heroin supply), extortion, mining, and donations from Gulf-based supporters. Estimates range from $300M to $1.5B/yr — none independently audited.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2011-01-01", "rates": { "us": 95000000, "nato_afghan": 32000000 } },
+        { "date": "2013-01-01", "rates": { "us": 82000000, "nato_afghan": 27000000 } },
+        { "date": "2015-01-01", "rates": { "us": 72000000, "nato_afghan": 23000000 } },
+        { "date": "2017-01-01", "rates": { "us": 68000000, "nato_afghan": 21000000 } },
+        { "date": "2019-01-01", "rates": { "us": 60000000, "nato_afghan": 19000000 } },
+        { "date": "2020-01-01", "rates": { "us": 50000000, "nato_afghan": 16000000 } },
+        { "date": "2021-04-01", "rates": { "us": 25000000, "nato_afghan": 8000000 } }
       ]
     }
   },
@@ -578,6 +1025,37 @@
         { "label": "Armenia / Artsakh (KIA — 2023 offensive)", "count": "~200" },
         { "label": "Civilians killed (both conflicts)", "count": "~200–300" }
       ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "Azerbaijan + Turkey vs. Armenia/Artsakh; two distinct conflict phases",
+      "parties": [
+        {
+          "key": "azerbaijan",
+          "flag": "🇦🇿",
+          "name": "Azerbaijan (+ Turkey)",
+          "role": "Offensive party",
+          "confidence": "medium",
+          "explainer": "Azerbaijan's military budget was $2.65B/yr (SIPRI 2020), entirely funded by oil revenues, after years of buildup following the First Nagorno-Karabakh War. Turkish advisory support and Bayraktar TB2 drone systems were decisive in the 44-Day War. The 2023 offensive was brief (24 hours of decisive operations) and far less costly.",
+          "color": "#e91e63",
+          "estimate": { "low": 8, "mid": 10, "high": 12 }
+        },
+        {
+          "key": "armenia",
+          "flag": "🇦🇲",
+          "name": "Armenia / Artsakh",
+          "role": "Defending party",
+          "confidence": "medium",
+          "explainer": "Armenia's defense budget was ~$630M/yr (SIPRI 2020), less than a quarter of Azerbaijan's. Artsakh (Nagorno-Karabakh) had a separate defense force funded by Armenian diaspora and Russian equipment transfers. The 2023 offensive collapsed Artsakh's defenses in under 24 hours, ending Armenian presence in the territory.",
+          "color": "#9b59b6",
+          "estimate": { "low": 1.5, "mid": 2, "high": 2.5 }
+        }
+      ],
+      "rateHistory": [
+        { "date": "2020-09-27", "rates": { "azerbaijan": 13000000, "armenia": 5000000 } },
+        { "date": "2020-11-10", "rates": { "azerbaijan": 7000000, "armenia": 2000000 } },
+        { "date": "2023-09-19", "rates": { "azerbaijan": 9000000, "armenia": 1000000 } }
+      ]
     }
   },
   {
@@ -608,6 +1086,51 @@
         { "label": "U.S. forces (KIA)", "count": "~100" },
         { "label": "Coalition / Iraqi / Kurdish forces (KIA)", "count": "~20,000+" },
         { "label": "Civilians killed — coalition airstrikes (Airwars)", "count": "~8,000–13,000" }
+      ]
+    },
+    "spendChart": {
+      "mode": "multi",
+      "note": "US-led coalition vs. Iraqi/Kurdish forces; ISIS self-funded",
+      "parties": [
+        {
+          "key": "us_coalition",
+          "flag": "🇺🇸",
+          "name": "U.S.-Led Coalition",
+          "role": "Air campaign + special forces",
+          "confidence": "high",
+          "explainer": "Total confirmed U.S. cost: $24.7B (Congressional Research Service), covering 34,000+ airstrikes and Operation Inherent Resolve ground advisors. Pentagon reported ~$14M/day in U.S.-only costs at peak (2016). UK, France, Canada, and Australia added further coalition contributions, bringing the total to ~$35B.",
+          "color": "#607d8b",
+          "estimate": { "low": 20, "mid": 25, "high": 30 },
+          "dailyLabel": "~$14M/day (US peak)"
+        },
+        {
+          "key": "iraq_kurdish",
+          "flag": "🇮🇶",
+          "name": "Iraq + Kurdish Forces (ISF/Peshmerga)",
+          "role": "Ground combat forces",
+          "confidence": "medium",
+          "explainer": "Iraqi Security Forces and Kurdish Peshmerga bore the majority of ground combat against ISIS. Iraq's defense budget grew from $6B to $14B/yr during the campaign. The Kurdish Regional Government's Peshmerga received ~$800M in U.S. equipment and training. Combined ground force costs estimated at ~$9M/day average.",
+          "color": "#fbbf24",
+          "estimate": { "low": 12, "mid": 16, "high": 20 }
+        },
+        {
+          "key": "isis",
+          "flag": "🇮🇶",
+          "name": "ISIS / ISIL",
+          "role": "Non-state armed group",
+          "confidence": "none",
+          "explainer": "At its peak (2014–2015), ISIS self-funded at an estimated $1–2M/day through oil smuggling (~$1.5M/day), extortion, taxation, and looting — one of the most financially sophisticated terrorist organizations in history. Revenue collapsed as territory was lost.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2014-06-10", "rates": { "us_coalition": 6000000, "iraq_kurdish": 4000000 } },
+        { "date": "2014-08-08", "rates": { "us_coalition": 10000000, "iraq_kurdish": 6000000 } },
+        { "date": "2015-01-01", "rates": { "us_coalition": 18000000, "iraq_kurdish": 9000000 } },
+        { "date": "2016-01-01", "rates": { "us_coalition": 16000000, "iraq_kurdish": 9000000 } },
+        { "date": "2017-01-01", "rates": { "us_coalition": 13000000, "iraq_kurdish": 8000000 } },
+        { "date": "2018-01-01", "rates": { "us_coalition": 8000000, "iraq_kurdish": 6000000 } },
+        { "date": "2019-01-01", "rates": { "us_coalition": 5000000, "iraq_kurdish": 4000000 } }
       ]
     }
   },
@@ -641,6 +1164,40 @@
         { "label": "Internally displaced (northeastern Nigeria)", "count": "2,000,000+" },
         { "label": "Lake Chad Basin — total humanitarian crisis (affected)", "count": "10,700,000+" }
       ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Nigerian defense budget estimate; Boko Haram/ISWAP spending undisclosed",
+      "parties": [
+        {
+          "key": "nigeria",
+          "flag": "🇳🇬",
+          "name": "Nigeria + MNJTF",
+          "role": "Government + regional force",
+          "confidence": "medium",
+          "explainer": "Nigeria's defense budget grew from ~$1.5B/yr (2009) to $4.47B (2021, SIPRI) — a 3× increase driven substantially by the northeast campaign. The Multinational Joint Task Force (MNJTF), incorporating Cameroon, Chad, and Niger, adds further regional costs. An estimated 40–50% of Nigeria's defense budget is attributable to the Boko Haram/ISWAP theater.",
+          "color": "#e65100",
+          "estimate": { "low": 12, "mid": 16, "high": 20 }
+        },
+        {
+          "key": "iswap",
+          "flag": "🇳🇬",
+          "name": "Boko Haram / ISWAP",
+          "role": "Islamist insurgents",
+          "confidence": "none",
+          "explainer": "Boko Haram and its ISWAP splinter are self-financing through kidnap-for-ransom, cattle rustling, taxation of Lake Chad fishing communities, and Islamic State global network support. ISWAP now controls larger territory than Boko Haram ever did, generating substantial local revenue — no reliable budget exists.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2009-07-26", "rate": 800000 },
+        { "date": "2011-01-01", "rate": 1000000 },
+        { "date": "2014-01-01", "rate": 2000000 },
+        { "date": "2016-01-01", "rate": 2500000 },
+        { "date": "2021-01-01", "rate": 3000000 },
+        { "date": "2022-01-01", "rate": 2500000 },
+        { "date": "2024-01-01", "rate": 2500000 }
+      ]
     }
   },
   {
@@ -671,6 +1228,42 @@
         { "label": "AMISOM / AU mission forces (KIA est.)", "count": "~3,000 (not officially published)" },
         { "label": "Al-Shabaab fighters (KIA est.)", "count": "15,000–25,000" },
         { "label": "Internally displaced (Somalia)", "count": "3,800,000+" }
+      ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "AMISOM/ATMIS/AUSSOM mission lifetime average; Al-Shabaab undisclosed",
+      "parties": [
+        {
+          "key": "amisom",
+          "flag": "🇸🇴",
+          "name": "Somalia + AU Mission (AMISOM → AUSSOM)",
+          "role": "Government + peacekeeping coalition",
+          "confidence": "medium",
+          "explainer": "AMISOM peaked at 22,000 troops with a budget of ~$1B/yr, funded primarily by the EU (€4.3B committed since 2007) and U.S. counter-terrorism assistance (~$2B over 2007–2020). Mission transitioned to ATMIS ($1.5B/yr, 2022–2023) then dramatically contracted to AUSSOM ($196M budget, 2025) — an 87% funding cut that severely threatens operational capacity.",
+          "color": "#1b5e20",
+          "estimate": { "low": 14, "mid": 18, "high": 22 }
+        },
+        {
+          "key": "alshabaab",
+          "flag": "🇸🇴",
+          "name": "Al-Shabaab",
+          "role": "Al-Qaeda affiliate insurgents",
+          "confidence": "none",
+          "explainer": "Al-Shabaab self-finances through port taxation at Kismayo and other towns, extortion of businesses and NGOs, and international Al-Qaeda network transfers. The UN Monitoring Group estimated revenues of $50–100M/yr — making it one of the wealthiest non-state armed groups in Africa. No auditable budget exists.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2007-03-06", "rate": 500000 },
+        { "date": "2009-01-01", "rate": 1000000 },
+        { "date": "2011-01-01", "rate": 2000000 },
+        { "date": "2014-01-01", "rate": 3000000 },
+        { "date": "2017-01-01", "rate": 3500000 },
+        { "date": "2020-01-01", "rate": 3000000 },
+        { "date": "2022-07-01", "rate": 2500000 },
+        { "date": "2023-01-01", "rate": 2000000 },
+        { "date": "2025-01-01", "rate": 1500000 }
       ]
     }
   },
@@ -704,6 +1297,39 @@
         { "label": "Internally displaced", "count": "~4,000,000" },
         { "label": "Refugees in neighboring countries", "count": "~2,500,000" }
       ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Combined SPLA, SPLM-IO, Uganda, and UNMISS peacekeeping costs",
+      "parties": [
+        {
+          "key": "spla",
+          "flag": "🇸🇸",
+          "name": "SPLA / Government + Uganda",
+          "role": "Government forces + ally",
+          "confidence": "medium",
+          "explainer": "South Sudan's military spending peaked at $800M/yr (SIPRI), consuming 60%+ of government revenue during the conflict's worst phases. Uganda deployed forces in support of President Kiir (2013–2015), estimated at $600–800M total. UNMISS (UN peacekeeping) operated at ~$1B/yr — the largest single cost component — separately funded by UN member states.",
+          "color": "#4a235a",
+          "estimate": { "low": 7, "mid": 9, "high": 12 }
+        },
+        {
+          "key": "splmio",
+          "flag": "🇸🇸",
+          "name": "SPLM-IO (Machar) + Allies",
+          "role": "Opposition armed group",
+          "confidence": "none",
+          "explainer": "Riek Machar's SPLM-IO was supported by South Sudanese diaspora, captured government equipment, and reportedly Sudan's intelligence services. The group had no formal budget — funding came through looting, cattle raiding, and external patronage. No independent cost figure exists.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2013-12-15", "rate": 2000000 },
+        { "date": "2014-06-01", "rate": 4000000 },
+        { "date": "2016-07-01", "rate": 5000000 },
+        { "date": "2018-09-01", "rate": 3000000 },
+        { "date": "2019-01-01", "rate": 2500000 },
+        { "date": "2020-01-01", "rate": 2000000 }
+      ]
     }
   },
   {
@@ -734,6 +1360,40 @@
         { "label": "Insurgents killed (ISIS-Mozambique est.)", "count": "~2,000–3,000" },
         { "label": "Mozambican + Rwandan forces (KIA est.)", "count": "several hundred" },
         { "label": "Displaced persons (Cabo Delgado)", "count": "1,300,000+" }
+      ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Mozambique + Rwanda costs; insurgent spending undisclosed",
+      "parties": [
+        {
+          "key": "mozambique_rwanda",
+          "flag": "🇲🇿",
+          "name": "Mozambique + Rwanda (RDF)",
+          "role": "Government + security partner",
+          "confidence": "medium",
+          "explainer": "Rwanda deployed 6,300+ troops (confirmed April 2026) — 3× its original commitment — enabling TotalEnergies to resume its $20B LNG project. EU European Peace Facility contributed ~€46M total (2021–2025), covering roughly 17% of Rwanda's costs. The EU announced it will end funding in May 2026. Mozambique's own defense budget is ~$95M/yr.",
+          "color": "#006064",
+          "estimate": { "low": 1.5, "mid": 2, "high": 2.5 }
+        },
+        {
+          "key": "ansar",
+          "flag": "🇲🇿",
+          "name": "Ansar al-Sunna (ISIS-Mozambique)",
+          "role": "Islamist insurgents",
+          "confidence": "none",
+          "explainer": "The insurgency (locally called al-Shabaab, distinct from Somalia) is estimated at 300–1,000 active fighters. Funding derives from local taxation, gem and timber smuggling from Cabo Delgado's rich natural resources, and Islamic State network connections. No independent budget figure exists.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2017-10-05", "rate": 100000 },
+        { "date": "2019-01-01", "rate": 300000 },
+        { "date": "2020-01-01", "rate": 500000 },
+        { "date": "2021-07-01", "rate": 800000 },
+        { "date": "2022-01-01", "rate": 700000 },
+        { "date": "2024-07-01", "rate": 600000 },
+        { "date": "2025-01-01", "rate": 600000 }
       ]
     }
   },
@@ -767,6 +1427,36 @@
         { "label": "Pakistani soldiers (KIA confirmed)", "count": "~12" },
         { "label": "Pakistani soldiers (wounded)", "count": "~27" },
         { "label": "Afghans displaced (OCHA, Apr 5 2026)", "count": "94,000+" }
+      ]
+    },
+    "spendChart": {
+      "mode": "single",
+      "note": "Pakistani operational costs; Taliban expenditure undisclosed",
+      "parties": [
+        {
+          "key": "pakistan",
+          "flag": "🇵🇰",
+          "name": "Pakistan (PAF + Army)",
+          "role": "Offensive party",
+          "confidence": "medium",
+          "explainer": "Pakistan's defense budget is ~$10B/yr ($27M/day total). Operation Ghazab lil-Haq involved air strikes on 22+ locations, ground operations securing 32 sq km of Afghan territory, and sustained artillery and rocket fire — estimated at $5M/day in operational costs above Pakistan's baseline military spending.",
+          "color": "#2ecc71",
+          "estimate": { "low": 0.1, "mid": 0.2, "high": 0.35 }
+        },
+        {
+          "key": "afghan_taliban",
+          "flag": "🇦🇫",
+          "name": "Afghan Taliban (IEA)",
+          "role": "Defending state",
+          "confidence": "none",
+          "explainer": "The Islamic Emirate of Afghanistan has no publicly disclosed defense budget. Taliban revenues derive from opium/heroin taxation (~$400–600M/yr per UNODC), mining royalties, customs duties, and international aid diverted through the Afghan banking system. Military expenditure is not separately reported.",
+          "color": "#64748b"
+        }
+      ],
+      "rateHistory": [
+        { "date": "2026-02-27", "rate": 10000000 },
+        { "date": "2026-03-10", "rate": 7000000 },
+        { "date": "2026-03-25", "rate": 5000000 }
       ]
     }
   }
