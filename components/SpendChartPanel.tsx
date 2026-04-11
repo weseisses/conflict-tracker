@@ -210,6 +210,7 @@ export default function SpendChartPanel({
   const [hov, setHov]           = useState<number | null>(null);
   const [shareOpen, setShareOpen] = useState(false);
   const [copied, setCopied]       = useState(false);
+  const [imgCopied, setImgCopied] = useState(false);
   const now       = new Date();
 
   const { timestamps, combined, parties } = buildSeries(conflict, chart, now);
@@ -424,7 +425,65 @@ export default function SpendChartPanel({
         const linkedIn     = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(sharePageUrl)}`;
         const facebookUrl  = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(sharePageUrl)}`;
         const redditUrl    = `https://reddit.com/submit?url=${encodeURIComponent(sharePageUrl)}&title=${encodeURIComponent(`${conflict.name} — Military Expenditure Over Time`)}`;
-        const mailUrl      = `mailto:?subject=${encodeURIComponent(`${conflict.name} — Conflict Cost Chart`)}&body=${encodeURIComponent(headline)}`;
+
+        const fullOgUrl    = `${SITE}${ogUrl}`;
+        const filename     = `${conflict.id}-chart.png`;
+
+        async function fetchImageBlob(): Promise<Blob | null> {
+          try {
+            const res = await fetch(fullOgUrl);
+            if (res.ok) return res.blob();
+          } catch {}
+          return null;
+        }
+
+        async function downloadBlob(blob: Blob) {
+          const url = URL.createObjectURL(blob);
+          const a   = document.createElement("a");
+          a.href     = url;
+          a.download = filename;
+          a.click();
+          URL.revokeObjectURL(url);
+        }
+
+        async function handleEmail() {
+          const blob = await fetchImageBlob();
+          if (blob) {
+            const file = new File([blob], filename, { type: "image/png" });
+            // Mobile: use Web Share API to hand the image file directly to Mail
+            if (typeof navigator.share === "function" && navigator.canShare?.({ files: [file] })) {
+              try {
+                await navigator.share({
+                  files: [file],
+                  title: `${conflict.name} — Conflict Cost Chart`,
+                  text: headline,
+                });
+                return;
+              } catch {}
+            }
+            // Desktop fallback: download image, then open mail client
+            await downloadBlob(blob);
+          }
+          setTimeout(() => {
+            const body = blob
+              ? `${headline}\n\n[Chart image saved as ${filename} — please attach it to this email]`
+              : headline;
+            window.location.href = `mailto:?subject=${encodeURIComponent(`${conflict.name} — Conflict Cost Chart`)}&body=${encodeURIComponent(body)}`;
+          }, 400);
+        }
+
+        async function handleCopyImage() {
+          const blob = await fetchImageBlob();
+          if (!blob) return;
+          try {
+            await navigator.clipboard.write([new ClipboardItem({ "image/png": blob })]);
+            setImgCopied(true);
+            setTimeout(() => setImgCopied(false), 2500);
+          } catch {
+            // Browser doesn't support clipboard image write — fall back to download
+            await downloadBlob(blob);
+          }
+        }
 
         return (
           <div
@@ -514,14 +573,28 @@ export default function SpendChartPanel({
                            padding: "10px 8px", textTransform: "uppercase", cursor: "pointer" }}>
                   {copied ? "✓ Copied!" : "⎘ Copy Link"}
                 </button>
-                <a href={mailUrl}
+                <button
+                  onClick={handleEmail}
                   style={{ background: "transparent", border: "1px solid #1e2530", color: "#4a5568",
                            fontSize: 11, fontWeight: 700, letterSpacing: 1, padding: "10px 8px",
-                           textTransform: "uppercase", textDecoration: "none",
+                           textTransform: "uppercase", cursor: "pointer",
                            display: "flex", alignItems: "center", justifyContent: "center" }}>
                   ✉ Email
-                </a>
+                </button>
               </div>
+
+              {/* Copy Image — pastes directly into social posts */}
+              <button
+                onClick={handleCopyImage}
+                style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
+                         width: "100%", marginBottom: 8,
+                         background: imgCopied ? "#1a2e1a" : "#0e1218",
+                         border: `1px solid ${imgCopied ? "#2a5a3a" : "#1e2a38"}`,
+                         color: imgCopied ? "#4ade80" : "#8a9ab0",
+                         fontSize: 11, fontWeight: 700, letterSpacing: 2,
+                         padding: "10px 12px", textTransform: "uppercase", cursor: "pointer" }}>
+                {imgCopied ? "✓ Image Copied — Paste into any post" : "⧉ Copy Image to Clipboard"}
+              </button>
 
               {/* Instagram row */}
               <button
@@ -547,24 +620,13 @@ export default function SpendChartPanel({
               {/* Download */}
               <button
                 onClick={async () => {
-                  const filename  = `${conflict.id}-chart.png`;
-                  const fullOgUrl = `${SITE}${ogUrl}`;
-                  const isMobile  = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                   if (isMobile) {
                     window.open(fullOgUrl, "_blank");
                   } else {
-                    try {
-                      const res  = await fetch(fullOgUrl);
-                      const blob = await res.blob();
-                      const url  = URL.createObjectURL(blob);
-                      const a    = document.createElement("a");
-                      a.href     = url;
-                      a.download = filename;
-                      a.click();
-                      URL.revokeObjectURL(url);
-                    } catch {
-                      window.open(fullOgUrl, "_blank");
-                    }
+                    const blob = await fetchImageBlob();
+                    if (blob) await downloadBlob(blob);
+                    else window.open(fullOgUrl, "_blank");
                   }
                 }}
                 style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: 8,
@@ -575,7 +637,7 @@ export default function SpendChartPanel({
               </button>
 
               <div style={{ marginTop: 14, fontSize: 11, color: "#2d3a4a", lineHeight: 1.7 }}>
-                When shared on X, LinkedIn, or Facebook — the chart image previews automatically.
+                X, LinkedIn, and Facebook auto-preview the chart image when the link is shared. Use Copy Image to paste the chart directly into any post or message.
               </div>
             </div>
           </div>
