@@ -7,7 +7,9 @@ export function calcCost(conflict: Conflict, now: Date): number {
   const effectiveNow = ceiling < now ? ceiling : now;
   const elapsedMs = effectiveNow.getTime() - start.getTime();
   if (elapsedMs < 0) return 0;
-  return (conflict.anchor || 0) + (elapsedMs / 86_400_000) * conflict.ratePerDay;
+  // anchor may be a negative calibration offset (e.g. Ukraine) to correct cumulative
+  // while preserving the live daily-burn rate; clamp so a past-date render can never go negative.
+  return Math.max(0, (conflict.anchor || 0) + (elapsedMs / 86_400_000) * conflict.ratePerDay);
 }
 
 export function daysSince(dateStr: string): number {
