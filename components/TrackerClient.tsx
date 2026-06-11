@@ -137,6 +137,18 @@ export default function TrackerClient({ conflicts, initialConflict }: Props) {
     ? new Date(lastUpdatedRaw + "-02T00:00:00Z").toLocaleDateString("en-US", { month: "long", year: "numeric" })
     : "";
 
+  // Staleness guard — flag when the newest casualties.asOf (YYYY-MM) is more than
+  // one calendar month behind today, so a stalled refresh pipeline doesn't show a
+  // confident-but-old date. Daily updates land in the current month and stay "fresh".
+  const dataStale = (() => {
+    if (!lastUpdatedRaw) return false;
+    const [y, m] = lastUpdatedRaw.split("-").map(Number);
+    if (!y || !m) return false;
+    const now = new Date();
+    const monthsBehind = (now.getFullYear() * 12 + now.getMonth()) - (y * 12 + (m - 1));
+    return monthsBehind > 1;
+  })();
+
   const active      = conflictCosts.find((c) => c.id === selected) ?? null;
   const displayCost = active ? active.cost : globalTotal;
   const displayRate = active ? (active.status === "ACTIVE" ? active.ratePerDay : 0) : globalRate;
@@ -623,9 +635,15 @@ export default function TrackerClient({ conflicts, initialConflict }: Props) {
             </div>
 
             {lastUpdated && (
-              <div style={{ fontSize: 10, letterSpacing: 2, color: "#2d3a4a", textTransform: "uppercase", marginTop: 12 }}>
-                Data last updated {lastUpdated} · SIPRI · ACLED · UCDP · OHCHR
-              </div>
+              dataStale ? (
+                <div style={{ fontSize: 10, letterSpacing: 2, color: "#7a5a2d", textTransform: "uppercase", marginTop: 12 }}>
+                  Data refresh in progress · last verified {lastUpdated} · SIPRI · ACLED · UCDP · OHCHR
+                </div>
+              ) : (
+                <div style={{ fontSize: 10, letterSpacing: 2, color: "#2d3a4a", textTransform: "uppercase", marginTop: 12 }}>
+                  Data last updated {lastUpdated} · SIPRI · ACLED · UCDP · OHCHR
+                </div>
+              )
             )}
 
             <EmailCapture />
